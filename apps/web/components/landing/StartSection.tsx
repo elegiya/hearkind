@@ -1,39 +1,64 @@
+import Footer from "@/components/landing/Footer";
 import Image from "next/image";
 
 export default function StartSection() {
   return (
-    <section id="start" className="bg-[#fffaf4] px-6 py-16">
-      <div className="mx-auto grid max-w-6xl items-center gap-12 md:grid-cols-2">
-        <div className="relative h-72 overflow-hidden rounded-[2rem]">
+    <section id="start" className="relative overflow-hidden bg-[#fffaf4]">
+      <div className="absolute left-0 right-0 top-0 z-20">
+        <svg
+          viewBox="0 0 1440 180"
+          preserveAspectRatio="none"
+          className="h-[150px] w-full"
+          aria-hidden="true"
+        >
+          <path
+            d="M0,70 C220,20 330,160 560,120 C770,85 980,10 1180,60 C1310,90 1380,100 1440,80 L1440,0 L0,0 Z"
+            fill="#fffaf4"
+          />
+        </svg>
+      </div>
+
+      <div className="relative min-h-[760px] overflow-hidden bg-[#fbf5ed]">
+        <div className="absolute inset-y-0 left-0 z-0 hidden w-[60%] overflow-hidden md:block">
           <Image
-            src="/images/landscape.png"
+            src="/images/landscape-new.png"
             alt="A peaceful path through a warm landscape"
             fill
-            className="object-cover"
+            className="object-cover object-[60%_center]"
           />
         </div>
 
-        <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.35em] text-[#c66f4b]">
-            Start your journey
-          </p>
+        <div className="relative z-10 mx-auto grid min-h-[760px] max-w-7xl grid-cols-1 px-6 pt-20 md:grid-cols-[60%_40%]">
+          <div />
 
-          <h2 className="mt-4 text-4xl font-semibold leading-tight">
-            Start with one honest sentence.
-          </h2>
+          <div className="flex items-center pb-28">
+            <div className="max-w-xl md:pl-10">
+              <p className="mb-8 text-xs font-semibold uppercase tracking-[0.35em] text-[#c66f4b]">
+                Start your journey
+              </p>
 
-          <p className="mt-5 max-w-md leading-8 text-[#6f6254]">
-            Soon you’ll be able to describe what you’re carrying and get matched
-            with someone who has been through something similar.
-          </p>
+              <h2 className="text-6xl font-semibold leading-[0.95] tracking-tight">
+                Start with one
+                <br />
+                honest sentence.
+              </h2>
 
-          <a
-            href="#"
-            className="mt-8 inline-flex rounded-full bg-[#3f4734] px-7 py-4 text-sm font-medium text-white"
-          >
-            Join the waitlist
-          </a>
+              <p className="mt-7 max-w-md text-lg leading-8 text-[#6f6254]">
+                Soon you’ll be able to describe what you’re carrying and get
+                matched with someone who has been through something similar.
+              </p>
+
+              <a
+                href="#"
+                className="mt-10 inline-flex rounded-full bg-[#3f4734] px-7 py-4 text-sm font-medium text-white transition duration-200 hover:-translate-y-0.5"
+              >
+                Join the waitlist
+              </a>
+            </div>
+          </div>
         </div>
+
+        <Footer />
       </div>
     </section>
   );

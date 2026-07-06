@@ -1,4 +1,3 @@
-import Footer from "@/components/landing/Footer";
 import HeroSection from "@/components/landing/HeroSection";
 import HowItWorksSection from "@/components/landing/HowItWorksSection";
 import SafetySection from "@/components/landing/SafetySection";
@@ -11,7 +10,6 @@ export default function Home() {
       <HowItWorksSection />
       <SafetySection />
       <StartSection />
-      <Footer />
     </main>
   );
 }
