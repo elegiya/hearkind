@@ -29,32 +29,34 @@ const topics = [
 
 export default function HowItWorksSection() {
   return (
-    <section id="how" className="bg-[#fffaf4] px-6 pb-20 pt-10">
-      <div className="mx-auto max-w-6xl text-center">
+    <section id="how" className="bg-[#fffaf4] px-6 pb-20 pt-8">
+      <div className="mx-auto max-w-7xl text-center">
         <p className="text-xs font-semibold uppercase tracking-[0.35em] text-[#c66f4b]">
           How it works
         </p>
 
-        <h2 className="mx-auto mt-4 max-w-3xl font-serif text-4xl font-medium leading-[1.08] tracking-[-0.02em] text-[#2a241d] md:text-5xl">
-          Support starts with
+        <h2 className="mx-auto mt-4 max-w-2xl text-4xl font-semibold leading-[1.05] tracking-tight md:text-5xl">
+          Support begins with finding
           <br />
-          being matched with the right person.
+          the right person.
         </h2>
 
-        <div className="mt-14 grid gap-6 md:grid-cols-3">
+        <div className="mt-12 grid gap-6 md:grid-cols-3">
           {steps.map((step, index) => (
             <article
               key={step.title}
-              className="rounded-[2.25rem] bg-[#fbf5ed]/80 px-8 py-9 text-left shadow-[0_16px_40px_rgba(76,55,35,0.055)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_22px_52px_rgba(76,55,35,0.09)]"
+              className="rounded-[2rem] bg-[#fbf5ed] px-7 pt-6 pb-7 text-center shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
             >
-              <div className="flex items-start justify-between">
-                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#f0c2a6] text-sm font-semibold">
+              {/* Number */}
+              <div className="flex">
+                <span className="mt-1 flex h-10 w-10 items-center justify-center rounded-full bg-[#f0c2a6] text-sm font-semibold">
                   {index + 1}
                 </span>
               </div>
 
-              <div className="mt-5 flex justify-center">
-                <div className="relative h-32 w-44">
+              {/* Illustration */}
+              <div className="-mt-6 mb-5 flex justify-center">
+                <div className="relative h-28 w-40">
                   <Image
                     src={step.image}
                     alt=""
@@ -64,15 +66,14 @@ export default function HowItWorksSection() {
                 </div>
               </div>
 
-              <div className="mt-8 text-center">
-                <h3 className="font-serif text-[1.65rem] font-medium leading-tight text-[#2a241d]">
-                  {step.title}
-                </h3>
+              {/* Content */}
+              <h3 className="mx-auto max-w-[240px] text-lg font-semibold leading-snug text-[#2a241d]">
+                {step.title}
+              </h3>
 
-                <p className="mx-auto mt-4 max-w-[270px] text-base leading-7 text-[#6f6254]">
-                  {step.description}
-                </p>
-              </div>
+              <p className="mx-auto mt-3 max-w-[250px] text-sm leading-6 text-[#6f6254]">
+                {step.description}
+              </p>
             </article>
           ))}
         </div>
@@ -85,7 +86,7 @@ export default function HowItWorksSection() {
           {topics.map((topic) => (
             <span
               key={topic.label}
-              className="inline-flex items-center gap-3 rounded-full border border-[#e5d6c8] bg-[#fffaf4] px-6 py-3 text-sm shadow-[0_8px_24px_rgba(76,55,35,0.035)] transition duration-200 hover:-translate-y-0.5 hover:bg-white"
+              className="inline-flex items-center gap-3 rounded-full border border-[#e5d6c8] bg-[#fffaf4] px-6 py-3 text-sm shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:bg-white"
             >
               <span className="text-lg leading-none text-[#9b735a]">
                 {topic.icon}
