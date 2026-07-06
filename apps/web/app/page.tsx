@@ -1,3 +1,5 @@
+import Header from "@/components/landing/Header";
+import Footer from "@/components/landing/Footer";
 import Image from "next/image";
 
 const steps = [
@@ -23,26 +25,7 @@ const topics = ["Burnout", "Anxiety", "Loneliness", "Relocation", "Layoff", "Rel
 export default function Home() {
   return (
     <main className="min-h-screen bg-[#fbf5ed] text-[#2a241d]">
-      <header className="mx-auto flex max-w-7xl items-center justify-between px-6 py-7">
-        <div className="flex items-center gap-2 text-2xl font-semibold">
-          <span className="text-2xl">♡</span>
-          HearKind
-        </div>
-
-        <nav className="hidden gap-10 text-sm font-medium md:flex">
-          <a href="#how">How it works</a>
-          <a href="#safety">Safety</a>
-          <a href="#about">About</a>
-          <a href="#faq">FAQ</a>
-        </nav>
-
-        <a
-          href="#start"
-          className="rounded-full bg-[#3f4734] px-6 py-3 text-sm font-medium text-white"
-        >
-          Join the waitlist
-        </a>
-      </header>
+     <Header />
 
       <section className="relative mx-auto grid min-h-[720px] max-w-7xl grid-cols-1 overflow-hidden px-6 pb-24 pt-16 md:grid-cols-2">
         <div className="z-10 max-w-xl">
@@ -207,12 +190,7 @@ export default function Home() {
         </div>
       </section>
 
-      <footer className="border-t border-[#eadfd3] bg-[#fffaf4] px-6 py-8">
-        <div className="mx-auto flex max-w-6xl flex-col justify-between gap-4 text-sm text-[#6f6254] md:flex-row">
-          <p>♡ HearKind</p>
-          <p>© 2026 HearKind. All rights reserved.</p>
-        </div>
-      </footer>
+      <Footer />
     </main>
   );
 }
