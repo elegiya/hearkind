@@ -84,7 +84,7 @@ export default function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
             </p>
 
             <h2 className="mt-4 text-4xl font-semibold leading-tight tracking-tight">
-              Be among the first to try HearKind
+              Join the first people building HearKind together
             </h2>
 
             <p className="mt-4 leading-7 text-[#6f6254]">

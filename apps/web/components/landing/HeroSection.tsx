@@ -35,8 +35,9 @@ export default function HeroSection({ onWaitlistClick }: HeroSectionProps) {
           </h1>
 
           <p className="mt-7 max-w-md text-lg leading-8 text-[#6f6254]">
-            HearKind helps people going through similar life challenges connect
-            for safe, empathetic, peer-to-peer support.
+            Connect with someone who's been through a similar life challenge — 
+            outside your social circle, anonymously, 
+            and without the pressure of social media.
           </p>
 
           <div className="mt-10 flex flex-col gap-4 sm:flex-row">

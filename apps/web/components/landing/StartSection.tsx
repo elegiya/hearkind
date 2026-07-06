@@ -50,8 +50,7 @@ export default function StartSection({ onWaitlistClick }: StartSectionProps) {
               </h2>
 
               <p className="mt-7 max-w-md text-lg leading-8 text-[#6f6254]">
-                Soon you’ll be able to describe what you’re carrying and get
-                matched with someone who has been through something similar.
+                Join the waitlist and help shape the first version of HearKind.
               </p>
 
               <button
