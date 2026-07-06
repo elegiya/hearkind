@@ -30,7 +30,7 @@ export default function SafetySection() {
             <h2 className="mt-3 max-w-2xl text-4xl font-semibold leading-[1.05] tracking-tight md:text-5xl">
               Every conversation
               <br />
-              starts with trust.
+              starts with trust
             </h2>
 
             <p className="mt-4 max-w-2xl text-base leading-7 text-[#f4e5d4]">

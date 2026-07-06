@@ -38,7 +38,7 @@ export default function HowItWorksSection() {
         <h2 className="mx-auto mt-4 max-w-4xl text-4xl font-semibold leading-[1.05] tracking-tight md:text-5xl">
           Support begins with finding
           <br />
-          the right person.
+          the right person
         </h2>
 
         <div className="mt-12 grid gap-6 md:grid-cols-3">

@@ -25,7 +25,7 @@ export default function HeroSection() {
           </p>
 
           <h1 className="text-6xl font-semibold leading-[0.95] tracking-tight md:text-7xl">
-            Find someone who truly understands.
+            Find someone who truly understands
           </h1>
 
           <p className="mt-7 max-w-md text-lg leading-8 text-[#6f6254]">

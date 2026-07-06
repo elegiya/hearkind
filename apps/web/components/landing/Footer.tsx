@@ -1,25 +1,39 @@
 export default function Footer() {
   return (
     <footer className="absolute bottom-0 left-0 right-0 z-30">
-      <div className="mx-auto flex max-w-7xl flex-col gap-4 px-6 py-7 text-sm text-[#2a241d]/75 md:flex-row md:items-center md:justify-between">
-        <div className="flex items-center gap-3 font-medium text-[#2a241d]">
-          <span className="text-xl">♡</span>
+      <div className="mx-auto flex max-w-7xl flex-col gap-4 px-6 py-7 text-sm text-[#2a241d] md:flex-row md:items-center md:justify-between">
+        <a
+          href="#"
+          className="inline-flex w-fit items-center gap-3 rounded-full bg-white/60 px-4 py-2 font-semibold shadow-sm backdrop-blur-md transition hover:bg-white/80"
+        >
+          <span className="text-xl leading-none">♡</span>
           <span>HearKind</span>
-        </div>
+        </a>
 
-        <nav className="flex flex-wrap gap-6">
-          <a href="#how" className="transition hover:text-[#2a241d]">
+        <nav className="flex w-fit flex-wrap gap-2 rounded-full bg-white/45 p-1.5 shadow-sm backdrop-blur-md">
+          <a
+            href="#how"
+            className="rounded-full px-4 py-2 font-medium transition hover:bg-white/65"
+          >
             How it works
           </a>
-          <a href="#safety" className="transition hover:text-[#2a241d]">
+          <a
+            href="#safety"
+            className="rounded-full px-4 py-2 font-medium transition hover:bg-white/65"
+          >
             Safety
           </a>
-          <a href="#start" className="transition hover:text-[#2a241d]">
+          <a
+            href="#start"
+            className="rounded-full px-4 py-2 font-medium transition hover:bg-white/65"
+          >
             Waitlist
           </a>
         </nav>
 
-        <p>© 2026 HearKind. All rights reserved.</p>
+        <p className="rounded-full bg-white/55 px-4 py-2 text-[#2a241d]/75 shadow-sm backdrop-blur-md">
+          © 2026 HearKind. All rights reserved.
+        </p>
       </div>
     </footer>
   );

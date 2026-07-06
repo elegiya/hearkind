@@ -21,7 +21,7 @@ export default function StartSection() {
       <div className="relative min-h-[620px] overflow-hidden bg-[#fbf5ed]">
         <div className="absolute inset-y-0 left-0 z-0 hidden w-[60%] overflow-hidden md:block">
           <Image
-            src="/images/landscape.png"
+            src="/images/landscape-new.png"
             alt="A peaceful path through a warm landscape"
             fill
             className="object-cover object-[60%_center]"
@@ -40,7 +40,7 @@ export default function StartSection() {
               <h2 className="text-5xl font-semibold leading-[0.95] tracking-tight md:text-6xl">
                 Start with one
                 <br />
-                honest sentence.
+                honest sentence
               </h2>
 
               <p className="mt-7 max-w-md text-lg leading-8 text-[#6f6254]">
@@ -50,7 +50,7 @@ export default function StartSection() {
 
               <a
                 href="#"
-                className="mt-10 inline-flex rounded-full bg-[#3f4734] px-7 py-4 text-sm font-medium text-white transition duration-200 hover:-translate-y-0.5"
+                className="mt-10 inline-flex rounded-full bg-[#3f4734] px-7 py-4 text-sm font-medium text-white shadow-xl transition duration-200 hover:-translate-y-0.5 hover:scale-[1.02]"
               >
                 Join the waitlist
               </a>
