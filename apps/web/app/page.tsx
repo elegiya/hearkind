@@ -1,18 +1,20 @@
+import Image from "next/image";
+
 const steps = [
   {
     title: "Share what you’re going through",
     description: "Write a short, private note about what feels heavy right now.",
-    icon: "✍️",
+    image: "/images/journal.png",
   },
   {
     title: "Get matched with someone similar",
     description: "HearKind looks for shared context, not random conversations.",
-    icon: "🌱",
+    image: "/images/plant-mug.png",
   },
   {
     title: "Talk when both of you feel ready",
     description: "Start with a safe text chat before moving to a call.",
-    icon: "💬",
+    image: "/images/chat.png",
   },
 ];
 
@@ -84,31 +86,14 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="relative mt-16 min-h-[420px] md:mt-0">
-          <div className="absolute right-0 top-0 h-[520px] w-[520px] rounded-full bg-[#f0c2a6]/40 blur-3xl" />
-          <div className="absolute right-10 top-10 h-[430px] w-[430px] rounded-full bg-[#e9d7bd]/70" />
-          <div className="absolute right-20 top-24 h-[340px] w-[340px] rounded-[45%] bg-[#fff7ee] shadow-2xl" />
-
-          <div className="absolute right-16 top-28 h-72 w-72 rounded-[3rem] bg-[#e8c3a7] p-8 shadow-xl">
-            <div className="h-full rounded-[2rem] bg-[#f9eadb] p-6">
-              <div className="mb-5 h-20 rounded-full bg-[#fff8ef]" />
-              <div className="space-y-3">
-                <div className="h-3 rounded-full bg-[#d5a98b]" />
-                <div className="h-3 w-4/5 rounded-full bg-[#d5a98b]" />
-                <div className="h-3 w-3/5 rounded-full bg-[#d5a98b]" />
-              </div>
-              <div className="mt-8 flex gap-3">
-                <div className="h-11 w-11 rounded-full bg-[#3f4734]" />
-                <div className="h-11 w-11 rounded-full bg-[#f0c2a6]" />
-                <div className="h-11 w-11 rounded-full bg-[#fff8ef]" />
-              </div>
-            </div>
-          </div>
-
-          <div className="absolute bottom-10 right-0 rounded-[2rem] bg-white/70 p-5 shadow-xl backdrop-blur">
-            <p className="text-sm font-medium">You’re not alone here</p>
-            <p className="mt-1 text-sm text-[#6f6254]">Someone will understand.</p>
-          </div>
+        <div className="relative mt-16 min-h-[520px] md:mt-0">
+          <Image
+            src="/images/hero-chair.png"
+            alt="A cozy armchair with a cup and plant"
+            fill
+            priority
+            className="object-contain"
+          />
         </div>
 
         <div className="absolute bottom-0 left-0 right-0 h-32 rounded-t-[55%] bg-[#fffaf4]" />
@@ -133,7 +118,9 @@ export default function Home() {
                   <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[#f0c2a6] text-sm font-semibold">
                     {index + 1}
                   </span>
-                  <span className="text-5xl">{step.icon}</span>
+                  <div className="relative h-28 w-32">
+                    <Image src={step.image} alt="" fill className="object-contain" />
+                  </div>
                 </div>
                 <h3 className="text-lg font-semibold">{step.title}</h3>
                 <p className="mt-3 leading-7 text-[#6f6254]">{step.description}</p>
@@ -161,8 +148,13 @@ export default function Home() {
       <section id="safety" className="bg-[#fffaf4] px-6 py-16">
         <div className="mx-auto grid max-w-6xl gap-8 rounded-[2rem] bg-[#4a503d] p-10 text-white md:grid-cols-[280px_1fr] md:p-14">
           <div className="flex items-center justify-center">
-            <div className="flex h-44 w-44 items-center justify-center rounded-full bg-[#f0c2a6] text-7xl">
-              ♡
+            <div className="relative h-64 w-64">
+              <Image
+                src="/images/hands-heart.png"
+                alt="Hands holding a heart"
+                fill
+                className="object-contain"
+              />
             </div>
           </div>
 
@@ -184,11 +176,13 @@ export default function Home() {
 
       <section id="start" className="bg-[#fffaf4] px-6 py-24">
         <div className="mx-auto grid max-w-6xl items-center gap-12 md:grid-cols-2">
-          <div className="relative h-72 overflow-hidden rounded-[2rem] bg-[#f1dfc9]">
-            <div className="absolute -left-10 bottom-0 h-48 w-72 rounded-t-full bg-[#d9c6ad]" />
-            <div className="absolute bottom-0 left-24 h-36 w-80 rounded-t-full bg-[#c9d0b4]" />
-            <div className="absolute left-16 top-14 h-16 w-16 rounded-full bg-[#d69b61]" />
-            <div className="absolute bottom-12 left-20 h-2 w-80 rounded-full bg-white/70" />
+          <div className="relative h-72 overflow-hidden rounded-[2rem]">
+            <Image
+              src="/images/landscape.png"
+              alt="A peaceful path through a warm landscape"
+              fill
+              className="object-cover"
+            />
           </div>
 
           <div>
