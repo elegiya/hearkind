@@ -29,13 +29,13 @@ const topics = [
 
 export default function HowItWorksSection() {
   return (
-    <section id="how" className="bg-[#fffaf4] px-6 pb-20 pt-8">
-      <div className="mx-auto max-w-7xl text-center">
+    <section id="how" className="bg-[#fffaf4] px-6 py-16">
+      <div className="mx-auto max-w-6xl text-center">
         <p className="text-xs font-semibold uppercase tracking-[0.35em] text-[#c66f4b]">
           How it works
         </p>
 
-        <h2 className="mx-auto mt-4 max-w-2xl text-4xl font-semibold leading-[1.05] tracking-tight md:text-5xl">
+        <h2 className="mx-auto mt-4 max-w-4xl text-4xl font-semibold leading-[1.05] tracking-tight md:text-5xl">
           Support begins with finding
           <br />
           the right person.
@@ -45,16 +45,14 @@ export default function HowItWorksSection() {
           {steps.map((step, index) => (
             <article
               key={step.title}
-              className="rounded-[2rem] bg-[#fbf5ed] px-7 pt-6 pb-7 text-center shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+              className="rounded-[2rem] bg-[#fbf5ed] px-7 pb-7 pt-6 text-center shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
             >
-              {/* Number */}
               <div className="flex">
                 <span className="mt-1 flex h-10 w-10 items-center justify-center rounded-full bg-[#f0c2a6] text-sm font-semibold">
                   {index + 1}
                 </span>
               </div>
 
-              {/* Illustration */}
               <div className="-mt-6 mb-5 flex justify-center">
                 <div className="relative h-28 w-40">
                   <Image
@@ -66,7 +64,6 @@ export default function HowItWorksSection() {
                 </div>
               </div>
 
-              {/* Content */}
               <h3 className="mx-auto max-w-[240px] text-lg font-semibold leading-snug text-[#2a241d]">
                 {step.title}
               </h3>
@@ -78,7 +75,7 @@ export default function HowItWorksSection() {
           ))}
         </div>
 
-        <p className="mt-14 text-xs font-semibold uppercase tracking-[0.35em] text-[#c66f4b]">
+        <p className="mt-12 text-xs font-semibold uppercase tracking-[0.35em] text-[#c66f4b]">
           You are not alone in this
         </p>
 

@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function StartSection() {
   return (
-    <section id="start" className="bg-[#fffaf4] px-6 py-24">
+    <section id="start" className="bg-[#fffaf4] px-6 py-16">
       <div className="mx-auto grid max-w-6xl items-center gap-12 md:grid-cols-2">
         <div className="relative h-72 overflow-hidden rounded-[2rem]">
           <Image

@@ -8,9 +8,9 @@ const safetyPoints = [
 
 export default function SafetySection() {
   return (
-    <section id="safety" className="bg-[#fffaf4] px-6 py-4">
+    <section id="safety" className="bg-[#fffaf4] px-6 py-8">
       <div className="mx-auto max-w-6xl">
-        <div className="grid items-center gap-4 overflow-hidden rounded-[2.5rem] bg-[#4a503d] px-8 py-6 text-white shadow-[0_24px_70px_rgba(42,36,29,0.16)] md:grid-cols-[360px_1fr] md:px-10 md:py-8">
+        <div className="grid items-center gap-4 overflow-hidden rounded-[2.5rem] bg-[#4a503d] px-8 py-6 text-white shadow-[0_24px_70px_rgba(42,36,29,0.16)] md:grid-cols-[340px_1fr] md:px-10 md:py-8">
           <div className="flex justify-center md:justify-start">
             <div className="relative h-80 w-80 md:h-[360px] md:w-[360px]">
               <Image
