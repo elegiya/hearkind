@@ -1,7 +1,13 @@
+"use client";
+
 import Footer from "@/components/landing/Footer";
 import Image from "next/image";
 
-export default function StartSection() {
+type StartSectionProps = {
+  onWaitlistClick: () => void;
+};
+
+export default function StartSection({ onWaitlistClick }: StartSectionProps) {
   return (
     <section id="start" className="relative overflow-hidden bg-[#fffaf4]">
       <div className="absolute left-0 right-0 top-0 z-20">
@@ -48,12 +54,13 @@ export default function StartSection() {
                 matched with someone who has been through something similar.
               </p>
 
-              <a
-                href="#"
+              <button
+                type="button"
+                onClick={onWaitlistClick}
                 className="mt-10 inline-flex rounded-full bg-[#3f4734] px-7 py-4 text-sm font-medium text-white shadow-xl transition duration-200 hover:-translate-y-0.5 hover:scale-[1.02]"
               >
                 Join the waitlist
-              </a>
+              </button>
             </div>
           </div>
         </div>

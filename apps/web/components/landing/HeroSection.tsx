@@ -1,7 +1,13 @@
+"use client";
+
 import Header from "@/components/landing/Header";
 import Image from "next/image";
 
-export default function HeroSection() {
+type HeroSectionProps = {
+  onWaitlistClick: () => void;
+};
+
+export default function HeroSection({ onWaitlistClick }: HeroSectionProps) {
   return (
     <section className="relative min-h-[820px] overflow-hidden bg-[#fbf5ed]">
       <div className="absolute inset-y-0 right-0 z-0 hidden w-[60%] overflow-hidden md:block">
@@ -15,7 +21,7 @@ export default function HeroSection() {
       </div>
 
       <div className="relative z-30">
-        <Header />
+        <Header onWaitlistClick={onWaitlistClick} />
       </div>
 
       <div className="relative z-10 mx-auto grid max-w-7xl grid-cols-1 px-6 pt-16 md:grid-cols-2">
@@ -34,16 +40,17 @@ export default function HeroSection() {
           </p>
 
           <div className="mt-10 flex flex-col gap-4 sm:flex-row">
-            <a
-              href="#start"
-              className="rounded-full bg-[#3f4734] px-7 py-4 text-center text-sm font-medium text-white"
+            <button
+              type="button"
+              onClick={onWaitlistClick}
+              className="rounded-full bg-[#3f4734] px-7 py-4 text-center text-sm font-medium text-white transition hover:-translate-y-0.5"
             >
-              Get started
-            </a>
+              Join the waitlist
+            </button>
 
             <a
               href="#how"
-              className="rounded-full border border-[#3f4734]/50 px-7 py-4 text-center text-sm font-medium"
+              className="rounded-full border border-[#3f4734]/50 px-7 py-4 text-center text-sm font-medium transition hover:bg-white/45"
             >
               See how it works
             </a>
