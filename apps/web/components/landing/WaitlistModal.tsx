@@ -12,6 +12,8 @@ export default function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
   const [name, setName] = useState("");
   const [interest, setInterest] = useState("peer-support");
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
 
   useEffect(() => {
     if (!isOpen) return;
@@ -29,11 +31,65 @@ export default function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
     };
   }, [isOpen, onClose]);
 
+  useEffect(() => {
+    if (!isOpen) {
+      setError("");
+      setIsLoading(false);
+    }
+  }, [isOpen]);
+
   if (!isOpen) return null;
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const resetForm = () => {
+    setEmail("");
+    setName("");
+    setInterest("peer-support");
+    setError("");
+    setIsLoading(false);
+  };
+
+  const handleClose = () => {
+    onClose();
+
+    window.setTimeout(() => {
+      setIsSubmitted(false);
+      resetForm();
+    }, 200);
+  };
+
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setIsSubmitted(true);
+
+    setIsLoading(true);
+    setError("");
+
+    try {
+      const response = await fetch("/api/waitlist", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email,
+          name,
+          interest,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        setError(data.error || "Something went wrong. Please try again.");
+        return;
+      }
+
+      resetForm();
+      setIsSubmitted(true);
+    } catch {
+      setError("Could not join the waitlist. Please try again.");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -41,14 +97,14 @@ export default function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
       <button
         type="button"
         aria-label="Close waitlist modal"
-        onClick={onClose}
+        onClick={handleClose}
         className="absolute inset-0 bg-[#2a241d]/35 backdrop-blur-sm"
       />
 
       <div className="relative w-full max-w-lg overflow-hidden rounded-[2rem] bg-[#fffaf4] p-8 shadow-[0_30px_100px_rgba(42,36,29,0.25)]">
         <button
           type="button"
-          onClick={onClose}
+          onClick={handleClose}
           className="absolute right-5 top-5 flex h-9 w-9 items-center justify-center rounded-full bg-[#fbf5ed] text-xl text-[#6f6254] transition hover:bg-[#f0c2a6]"
         >
           ×
@@ -71,7 +127,7 @@ export default function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
 
             <button
               type="button"
-              onClick={onClose}
+              onClick={handleClose}
               className="mt-8 rounded-full bg-[#3f4734] px-7 py-4 text-sm font-medium text-white"
             >
               Close
@@ -115,16 +171,27 @@ export default function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
                 onChange={(event) => setInterest(event.target.value)}
                 className="w-full rounded-2xl border border-[#e5d6c8] bg-white px-5 py-4 text-sm outline-none transition focus:border-[#c66f4b]"
               >
-                <option value="peer-support">I’m looking for peer support</option>
-                <option value="volunteer">I may want to support others</option>
+                <option value="peer-support">
+                  I’m looking for peer support
+                </option>
+                <option value="volunteer">
+                  I may want to support others
+                </option>
                 <option value="curious">I’m just curious</option>
               </select>
 
+              {error && (
+                <p className="rounded-2xl bg-[#f0c2a6]/30 px-4 py-3 text-sm text-[#8a3f2b]">
+                  {error}
+                </p>
+              )}
+
               <button
                 type="submit"
-                className="w-full rounded-full bg-[#3f4734] px-7 py-4 text-sm font-medium text-white shadow-lg transition hover:-translate-y-0.5"
+                disabled={isLoading}
+                className="w-full rounded-full bg-[#3f4734] px-7 py-4 text-sm font-medium text-white shadow-lg transition hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-70"
               >
-                Join the waitlist
+                {isLoading ? "Joining..." : "Join the waitlist"}
               </button>
             </form>
           </>
