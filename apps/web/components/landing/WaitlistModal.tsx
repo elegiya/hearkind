@@ -187,19 +187,21 @@ export default function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
                 className="w-full rounded-2xl border border-[#e5d6c8] bg-white px-5 py-4 text-sm outline-none transition placeholder:text-[#9b8d7f] focus:border-[#c66f4b]"
               />
 
+              <div className="relative">
               <select
                 value={interest}
                 onChange={(event) => setInterest(event.target.value)}
-                className="w-full rounded-2xl border border-[#e5d6c8] bg-white px-5 py-4 text-sm outline-none transition focus:border-[#c66f4b]"
+                className="w-full appearance-none rounded-2xl border border-[#e5d6c8] bg-white px-5 py-4 pr-12 text-sm text-[#2a241d] outline-none transition focus:border-[#c66f4b]"
               >
-                <option value="peer-support">
-                  I’m looking for peer support
-                </option>
-                <option value="volunteer">
-                  I may want to support others
-                </option>
+                <option value="peer-support">I’m looking for peer support</option>
+                <option value="volunteer">I may want to support others</option>
                 <option value="curious">I’m just curious</option>
               </select>
+
+                <span className="pointer-events-none absolute right-5 top-1/2 -translate-y-1/2 text-sm text-[#6f6254]">
+                    ▾
+                </span>
+              </div>
 
               {error && (
                 <p className="rounded-2xl bg-[#f0c2a6]/30 px-4 py-3 text-sm text-[#8a3f2b]">
