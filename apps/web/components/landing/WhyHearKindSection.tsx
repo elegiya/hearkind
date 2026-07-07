@@ -2,16 +2,16 @@ const options = [
   {
     label: "Friends",
     icon: "☕",
-    title: "They care, but they're part of your life",
+    title: "They care, but they’re close to your life",
     description:
-      "Sometimes you're afraid of being judged, becoming a burden, or having your story shared with people you both know.",
+      "Sometimes you worry about being judged, becoming a burden, or your story reaching people you both know.",
   },
   {
     label: "Therapy",
     icon: "🛋️",
     title: "Professional support matters",
     description:
-      "But appointments take time, and sometimes you simply need someone to talk to today.",
+      "But appointments take time, and sometimes you simply need to talk before things feel heavier.",
   },
 ];
 
@@ -23,7 +23,7 @@ const hearKindPoints = [
 
 export default function WhyHearKindSection() {
   return (
-    <section className="bg-[#fffaf4] px-6 py-12">
+    <section id="why" className="bg-[#fffaf4] px-6 py-12">
       <div className="mx-auto max-w-6xl">
         <div className="mx-auto max-w-3xl text-center">
           <p className="text-xs font-semibold uppercase tracking-[0.35em] text-[#c66f4b]">
@@ -38,7 +38,7 @@ export default function WhyHearKindSection() {
 
           <p className="mx-auto mt-5 max-w-2xl text-lg leading-8 text-[#6f6254]">
             Some conversations are too personal for friends, but too important
-            to keep to yourself.
+            to keep to yourself
           </p>
         </div>
 
@@ -84,8 +84,8 @@ export default function WhyHearKindSection() {
               </h3>
 
               <p className="mt-4 text-sm leading-7 text-[#f4e5d4]">
-                A private conversation with someone outside your everyday life,
-                carefully matched by shared experience — not random chance.
+                A private space to talk to someone outside your circle, matched
+                by lived experience instead of random chance.
               </p>
 
               <div className="mt-6 space-y-3">
@@ -94,10 +94,7 @@ export default function WhyHearKindSection() {
                     <span className="flex h-6 w-6 items-center justify-center rounded-full bg-[#f0c2a6]/20 text-xs text-[#f0c2a6]">
                       ✓
                     </span>
-
-                    <span className="text-sm text-[#f4e5d4]">
-                      {point}
-                    </span>
+                    <span className="text-sm text-[#f4e5d4]">{point}</span>
                   </div>
                 ))}
               </div>

@@ -1,6 +1,6 @@
 export default function Footer() {
   return (
-    <footer className="absolute bottom-0 left-0 right-0 z-30">
+    <footer className="relative z-30 md:absolute md:bottom-0 md:left-0 md:right-0">
       <div className="mx-auto flex max-w-7xl flex-col gap-4 px-6 py-7 text-sm text-[#2a241d] md:flex-row md:items-center md:justify-between">
         <a
           href="#"
@@ -17,12 +17,21 @@ export default function Footer() {
           >
             How it works
           </a>
+
+          <a
+            href="#why"
+            className="rounded-full px-4 py-2 font-medium transition hover:bg-white/65"
+          >
+            Why HearKind
+          </a>
+
           <a
             href="#safety"
             className="rounded-full px-4 py-2 font-medium transition hover:bg-white/65"
           >
             Safety
           </a>
+
           <a
             href="#start"
             className="rounded-full px-4 py-2 font-medium transition hover:bg-white/65"
@@ -31,7 +40,7 @@ export default function Footer() {
           </a>
         </nav>
 
-        <p className="rounded-full bg-white/55 px-4 py-2 text-[#2a241d]/75 shadow-sm backdrop-blur-md">
+        <p className="w-fit rounded-full bg-white/55 px-4 py-2 text-[#2a241d]/75 shadow-sm backdrop-blur-md">
           © 2026 HearKind. All rights reserved.
         </p>
       </div>
