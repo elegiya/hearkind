@@ -2,6 +2,12 @@
 
 import { FormEvent, useEffect, useState } from "react";
 import { validateEmail } from "@/lib/validation/email";
+import {
+  trackWaitlistDuplicate,
+  trackWaitlistFailed,
+  trackWaitlistSubmitStarted,
+  trackWaitlistSuccess,
+} from "@/lib/analytics/events";
 
 type WaitlistModalProps = {
   isOpen: boolean;
@@ -60,14 +66,14 @@ export default function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
+    trackWaitlistSubmitStarted(interest);
     const emailError = validateEmail(email);
 
     if (emailError) {
         setError(emailError);
         return;
     }
-    
+
     setIsLoading(true);
     setError("");
 
@@ -85,11 +91,18 @@ export default function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
       });
 
       const data = await response.json();
-
       if (!response.ok) {
+        if (response.status === 409) {
+          trackWaitlistDuplicate(interest);
+        } else {
+          trackWaitlistFailed(interest, data.error);
+        }
+
         setError(data.error || "Something went wrong. Please try again.");
         return;
       }
+
+      trackWaitlistSuccess(interest, data.waitlist?.id);
 
       resetForm();
       setIsSubmitted(true);

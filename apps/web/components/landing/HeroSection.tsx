@@ -4,7 +4,7 @@ import Header from "@/components/landing/Header";
 import Image from "next/image";
 
 type HeroSectionProps = {
-  onWaitlistClick: () => void;
+  onWaitlistClick: (source: "header" | "hero") => void;
 };
 
 export default function HeroSection({ onWaitlistClick }: HeroSectionProps) {
@@ -21,7 +21,7 @@ export default function HeroSection({ onWaitlistClick }: HeroSectionProps) {
       </div>
 
       <div className="relative z-30">
-        <Header onWaitlistClick={onWaitlistClick} />
+        <Header onWaitlistClick={() => onWaitlistClick("header")} />
       </div>
 
       <div className="relative z-10 mx-auto grid max-w-7xl grid-cols-1 px-6 pt-16 md:grid-cols-2">
@@ -43,7 +43,7 @@ export default function HeroSection({ onWaitlistClick }: HeroSectionProps) {
           <div className="mt-10 flex flex-col gap-4 sm:flex-row">
             <button
               type="button"
-              onClick={onWaitlistClick}
+              onClick={() => onWaitlistClick("hero")}
               className="rounded-full bg-[#3f4734] px-7 py-4 text-center text-sm font-medium text-white transition hover:-translate-y-0.5"
             >
               Join the waitlist
