@@ -1,6 +1,7 @@
 "use client";
 
 import { FormEvent, useEffect, useState } from "react";
+import { validateEmail } from "@/lib/validation/email";
 
 type WaitlistModalProps = {
   isOpen: boolean;
@@ -60,6 +61,13 @@ export default function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
+    const emailError = validateEmail(email);
+
+    if (emailError) {
+        setError(emailError);
+        return;
+    }
+    
     setIsLoading(true);
     setError("");
 

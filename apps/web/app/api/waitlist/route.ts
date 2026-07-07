@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { supabaseAdmin } from "@/lib/supabase/server";
+import { validateEmail } from "@/lib/validation/email";
 
 export async function POST(request: Request) {
   try {
@@ -9,11 +10,10 @@ export async function POST(request: Request) {
     const name = String(body.name || "").trim();
     const interest = String(body.interest || "").trim();
 
-    if (!email || !email.includes("@")) {
-      return NextResponse.json(
-        { error: "Please enter a valid email." },
-        { status: 400 },
-      );
+    const emailError = validateEmail(email);
+
+    if (emailError) {
+      return NextResponse.json({ error: emailError }, { status: 400 });
     }
 
     if (!interest) {
@@ -42,8 +42,6 @@ export async function POST(request: Request) {
     }
 
     if (error) {
-      console.error("Supabase insert error:", error);
-
       return NextResponse.json(
         { error: "Something went wrong. Please try again." },
         { status: 500 },
@@ -56,9 +54,7 @@ export async function POST(request: Request) {
         id: data.id,
       },
     });
-  } catch (error) {
-    console.error("Waitlist API error:", error);
-
+  } catch {
     return NextResponse.json(
       { error: "Something went wrong. Please try again." },
       { status: 500 },
