@@ -9,7 +9,7 @@ type HeroSectionProps = {
 
 export default function HeroSection({ onWaitlistClick }: HeroSectionProps) {
   return (
-    <section className="relative min-h-[760px] overflow-hidden bg-[#fbf5ed] lg:min-h-[820px]">
+    <section className="relative overflow-hidden bg-[#fbf5ed] lg:min-h-[820px]">
       <div className="absolute inset-y-0 right-0 z-0 hidden w-1/2 overflow-hidden lg:block">
         <Image
           src="/images/hero-chair-new.png"
@@ -25,7 +25,7 @@ export default function HeroSection({ onWaitlistClick }: HeroSectionProps) {
       </div>
 
       <div className="relative z-10 mx-auto grid max-w-7xl grid-cols-1 px-6 pt-16 lg:grid-cols-[48%_52%]">
-        <div className="relative z-10 max-w-xl pb-44">
+        <div className="relative z-10 mx-auto max-w-2xl pb-36 lg:mx-0 lg:max-w-xl lg:pb-44">
           <p className="mb-8 text-xs font-semibold uppercase tracking-[0.35em] text-[#c66f4b]">
             Anonymous peer support
           </p>
@@ -34,7 +34,7 @@ export default function HeroSection({ onWaitlistClick }: HeroSectionProps) {
             Find someone who truly understands
           </h1>
 
-          <p className="mt-7 max-w-md text-lg leading-8 text-[#6f6254]">
+          <p className="mt-7 max-w-xl text-lg leading-8 text-[#6f6254] lg:max-w-md">
             Connect with someone who's been through a similar life challenge —
             outside your social circle, anonymously, and without the pressure of
             social media.
@@ -66,9 +66,19 @@ export default function HeroSection({ onWaitlistClick }: HeroSectionProps) {
               <p className="text-sm text-[#6f6254]">Your story stays yours.</p>
             </div>
           </div>
+
+          <div className="relative mt-12 aspect-[4/3] overflow-hidden rounded-[2rem] shadow-xl lg:hidden">
+            <Image
+              src="/images/hero-chair-new.png"
+              alt="A cozy armchair with a cup and plant"
+              fill
+              priority
+              className="object-cover object-[25%_center]"
+            />
+          </div>
         </div>
 
-        <div />
+        <div className="hidden lg:block" />
       </div>
 
       <div className="absolute bottom-[-1px] left-0 right-0 z-20">

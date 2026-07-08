@@ -24,7 +24,7 @@ export default function StartSection({ onWaitlistClick }: StartSectionProps) {
         </svg>
       </div>
 
-      <div className="relative min-h-[620px] overflow-hidden bg-[#fbf5ed]">
+      <div className="relative overflow-hidden bg-[#fbf5ed] lg:min-h-[620px]">
         <div className="absolute inset-y-0 left-0 z-0 hidden w-1/2 overflow-hidden lg:block">
           <Image
             src="/images/landscape-new.png"
@@ -34,11 +34,20 @@ export default function StartSection({ onWaitlistClick }: StartSectionProps) {
           />
         </div>
 
-        <div className="relative z-10 mx-auto grid min-h-[620px] max-w-7xl grid-cols-1 px-6 pt-20 lg:grid-cols-[52%_48%] lg:pt-10">
-          <div />
+        <div className="relative z-10 mx-auto grid max-w-7xl grid-cols-1 gap-10 px-6 pb-28 pt-24 lg:min-h-[620px] lg:grid-cols-[52%_48%] lg:gap-0 lg:pb-0 lg:pt-10">
+          <div className="relative aspect-[16/11] overflow-hidden rounded-[2rem] shadow-xl lg:hidden">
+            <Image
+              src="/images/landscape-new.png"
+              alt="A peaceful path through a warm landscape"
+              fill
+              className="object-cover object-[60%_center]"
+            />
+          </div>
 
-          <div className="flex items-center pb-20">
-            <div className="max-w-xl">
+          <div className="hidden lg:block" />
+
+          <div className="flex items-center lg:pb-20">
+            <div className="mx-auto max-w-2xl lg:mx-0 lg:max-w-xl">
               <p className="mb-8 text-xs font-semibold uppercase tracking-[0.35em] text-[#c66f4b]">
                 Start your journey
               </p>
@@ -49,7 +58,7 @@ export default function StartSection({ onWaitlistClick }: StartSectionProps) {
                 honest sentence
               </h2>
 
-              <p className="mt-7 max-w-md text-lg leading-8 text-[#6f6254]">
+              <p className="mt-7 max-w-xl text-lg leading-8 text-[#6f6254] lg:max-w-md">
                 Join the waitlist and help shape the first version of HearKind.
               </p>
 
