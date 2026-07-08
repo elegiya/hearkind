@@ -25,7 +25,7 @@ export default function StartSection({ onWaitlistClick }: StartSectionProps) {
       </div>
 
       <div className="relative min-h-[620px] overflow-hidden bg-[#fbf5ed]">
-        <div className="absolute inset-y-0 left-0 z-0 hidden w-[60%] overflow-hidden md:block">
+        <div className="absolute inset-y-0 left-0 z-0 hidden w-1/2 overflow-hidden lg:block">
           <Image
             src="/images/landscape-new.png"
             alt="A peaceful path through a warm landscape"
@@ -34,16 +34,16 @@ export default function StartSection({ onWaitlistClick }: StartSectionProps) {
           />
         </div>
 
-        <div className="relative z-10 mx-auto grid min-h-[620px] max-w-7xl grid-cols-1 px-6 pt-10 md:grid-cols-[60%_40%]">
+        <div className="relative z-10 mx-auto grid min-h-[620px] max-w-7xl grid-cols-1 px-6 pt-20 lg:grid-cols-[52%_48%] lg:pt-10">
           <div />
 
           <div className="flex items-center pb-20">
-            <div className="max-w-xl md:pl-10">
+            <div className="max-w-xl">
               <p className="mb-8 text-xs font-semibold uppercase tracking-[0.35em] text-[#c66f4b]">
                 Start your journey
               </p>
 
-              <h2 className="text-5xl font-semibold leading-[0.95] tracking-tight md:text-6xl">
+              <h2 className="text-5xl font-semibold leading-[0.95] tracking-tight lg:text-6xl">
                 Start with one
                 <br />
                 honest sentence

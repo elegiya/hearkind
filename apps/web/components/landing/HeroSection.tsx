@@ -9,8 +9,8 @@ type HeroSectionProps = {
 
 export default function HeroSection({ onWaitlistClick }: HeroSectionProps) {
   return (
-    <section className="relative min-h-[820px] overflow-hidden bg-[#fbf5ed]">
-      <div className="absolute inset-y-0 right-0 z-0 hidden w-[60%] overflow-hidden md:block">
+    <section className="relative min-h-[760px] overflow-hidden bg-[#fbf5ed] lg:min-h-[820px]">
+      <div className="absolute inset-y-0 right-0 z-0 hidden w-1/2 overflow-hidden lg:block">
         <Image
           src="/images/hero-chair-new.png"
           alt="A cozy armchair with a cup and plant"
@@ -24,20 +24,20 @@ export default function HeroSection({ onWaitlistClick }: HeroSectionProps) {
         <Header onWaitlistClick={() => onWaitlistClick("header")} />
       </div>
 
-      <div className="relative z-10 mx-auto grid max-w-7xl grid-cols-1 px-6 pt-16 md:grid-cols-2">
-        <div className="max-w-xl pb-44">
+      <div className="relative z-10 mx-auto grid max-w-7xl grid-cols-1 px-6 pt-16 lg:grid-cols-[48%_52%]">
+        <div className="relative z-10 max-w-xl pb-44">
           <p className="mb-8 text-xs font-semibold uppercase tracking-[0.35em] text-[#c66f4b]">
             Anonymous peer support
           </p>
 
-          <h1 className="text-6xl font-semibold leading-[0.95] tracking-tight md:text-7xl">
+          <h1 className="text-6xl font-semibold leading-[0.95] tracking-tight lg:text-7xl">
             Find someone who truly understands
           </h1>
 
           <p className="mt-7 max-w-md text-lg leading-8 text-[#6f6254]">
-            Connect with someone who's been through a similar life challenge — 
-            outside your social circle, anonymously, 
-            and without the pressure of social media.
+            Connect with someone who's been through a similar life challenge —
+            outside your social circle, anonymously, and without the pressure of
+            social media.
           </p>
 
           <div className="mt-10 flex flex-col gap-4 sm:flex-row">
