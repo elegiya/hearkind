@@ -29,7 +29,7 @@ const topics = [
 
 export default function HowItWorksSection() {
   return (
-    <section id="how" className="bg-[#fffaf4] px-6 py-16">
+    <section id="how" className="bg-[#fffaf4] px-6 pb-8 pt-16 md:pb-10">
       <div className="mx-auto max-w-6xl text-center">
         <p className="text-xs font-semibold uppercase tracking-[0.35em] text-[#c66f4b]">
           How it works
@@ -75,7 +75,7 @@ export default function HowItWorksSection() {
           ))}
         </div>
 
-        <p className="mt-12 text-xs font-semibold uppercase tracking-[0.35em] text-[#c66f4b]">
+        <p className="mt-10 text-xs font-semibold uppercase tracking-[0.35em] text-[#c66f4b]">
           You are not alone in this
         </p>
 

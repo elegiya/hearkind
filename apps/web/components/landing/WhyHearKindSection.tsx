@@ -23,7 +23,7 @@ const hearKindPoints = [
 
 export default function WhyHearKindSection() {
   return (
-    <section id="why" className="bg-[#fffaf4] px-6 py-12">
+    <section id="why" className="bg-[#fffaf4] px-6 pb-12 pt-6 md:pt-8">
       <div className="mx-auto max-w-6xl">
         <div className="mx-auto max-w-3xl text-center">
           <p className="text-xs font-semibold uppercase tracking-[0.35em] text-[#c66f4b]">

@@ -34,7 +34,7 @@ export default function StartSection({ onWaitlistClick }: StartSectionProps) {
           />
         </div>
 
-        <div className="relative z-10 mx-auto grid max-w-7xl grid-cols-1 gap-10 px-6 pb-28 pt-24 lg:min-h-[620px] lg:grid-cols-[52%_48%] lg:gap-0 lg:pb-0 lg:pt-10">
+        <div className="relative z-10 mx-auto grid max-w-7xl grid-cols-1 gap-10 px-6 pb-6 pt-24 sm:pb-10 lg:min-h-[620px] lg:grid-cols-[52%_48%] lg:gap-0 lg:pb-0 lg:pt-10">
           <div className="relative aspect-[16/11] overflow-hidden rounded-[2rem] shadow-xl lg:hidden">
             <Image
               src="/images/landscape-new.png"
@@ -65,7 +65,7 @@ export default function StartSection({ onWaitlistClick }: StartSectionProps) {
               <button
                 type="button"
                 onClick={onWaitlistClick}
-                className="mt-10 inline-flex rounded-full bg-[#3f4734] px-7 py-4 text-sm font-medium text-white shadow-xl transition duration-200 hover:-translate-y-0.5 hover:scale-[1.02]"
+                className="mt-10 inline-flex w-full justify-center rounded-full bg-[#3f4734] px-7 py-4 text-sm font-medium text-white shadow-xl transition duration-200 hover:-translate-y-0.5 hover:scale-[1.02] sm:w-auto"
               >
                 Join the waitlist
               </button>

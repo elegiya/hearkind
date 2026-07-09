@@ -24,13 +24,13 @@ export default function HeroSection({ onWaitlistClick }: HeroSectionProps) {
         <Header onWaitlistClick={() => onWaitlistClick("header")} />
       </div>
 
-      <div className="relative z-10 mx-auto grid max-w-7xl grid-cols-1 px-6 pt-16 lg:grid-cols-[48%_52%]">
-        <div className="relative z-10 mx-auto max-w-2xl pb-36 lg:mx-0 lg:max-w-xl lg:pb-44">
-          <p className="mb-8 text-xs font-semibold uppercase tracking-[0.35em] text-[#c66f4b]">
+      <div className="relative z-10 mx-auto max-w-7xl px-6 pb-36 pt-16 sm:pb-40 lg:grid lg:grid-cols-[48%_52%] lg:pb-44">
+        <div className="relative z-10 mx-auto max-w-2xl lg:mx-0 lg:max-w-xl">
+          <p className="mb-8 text-xs font-semibold uppercase tracking-[0.24em] text-[#c66f4b] sm:tracking-[0.35em]">
             Anonymous peer support
           </p>
 
-          <h1 className="text-6xl font-semibold leading-[0.95] tracking-tight lg:text-7xl">
+          <h1 className="text-5xl font-semibold leading-[0.95] tracking-tight sm:text-6xl lg:text-7xl">
             Find someone who truly understands
           </h1>
 
@@ -58,7 +58,7 @@ export default function HeroSection({ onWaitlistClick }: HeroSectionProps) {
           </div>
 
           <div className="mt-16 flex items-center gap-4">
-            <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#f0c2a6] text-xl">
+            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[#f0c2a6] text-xl">
               ♡
             </div>
             <div>
@@ -66,16 +66,16 @@ export default function HeroSection({ onWaitlistClick }: HeroSectionProps) {
               <p className="text-sm text-[#6f6254]">Your story stays yours.</p>
             </div>
           </div>
+        </div>
 
-          <div className="relative mt-12 aspect-[4/3] overflow-hidden rounded-[2rem] shadow-xl lg:hidden">
-            <Image
-              src="/images/hero-chair-new.png"
-              alt="A cozy armchair with a cup and plant"
-              fill
-              priority
-              className="object-cover object-[25%_center]"
-            />
-          </div>
+        <div className="relative mx-auto mt-12 aspect-[16/11] w-full max-w-3xl overflow-hidden rounded-[2rem] shadow-xl lg:hidden">
+          <Image
+            src="/images/hero-chair-new.png"
+            alt="A cozy armchair with a cup and plant"
+            fill
+            priority
+            className="object-cover object-[25%_center]"
+          />
         </div>
 
         <div className="hidden lg:block" />
@@ -85,7 +85,7 @@ export default function HeroSection({ onWaitlistClick }: HeroSectionProps) {
         <svg
           viewBox="0 0 1440 180"
           preserveAspectRatio="none"
-          className="h-[150px] w-full"
+          className="h-[90px] w-full sm:h-[120px] lg:h-[150px]"
           aria-hidden="true"
         >
           <path
