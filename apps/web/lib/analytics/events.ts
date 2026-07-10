@@ -4,8 +4,22 @@ import posthog from "posthog-js";
 
 type WaitlistSource = "header" | "hero" | "start";
 
+function isLocalhost(hostname: string) {
+  return hostname === "localhost" || hostname === "127.0.0.1" || hostname === "::1";
+}
+
+function shouldEnableAnalytics() {
+  if (typeof window === "undefined") return false;
+
+  const isDevelopment = process.env.NODE_ENV === "development";
+  const isDisabledByEnv = process.env.NEXT_PUBLIC_DISABLE_ANALYTICS === "true";
+  const isRunningLocally = isLocalhost(window.location.hostname);
+
+  return !isDevelopment && !isDisabledByEnv && !isRunningLocally;
+}
+
 function track(event: string, properties?: Record<string, unknown>) {
-  if (typeof window === "undefined") return;
+  if (!shouldEnableAnalytics()) return;
 
   posthog.capture(event, {
     ...properties,

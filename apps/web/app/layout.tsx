@@ -16,7 +16,22 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "HearKind",
   description:
-    "Private peer support for people going through similar life challenges.",
+    "Private peer support for people going through similar life challenges",
+
+  metadataBase: new URL("https://hearkind.app"),
+
+  openGraph: {
+    title: "HearKind",
+    description:
+      "Private peer support matched by shared lived experience",
+    url: "https://hearkind.app",
+    siteName: "HearKind",
+    images: ["/og-image.png"],
+  },
+
+  alternates: {
+    canonical: "https://hearkind.app",
+  },
 };
 
 export default function RootLayout({
