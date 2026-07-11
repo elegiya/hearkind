@@ -1,14 +1,14 @@
+import BrandLogo from "@/components/BrandLogo";
+
 export default function Footer() {
   return (
     <footer className="relative z-30 text-[#2a241d] lg:absolute lg:bottom-0 lg:left-0 lg:right-0">
       <div className="mx-auto flex max-w-7xl flex-col items-center gap-4 px-6 py-5 text-sm lg:flex-row lg:items-center lg:justify-between lg:py-7">
-        <a
-          href="#"
-          className="inline-flex items-center justify-center gap-3 rounded-full bg-white/80 px-4 py-2 font-semibold text-[#2a241d] shadow-sm transition hover:bg-white"
-        >
-          <span className="text-xl leading-none">♡</span>
-          <span>HearKind</span>
-        </a>
+        <BrandLogo
+          href="/"
+          variant="pill"
+          size="small"
+        />
 
         <nav className="flex w-full max-w-sm flex-col gap-1.5 rounded-[1.5rem] bg-white/75 p-1.5 text-center text-[#2a241d] shadow-sm sm:flex-row sm:rounded-full lg:w-fit lg:max-w-none">
           <a
