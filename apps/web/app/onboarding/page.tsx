@@ -2,7 +2,6 @@
 
 import {
   FormEvent,
-  useEffect,
   useState,
 } from "react";
 import Image from "next/image";
@@ -13,6 +12,21 @@ import BrandLogo from "@/components/BrandLogo";
 import { createClient } from "@/lib/supabase/client";
 
 const AUTHENTICATED_REDIRECT = "/";
+const GOOGLE_CALLBACK_ERROR =
+  "Google login could not be completed. Please try again.";
+
+function getInitialError() {
+  if (typeof window === "undefined") return null;
+
+  const searchParams = new URLSearchParams(
+    window.location.search,
+  );
+
+  return searchParams.get("error") ===
+    "auth_callback_failed"
+    ? GOOGLE_CALLBACK_ERROR
+    : null;
+}
 
 export default function LoginPage() {
   const router = useRouter();
@@ -37,23 +51,7 @@ export default function LoginPage() {
 
   const [error, setError] = useState<
     string | null
-  >(null);
-
-  useEffect(() => {
-    const searchParams =
-      new URLSearchParams(
-        window.location.search,
-      );
-
-    if (
-      searchParams.get("error") ===
-      "auth_callback_failed"
-    ) {
-      setError(
-        "Google login could not be completed. Please try again.",
-      );
-    }
-  }, []);
+  >(getInitialError);
 
   async function handleLogin(
     event: FormEvent<HTMLFormElement>,

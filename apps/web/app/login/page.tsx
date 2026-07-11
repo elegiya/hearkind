@@ -2,7 +2,6 @@
 
 import {
   FormEvent,
-  useEffect,
   useState,
 } from "react";
 import Image from "next/image";
@@ -13,6 +12,21 @@ import BrandLogo from "@/components/BrandLogo";
 import { createClient } from "@/lib/supabase/client";
 
 const AUTHENTICATED_REDIRECT = "/";
+const GOOGLE_CALLBACK_ERROR =
+  "Google login could not be completed. Please try again.";
+
+function getInitialError() {
+  if (typeof window === "undefined") return null;
+
+  const searchParams = new URLSearchParams(
+    window.location.search,
+  );
+
+  return searchParams.get("error") ===
+    "auth_callback_failed"
+    ? GOOGLE_CALLBACK_ERROR
+    : null;
+}
 
 export default function LoginPage() {
   const router = useRouter();
@@ -37,23 +51,7 @@ export default function LoginPage() {
 
   const [error, setError] = useState<
     string | null
-  >(null);
-
-  useEffect(() => {
-    const searchParams =
-      new URLSearchParams(
-        window.location.search,
-      );
-
-    if (
-      searchParams.get("error") ===
-      "auth_callback_failed"
-    ) {
-      setError(
-        "Google login could not be completed. Please try again.",
-      );
-    }
-  }, []);
+  >(getInitialError);
 
   async function handleLogin(
     event: FormEvent<HTMLFormElement>,
@@ -221,12 +219,31 @@ export default function LoginPage() {
       <section className="form-panel">
         <div className="form-content">
           <div className="form-card">
+            <div className="mobile-brand">
+              <BrandLogo
+                href="/"
+                variant="plain"
+                size="medium"
+              />
+            </div>
+
+            <p className="mobile-eyebrow">
+              Anonymous peer support
+            </p>
+
             <header className="form-header">
               <h2>Welcome back</h2>
 
               <p>
-                Log in to your HearKind
-                account
+                <span className="desktop-copy">
+                  Log in to your HearKind
+                  account
+                </span>
+
+                <span className="mobile-copy">
+                  Good to see you again.
+                  You&apos;re not alone.
+                </span>
               </p>
             </header>
 
@@ -367,10 +384,23 @@ export default function LoginPage() {
             </form>
 
             <p className="signup-copy">
-              Don&apos;t have an
-              account?{" "}
+              <span className="desktop-copy">
+                Don&apos;t have an
+                account?{" "}
+              </span>
+
+              <span className="mobile-copy">
+                New here?{" "}
+              </span>
+
               <Link href="/signup">
-                Sign up
+                <span className="desktop-copy">
+                  Sign up
+                </span>
+
+                <span className="mobile-copy">
+                  Create an account
+                </span>
               </Link>
             </p>
           </div>
@@ -813,6 +843,12 @@ export default function LoginPage() {
             1.75vw,
             50px
           );
+        }
+
+        .mobile-brand,
+        .mobile-eyebrow,
+        .mobile-copy {
+          display: none;
         }
 
         .form-header h2 {
@@ -1341,38 +1377,366 @@ export default function LoginPage() {
           max-width: 820px
         ) {
           .login-page {
+            min-height: 100svh;
             overflow-y: auto;
+
+            background: #fffdfb;
           }
 
-          .visual-panel,
           .clip-definitions {
             display: none;
           }
 
+          .visual-panel {
+            position: relative;
+            z-index: 1;
+
+            display: block;
+
+            width: 100%;
+            min-height: 0;
+            height: clamp(
+              250px,
+              34svh,
+              360px
+            );
+
+            clip-path: none;
+            -webkit-clip-path: none;
+
+            border-bottom-left-radius: 38px;
+            border-bottom-right-radius: 38px;
+          }
+
+          .visual-background,
+          .brand,
+          .visual-copy,
+          .safety-card {
+            display: none;
+          }
+
+          .illustration {
+            inset: 0;
+          }
+
+          .illustration
+            :global(img) {
+            object-position: center 60%;
+            transform: none;
+          }
+
+          .illustration-overlay {
+            background:
+              linear-gradient(
+                180deg,
+                rgba(
+                    255,
+                    250,
+                    244,
+                    0
+                  )
+                  56%,
+                rgba(
+                    255,
+                    253,
+                    251,
+                    0.5
+                  )
+                  82%,
+                rgba(
+                    255,
+                    253,
+                    251,
+                    0.94
+                  )
+                  100%
+              );
+          }
+
           .form-panel {
-            min-height: 100svh;
+            z-index: 5;
+
+            min-height: auto;
             margin-left: 0;
+
+            margin-top: -44px;
+            overflow: visible;
           }
 
           .form-content {
-            min-height: 100svh;
+            min-height: auto;
             justify-content: flex-start;
 
+            overflow: visible;
+
             padding:
-              50px
-              22px
-              24px;
+              64px
+              34px
+              34px;
+
+            border-top-left-radius: 52px;
+            border-top-right-radius: 52px;
+
+            background: #fffdfb;
+          }
+
+          .form-content::before {
+            content: "";
+
+            position: absolute;
+            z-index: 0;
+
+            top: -34px;
+            left: -14%;
+
+            width: 72%;
+            height: 82px;
+
+            border-radius: 999px;
+
+            background: #fffdfb;
+          }
+
+          .form-content::after {
+            content: "";
+
+            position: absolute;
+            z-index: 0;
+
+            top: -26px;
+            right: -8%;
+
+            width: 38%;
+            height: 62px;
+
+            border-radius: 999px;
+
+            background: #fffdfb;
           }
 
           .form-card {
+            z-index: 1;
+
             width: min(
               100%,
-              460px
+              520px
             );
           }
 
+          .mobile-brand {
+            display: flex;
+
+            margin-bottom: 38px;
+          }
+
+          .mobile-brand
+            :global(a) {
+            gap: 20px;
+            height: auto;
+            padding: 0;
+          }
+
+          .mobile-brand
+            :global(a span:first-child) {
+            color: #cf744d;
+            font-size: 44px;
+          }
+
+          .mobile-brand
+            :global(a span:last-child) {
+            color: #2a2a26;
+            font-family:
+              Georgia,
+              "Times New Roman",
+              serif;
+            font-size: 35px;
+            font-weight: 650;
+          }
+
+          .mobile-eyebrow {
+            display: block;
+
+            margin: 0 0 24px;
+
+            color: #c66f4b;
+            font-size: 12px;
+            font-weight: 700;
+            line-height: 1;
+            letter-spacing: 0.42em;
+            text-transform: uppercase;
+          }
+
+          .desktop-copy {
+            display: none;
+          }
+
+          .mobile-copy {
+            display: inline;
+          }
+
           .form-header {
-            margin-bottom: 31px;
+            margin-bottom: 32px;
+          }
+
+          .form-header h2 {
+            margin-bottom: 22px;
+
+            color: #2a2a26;
+            font-size: clamp(
+              48px,
+              12vw,
+              64px
+            );
+            font-weight: 650;
+            line-height: 0.98;
+            letter-spacing: -0.035em;
+          }
+
+          .form-header p {
+            color: #6c7170;
+            font-size: clamp(
+              19px,
+              5.2vw,
+              28px
+            );
+            line-height: 1.35;
+          }
+
+          .field-group {
+            margin-bottom: 18px;
+          }
+
+          .field-group label {
+            display: none;
+          }
+
+          .input-shell {
+            min-height: 66px;
+            padding: 0 28px;
+
+            border-color: rgba(
+              63,
+              59,
+              55,
+              0.24
+            );
+            border-radius: 23px;
+
+            background: rgba(
+              255,
+              255,
+              255,
+              0.72
+            );
+          }
+
+          .input-shell
+            :global(svg) {
+            width: 25px;
+            height: 25px;
+            flex: 0 0 25px;
+
+            color: #303330;
+          }
+
+          .input-shell input {
+            height: 64px;
+            padding: 0 24px;
+
+            color: #2a2d2a;
+            font-size: 20px;
+          }
+
+          .input-shell
+            input::placeholder {
+            color: #8d908d;
+          }
+
+          .password-toggle {
+            padding: 6px 0 6px 12px;
+          }
+
+          .forgot-password {
+            margin-top: 6px;
+            margin-bottom: 30px;
+
+            font-size: 19px;
+            font-weight: 650;
+          }
+
+          .forgot-password a,
+          .signup-copy a {
+            color: #3e4a35;
+            text-decoration: underline;
+            text-decoration-thickness: 1px;
+            text-underline-offset: 4px;
+          }
+
+          .primary-button,
+          .google-button {
+            min-height: 68px;
+
+            border-radius: 22px;
+
+            font-size: 20px;
+            font-weight: 600;
+          }
+
+          .primary-button {
+            background: #3e4a35;
+
+            box-shadow:
+              0 18px 32px
+              rgba(
+                62,
+                74,
+                53,
+                0.18
+              );
+          }
+
+          .separator {
+            gap: 28px;
+
+            margin: 26px 0;
+
+            color: #70726f;
+            font-size: 20px;
+            font-weight: 600;
+          }
+
+          .google-button {
+            gap: 28px;
+
+            border-color: rgba(
+              63,
+              59,
+              55,
+              0.28
+            );
+            background: rgba(
+              255,
+              255,
+              255,
+              0.58
+            );
+
+            color: #1f211f;
+          }
+
+          .google-button
+            :global(svg) {
+            width: 28px;
+            height: 28px;
+            flex: 0 0 28px;
+          }
+
+          .signup-copy {
+            margin-top: 28px;
+
+            color: #777b79;
+            font-size: 20px;
+            line-height: 1.35;
           }
 
         }
@@ -1385,31 +1749,40 @@ export default function LoginPage() {
           }
 
           .form-header h2 {
-            font-size: 37px;
+            font-size: clamp(
+              48px,
+              12vw,
+              64px
+            );
           }
 
           .form-header p {
-            font-size: 16px;
+            font-size: clamp(
+              19px,
+              5.2vw,
+              28px
+            );
           }
 
           .input-shell {
-            min-height: 60px;
-            border-radius: 15px;
+            min-height: 66px;
+            border-radius: 23px;
           }
 
           .input-shell input {
-            height: 58px;
-            font-size: 16px;
+            height: 64px;
+            font-size: 20px;
           }
 
           .primary-button,
           .google-button {
-            min-height: 56px;
-            font-size: 16px;
+            min-height: 68px;
+            border-radius: 22px;
+            font-size: 20px;
           }
 
           .signup-copy {
-            font-size: 15px;
+            font-size: 20px;
           }
 
         }
@@ -1507,6 +1880,14 @@ function BottomLandscape() {
                 72%,
               transparent 100%
             );
+        }
+
+        @media (
+          max-width: 820px
+        ) {
+          .bottom-landscape {
+            display: none;
+          }
         }
 
         @media (

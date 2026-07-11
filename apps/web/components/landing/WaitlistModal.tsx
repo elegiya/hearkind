@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, useEffect, useState } from "react";
+import { FormEvent, useCallback, useEffect, useState } from "react";
 import { validateEmail } from "@/lib/validation/email";
 import {
   trackWaitlistDuplicate,
@@ -22,11 +22,28 @@ export default function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
 
+  const resetForm = useCallback(() => {
+    setEmail("");
+    setName("");
+    setInterest("peer-support");
+    setError("");
+    setIsLoading(false);
+  }, []);
+
+  const handleClose = useCallback(() => {
+    onClose();
+
+    window.setTimeout(() => {
+      setIsSubmitted(false);
+      resetForm();
+    }, 200);
+  }, [onClose, resetForm]);
+
   useEffect(() => {
     if (!isOpen) return;
 
     const handleEscape = (event: KeyboardEvent) => {
-      if (event.key === "Escape") onClose();
+      if (event.key === "Escape") handleClose();
     };
 
     document.body.style.overflow = "hidden";
@@ -36,33 +53,9 @@ export default function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
       document.body.style.overflow = "";
       window.removeEventListener("keydown", handleEscape);
     };
-  }, [isOpen, onClose]);
-
-  useEffect(() => {
-    if (!isOpen) {
-      setError("");
-      setIsLoading(false);
-    }
-  }, [isOpen]);
+  }, [isOpen, handleClose]);
 
   if (!isOpen) return null;
-
-  const resetForm = () => {
-    setEmail("");
-    setName("");
-    setInterest("peer-support");
-    setError("");
-    setIsLoading(false);
-  };
-
-  const handleClose = () => {
-    onClose();
-
-    window.setTimeout(() => {
-      setIsSubmitted(false);
-      resetForm();
-    }, 200);
-  };
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
