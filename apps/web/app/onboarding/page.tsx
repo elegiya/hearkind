@@ -172,7 +172,7 @@ export default function LoginPage() {
 
         <div className="illustration">
           <Image
-            src="/images/login-illustration.png"
+            src="/images/login-beige.png"
             alt="A warm watercolor scene with a journal, candle, cup and books"
             fill
             priority
