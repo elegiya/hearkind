@@ -171,7 +171,7 @@ export default function LoginPage() {
 
         <div className="illustration">
           <Image
-            src="/images/login-illustration.png"
+            src="/images/login-warm.png"
             alt="A warm watercolor scene with a journal, candle, cup and books"
             fill
             priority
@@ -190,13 +190,18 @@ export default function LoginPage() {
         </div>
 
         <div className="visual-copy">
+          <p className="visual-eyebrow">
+            Private peer support
+          </p>
+
           <h1>
-            Understanding starts here
+            Understanding
+            <br />
+            starts here
           </h1>
 
-          <p>
-            Private support from someone
-            who gets it
+          <p className="visual-subtitle">
+            Private support from someone who gets it
           </p>
         </div>
 
@@ -368,14 +373,6 @@ export default function LoginPage() {
                 Sign up
               </Link>
             </p>
-          </div>
-
-          <div className="footer-brand">
-            <BrandLogo
-                href="/"
-                variant="pill"
-                size="small"
-            />
           </div>
         </div>
       </section>
@@ -563,40 +560,55 @@ export default function LoginPage() {
           right: 17%;
         }
 
+        .visual-eyebrow {
+          margin:
+            0 0
+            clamp(
+              16px,
+              2vh,
+              28px
+            );
+
+          font-size: 12px;
+          font-weight: 600;
+          line-height: 1;
+          letter-spacing: 0.35em;
+          text-transform: uppercase;
+
+          color: #c66f4b;
+        }
+
         .visual-copy h1 {
           margin: 0;
 
-          white-space: nowrap;
-
           font-size: clamp(
-            29px,
-            3vw,
-            50px
+            48px,
+            4.65vw,
+            72px
           );
 
-          font-weight: 700;
-          line-height: 1.08;
-          letter-spacing: -0.01em;
+          font-weight: 600;
+          line-height: 0.95;
+          letter-spacing: 0;
 
-          color: #241f1a;
+          color: #2a241d;
         }
 
-        .visual-copy p {
-          margin: 18px 0 0;
-
-          white-space: nowrap;
+        .visual-subtitle {
+          max-width: 420px;
+          margin: 28px 0 0;
 
           font-size: clamp(
-            13px,
-            1.05vw,
+            16px,
+            1.15vw,
             18px
           );
 
           font-weight: 400;
-          line-height: 1.45;
+          line-height: 1.6;
           letter-spacing: 0;
 
-          color: #65615b;
+          color: #6f6254;
         }
 
         .safety-card {
@@ -705,19 +717,24 @@ export default function LoginPage() {
           display: flex;
           flex-direction: column;
           align-items: center;
+          justify-content: center;
 
           padding:
             clamp(
-              62px,
-              8vh,
-              105px
+              36px,
+              4vh,
+              96px
             )
             clamp(
               38px,
               4.5vw,
               76px
             )
-            28px
+            clamp(
+              96px,
+              13vh,
+              260px
+            )
             clamp(
               92px,
               6.5vw,
@@ -725,15 +742,77 @@ export default function LoginPage() {
             );
         }
 
+        .form-content::before {
+          content: "";
+
+          position: absolute;
+          z-index: -1;
+
+          top: clamp(
+            22px,
+            5vh,
+            72px
+          );
+
+          left: 50%;
+
+          width: min(
+            820px,
+            90%
+          );
+
+          height: min(
+            780px,
+            76vh
+          );
+
+          border-radius: 999px;
+
+          background:
+            radial-gradient(
+              circle,
+              rgba(
+                251,
+                245,
+                237,
+                0.72
+              )
+              0%,
+              rgba(
+                251,
+                245,
+                237,
+                0.34
+              )
+              45%,
+              transparent 74%
+            );
+
+          pointer-events: none;
+
+          transform:
+            translateX(-50%);
+        }
+
         .form-card {
+          position: relative;
+
           width: min(
             100%,
-            500px
+            clamp(
+              462px,
+              31vw,
+              720px
+            )
           );
         }
 
         .form-header {
-          margin-bottom: 34px;
+          margin-bottom: clamp(
+            34px,
+            1.75vw,
+            50px
+          );
         }
 
         .form-header h2 {
@@ -741,8 +820,8 @@ export default function LoginPage() {
 
           font-size: clamp(
             38px,
-            2.8vw,
-            52px
+            2.1vw,
+            78px
           );
 
           font-weight: 650;
@@ -755,7 +834,11 @@ export default function LoginPage() {
         .form-header p {
           margin: 0;
 
-          font-size: 17px;
+          font-size: clamp(
+            17px,
+            0.72vw,
+            24px
+          );
           font-weight: 400;
           line-height: 1.45;
 
@@ -763,7 +846,11 @@ export default function LoginPage() {
         }
 
         .field-group {
-          margin-bottom: 22px;
+          margin-bottom: clamp(
+            22px,
+            1.12vw,
+            34px
+          );
         }
 
         .field-group label {
@@ -771,7 +858,11 @@ export default function LoginPage() {
 
           margin-bottom: 9px;
 
-          font-size: 16px;
+          font-size: clamp(
+            16px,
+            0.64vw,
+            20px
+          );
           font-weight: 600;
 
           color: #191b1a;
@@ -781,13 +872,27 @@ export default function LoginPage() {
           display: flex;
           align-items: center;
 
-          min-height: 64px;
-          padding: 0 17px;
+          min-height: clamp(
+            64px,
+            3.1vw,
+            88px
+          );
+          padding:
+            0
+            clamp(
+              17px,
+              0.9vw,
+              26px
+            );
 
           border: 1px solid
             #d8d5d0;
 
-          border-radius: 16px;
+          border-radius: clamp(
+            16px,
+            0.75vw,
+            24px
+          );
 
           background: rgba(
             255,
@@ -820,9 +925,23 @@ export default function LoginPage() {
 
         .input-shell
           :global(svg) {
-          width: 22px;
-          height: 22px;
-          flex: 0 0 22px;
+          width: clamp(
+            22px,
+            0.9vw,
+            30px
+          );
+          height: clamp(
+            22px,
+            0.9vw,
+            30px
+          );
+          flex:
+            0 0
+            clamp(
+              22px,
+              0.9vw,
+              30px
+            );
 
           color: #6d706c;
         }
@@ -830,9 +949,19 @@ export default function LoginPage() {
         .input-shell input {
           width: 100%;
           min-width: 0;
-          height: 62px;
+          height: clamp(
+            62px,
+            3vw,
+            86px
+          );
 
-          padding: 0 15px;
+          padding:
+            0
+            clamp(
+              15px,
+              0.75vw,
+              24px
+            );
 
           border: 0;
           outline: 0;
@@ -840,7 +969,11 @@ export default function LoginPage() {
           background: transparent;
 
           font: inherit;
-          font-size: 16px;
+          font-size: clamp(
+            16px,
+            0.7vw,
+            21px
+          );
           font-weight: 400;
 
           color: #1d2521;
@@ -869,9 +1002,17 @@ export default function LoginPage() {
           justify-content: flex-end;
 
           margin-top: -6px;
-          margin-bottom: 27px;
+          margin-bottom: clamp(
+            27px,
+            1.2vw,
+            38px
+          );
 
-          font-size: 15px;
+          font-size: clamp(
+            15px,
+            0.62vw,
+            19px
+          );
           font-weight: 400;
         }
 
@@ -915,12 +1056,24 @@ export default function LoginPage() {
         .primary-button,
         .google-button {
           width: 100%;
-          min-height: 58px;
+          min-height: clamp(
+            58px,
+            2.9vw,
+            82px
+          );
 
-          border-radius: 15px;
+          border-radius: clamp(
+            15px,
+            0.75vw,
+            24px
+          );
 
           font: inherit;
-          font-size: 17px;
+          font-size: clamp(
+            17px,
+            0.72vw,
+            22px
+          );
           font-weight: 500;
 
           cursor: pointer;
@@ -935,20 +1088,15 @@ export default function LoginPage() {
         .primary-button {
           border: 0;
 
-          background:
-            linear-gradient(
-              135deg,
-              #19483c,
-              #103b32
-            );
+          background: #3e4a35;
 
           color: #ffffff;
 
           box-shadow:
             0 12px 25px
             rgba(
-              23,
-              63,
+              62,
+              74,
               53,
               0.15
             );
@@ -963,8 +1111,8 @@ export default function LoginPage() {
           box-shadow:
             0 15px 29px
             rgba(
-              23,
-              63,
+              62,
+              74,
               53,
               0.2
             );
@@ -985,10 +1133,20 @@ export default function LoginPage() {
           align-items: center;
           gap: 18px;
 
-          margin: 21px 0;
+          margin:
+            clamp(
+              21px,
+              1vw,
+              32px
+            )
+            0;
 
           color: #686a67;
-          font-size: 15px;
+          font-size: clamp(
+            15px,
+            0.62vw,
+            19px
+          );
         }
 
         .separator span {
@@ -1033,64 +1191,44 @@ export default function LoginPage() {
 
         .google-button
           :global(svg) {
-          width: 22px;
-          height: 22px;
-          flex: 0 0 22px;
+          width: clamp(
+            22px,
+            0.9vw,
+            30px
+          );
+          height: clamp(
+            22px,
+            0.9vw,
+            30px
+          );
+          flex:
+            0 0
+            clamp(
+              22px,
+              0.9vw,
+              30px
+            );
         }
 
         .signup-copy {
-          margin: 25px 0 0;
+          margin:
+            clamp(
+              25px,
+              1.1vw,
+              38px
+            )
+            0 0;
 
           text-align: center;
 
-          font-size: 16px;
+          font-size: clamp(
+            16px,
+            0.68vw,
+            21px
+          );
           font-weight: 400;
 
           color: #6b6d69;
-        }
-
-        .footer-brand {
-          position: relative;
-          z-index: 6;
-
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-
-          margin-top: auto;
-
-          margin-bottom: clamp(
-            20px,
-            2.8vh,
-            38px
-          );
-
-          text-align: center;
-
-          text-shadow:
-            0 1px 4px
-              rgba(
-                255,
-                255,
-                255,
-                0.98
-              ),
-            0 0 15px
-              rgba(
-                255,
-                255,
-                255,
-                0.98
-              );
-        }
-
-        .footer-brand p {
-          margin: 4px 0 0;
-
-          font-size: 14px;
-          font-weight: 400;
-
-          color: #545a56;
         }
 
         @media (
@@ -1113,7 +1251,13 @@ export default function LoginPage() {
             font-size: 37px;
           }
 
-          .visual-copy p {
+          .visual-eyebrow {
+            margin-bottom: 16px;
+            font-size: 10px;
+            letter-spacing: 0.28em;
+          }
+
+          .visual-subtitle {
             font-size: 14px;
           }
         }
@@ -1147,7 +1291,11 @@ export default function LoginPage() {
             font-size: 31px;
           }
 
-          .visual-copy p {
+          .visual-eyebrow {
+            margin-bottom: 14px;
+          }
+
+          .visual-subtitle {
             margin-top: 15px;
             font-size: 13px;
           }
@@ -1184,7 +1332,7 @@ export default function LoginPage() {
             font-size: 28px;
           }
 
-          .visual-copy p {
+          .visual-subtitle {
             font-size: 12px;
           }
         }
@@ -1208,6 +1356,7 @@ export default function LoginPage() {
 
           .form-content {
             min-height: 100svh;
+            justify-content: flex-start;
 
             padding:
               50px
@@ -1226,10 +1375,6 @@ export default function LoginPage() {
             margin-bottom: 31px;
           }
 
-          .footer-brand {
-            margin-top: 65px;
-            margin-bottom: 16px;
-          }
         }
 
         @media (
@@ -1267,13 +1412,6 @@ export default function LoginPage() {
             font-size: 15px;
           }
 
-          .footer-brand {
-            margin-top: 58px;
-          }
-
-          .footer-brand p {
-            font-size: 13px;
-          }
         }
       `}</style>
     </main>
