@@ -23,16 +23,12 @@ export async function POST(request: Request) {
       );
     }
 
-    const { data, error } = await supabaseAdmin
-      .from("waitlist")
-      .insert({
-        email,
-        name: name || null,
-        interest,
-        source: "landing",
-      })
-      .select("id")
-      .single();
+    const { error } = await supabaseAdmin.from("waitlist").insert({
+      email,
+      name: name || null,
+      interest,
+      source: "landing",
+    });
 
     if (error?.code === "23505") {
       return NextResponse.json(
@@ -48,12 +44,10 @@ export async function POST(request: Request) {
       );
     }
 
-    return NextResponse.json({
-      success: true,
-      waitlist: {
-        id: data.id,
-      },
-    });
+    return NextResponse.json(
+      { success: true },
+      { headers: { "Cache-Control": "no-store" } },
+    );
   } catch {
     return NextResponse.json(
       { error: "Something went wrong. Please try again." },
