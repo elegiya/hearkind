@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import PostHogProvider from "@/components/analytics/PostHogProvider";
+import CookieConsentBanner from "@/components/consent/CookieConsentBanner";
+import { CookieConsentProvider } from "@/components/consent/CookieConsentProvider";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -14,21 +16,20 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "HearKind",
+  title: {
+    default: "HearKind",
+    template: "%s | HearKind",
+  },
   description:
     "Private peer support for people going through similar life challenges",
-
   metadataBase: new URL("https://hearkind.app"),
-
   openGraph: {
     title: "HearKind",
-    description:
-      "Private peer support matched by shared lived experience",
+    description: "Private peer support matched by shared lived experience",
     url: "https://hearkind.app",
     siteName: "HearKind",
     images: ["/og-image.png"],
   },
-
   alternates: {
     canonical: "https://hearkind.app",
   },
@@ -45,7 +46,10 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
-        <PostHogProvider>{children}</PostHogProvider>
+        <CookieConsentProvider>
+          <PostHogProvider>{children}</PostHogProvider>
+          <CookieConsentBanner />
+        </CookieConsentProvider>
       </body>
     </html>
   );

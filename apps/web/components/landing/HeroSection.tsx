@@ -35,7 +35,7 @@ export default function HeroSection({ onWaitlistClick }: HeroSectionProps) {
           </h1>
 
           <p className="mt-7 max-w-xl text-lg leading-8 text-[#6f6254] lg:max-w-md">
-            Connect with someone who's been through a similar life challenge —
+            Connect with someone who&apos;s been through a similar life challenge —
             outside your social circle, anonymously, and without the pressure of
             social media.
           </p>
