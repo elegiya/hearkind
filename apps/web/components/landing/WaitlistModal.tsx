@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { FormEvent, useCallback, useEffect, useState } from "react";
 import { validateEmail } from "@/lib/validation/email";
 import {
@@ -59,12 +60,13 @@ export default function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    trackWaitlistSubmitStarted(interest);
+    trackWaitlistSubmitStarted();
+
     const emailError = validateEmail(email);
 
     if (emailError) {
-        setError(emailError);
-        return;
+      setError(emailError);
+      return;
     }
 
     setIsLoading(true);
@@ -76,30 +78,27 @@ export default function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-          email,
-          name,
-          interest,
-        }),
+        body: JSON.stringify({ email, name, interest }),
       });
 
       const data = await response.json();
+
       if (!response.ok) {
         if (response.status === 409) {
-          trackWaitlistDuplicate(interest);
+          trackWaitlistDuplicate();
         } else {
-          trackWaitlistFailed(interest, data.error);
+          trackWaitlistFailed("server");
         }
 
         setError(data.error || "Something went wrong. Please try again.");
         return;
       }
 
-      trackWaitlistSuccess(interest, data.waitlist?.id);
-
+      trackWaitlistSuccess();
       resetForm();
       setIsSubmitted(true);
     } catch {
+      trackWaitlistFailed("network");
       setError("Could not join the waitlist. Please try again.");
     } finally {
       setIsLoading(false);
@@ -119,6 +118,7 @@ export default function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
         <button
           type="button"
           onClick={handleClose}
+          aria-label="Close"
           className="absolute right-5 top-5 flex h-9 w-9 items-center justify-center rounded-full bg-[#fbf5ed] text-xl text-[#6f6254] transition hover:bg-[#f0c2a6]"
         >
           ×
@@ -129,16 +129,13 @@ export default function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
             <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-[#f0c2a6] text-2xl">
               ♡
             </div>
-
             <h2 className="mt-6 text-4xl font-semibold leading-tight tracking-tight">
               You’re on the list
             </h2>
-
             <p className="mx-auto mt-4 max-w-sm leading-7 text-[#6f6254]">
               Thank you. We’ll let you know when HearKind is ready for early
               access.
             </p>
-
             <button
               type="button"
               onClick={handleClose}
@@ -152,47 +149,53 @@ export default function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
             <p className="text-xs font-semibold uppercase tracking-[0.35em] text-[#c66f4b]">
               Join the waitlist
             </p>
-
             <h2 className="mt-4 text-4xl font-semibold leading-tight tracking-tight">
               Join the first people building HearKind together
             </h2>
-
             <p className="mt-4 leading-7 text-[#6f6254]">
               Leave your email and we’ll invite you when the first private beta
               is ready.
             </p>
 
-            <form onSubmit={handleSubmit} className="mt-8 space-y-4">
+            <form
+              onSubmit={handleSubmit}
+              className="ph-no-capture mt-8 space-y-4"
+              data-sensitive="true"
+            >
               <input
                 type="email"
                 required
+                autoComplete="email"
                 placeholder="Email address"
                 value={email}
                 onChange={(event) => setEmail(event.target.value)}
-                className="w-full rounded-2xl border border-[#e5d6c8] bg-white px-5 py-4 text-sm outline-none transition placeholder:text-[#9b8d7f] focus:border-[#c66f4b]"
+                className="ph-no-capture w-full rounded-2xl border border-[#e5d6c8] bg-white px-5 py-4 text-sm outline-none transition placeholder:text-[#9b8d7f] focus:border-[#c66f4b]"
               />
-
               <input
                 type="text"
+                autoComplete="given-name"
                 placeholder="First name optional"
                 value={name}
                 onChange={(event) => setName(event.target.value)}
-                className="w-full rounded-2xl border border-[#e5d6c8] bg-white px-5 py-4 text-sm outline-none transition placeholder:text-[#9b8d7f] focus:border-[#c66f4b]"
+                className="ph-no-capture w-full rounded-2xl border border-[#e5d6c8] bg-white px-5 py-4 text-sm outline-none transition placeholder:text-[#9b8d7f] focus:border-[#c66f4b]"
               />
 
               <div className="relative">
-              <select
-                value={interest}
-                onChange={(event) => setInterest(event.target.value)}
-                className="w-full appearance-none rounded-2xl border border-[#e5d6c8] bg-white px-5 py-4 pr-12 text-sm text-[#2a241d] outline-none transition focus:border-[#c66f4b]"
-              >
-                <option value="peer-support">I’m looking for peer support</option>
-                <option value="volunteer">I may want to support others</option>
-                <option value="curious">I’m just curious</option>
-              </select>
-
+                <select
+                  value={interest}
+                  onChange={(event) => setInterest(event.target.value)}
+                  className="ph-no-capture w-full appearance-none rounded-2xl border border-[#e5d6c8] bg-white px-5 py-4 pr-12 text-sm text-[#2a241d] outline-none transition focus:border-[#c66f4b]"
+                >
+                  <option value="peer-support">
+                    I’m looking for peer support
+                  </option>
+                  <option value="volunteer">
+                    I may want to support others
+                  </option>
+                  <option value="curious">I’m just curious</option>
+                </select>
                 <span className="pointer-events-none absolute right-5 top-1/2 -translate-y-1/2 text-sm text-[#6f6254]">
-                    ▾
+                  ▾
                 </span>
               </div>
 
@@ -209,6 +212,15 @@ export default function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
               >
                 {isLoading ? "Joining..." : "Join the waitlist"}
               </button>
+
+              <p className="px-2 text-center text-xs leading-5 text-[#6f6254]">
+                By joining, you ask HearKind to use your email to notify you
+                about launch and early access. See our{" "}
+                <Link href="/privacy" className="font-semibold underline">
+                  Privacy Policy
+                </Link>
+                .
+              </p>
             </form>
           </>
         )}
