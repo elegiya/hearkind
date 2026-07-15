@@ -1,4 +1,6 @@
 import Link from "next/link";
+
+import BrandLogo from "@/components/BrandLogo";
 import CookieSettingsButton from "@/components/consent/CookieSettingsButton";
 
 const primaryLinkClass =
@@ -7,26 +9,17 @@ const primaryLinkClass =
 const legalLinkClass =
   "text-[11px] font-medium text-[#2a241d]/50 transition hover:text-[#2a241d] sm:text-xs";
 
-import BrandLogo from "@/components/BrandLogo";
-
 export default function Footer() {
   return (
     <footer className="relative z-30 text-[#2a241d] lg:absolute lg:bottom-0 lg:left-0 lg:right-0">
       <div className="mx-auto max-w-7xl px-6 pb-3 pt-5">
         <div className="flex flex-col items-center gap-4 text-sm lg:grid lg:grid-cols-[1fr_auto_1fr] lg:items-center lg:gap-6">
-          <Link
+          <BrandLogo
             href="/"
-            className="inline-flex h-12 items-center justify-center gap-3 rounded-full bg-white/80 px-5 font-semibold text-[#2a241d] shadow-sm backdrop-blur-sm transition hover:bg-white lg:justify-self-start"
-          >
-            <span className="text-xl leading-none">♡</span>
-            <span>HearKind</span>
-          </Link>
-      <div className="mx-auto flex max-w-7xl flex-col items-center gap-4 px-6 py-5 text-sm lg:flex-row lg:items-center lg:justify-between lg:py-7">
-        <BrandLogo
-          href="/"
-          variant="pill"
-          size="small"
-        />
+            variant="pill"
+            size="small"
+            className="lg:justify-self-start"
+          />
 
           <nav
             aria-label="Landing page"
