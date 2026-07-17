@@ -328,6 +328,10 @@
   background: transparent;
 }
 
+.mobile-wave {
+  display: none;
+}
+
 .form-content {
   position: relative;
   z-index: 5;
@@ -985,17 +989,11 @@
 
     width: 100%;
     min-height: 0;
-    height: clamp(
-      250px,
-      34svh,
-      360px
-    );
+    height: clamp(280px, 38svh, 390px);
 
     clip-path: none;
     -webkit-clip-path: none;
 
-    border-bottom-left-radius: 38px;
-    border-bottom-right-radius: 38px;
   }
 
   .visual-background,
@@ -1011,7 +1009,7 @@
 
   .illustration
     img {
-    object-position: center 60%;
+    object-position: center 58%;
     transform: none;
   }
 
@@ -1048,9 +1046,22 @@
 
     min-height: auto;
     margin-left: 0;
-
-    margin-top: -44px;
+    margin-top: -92px;
     overflow: visible;
+  }
+
+  .mobile-wave {
+    position: relative;
+    z-index: 1;
+
+    display: block;
+
+    width: 100%;
+    height: 104px;
+    margin-bottom: -1px;
+
+    color: #fffdfb;
+    fill: currentColor;
   }
 
   .form-content {
@@ -1059,49 +1070,14 @@
 
     overflow: visible;
 
-    padding:
-      64px
-      34px
-      34px;
-
-    border-top-left-radius: 52px;
-    border-top-right-radius: 52px;
+    padding: 18px 34px 40px;
 
     background: #fffdfb;
   }
 
-  .form-content::before {
-    content: "";
-
-    position: absolute;
-    z-index: 0;
-
-    top: -34px;
-    left: -14%;
-
-    width: 72%;
-    height: 82px;
-
-    border-radius: 999px;
-
-    background: #fffdfb;
-  }
-
+  .form-content::before,
   .form-content::after {
-    content: "";
-
-    position: absolute;
-    z-index: 0;
-
-    top: -26px;
-    right: -8%;
-
-    width: 38%;
-    height: 62px;
-
-    border-radius: 999px;
-
-    background: #fffdfb;
+    content: none;
   }
 
   .form-card {
@@ -1111,12 +1087,14 @@
       100%,
       520px
     );
+
+    transform: none;
   }
 
   .mobile-brand {
     display: flex;
 
-    margin-bottom: 38px;
+    margin-bottom: 34px;
   }
 
   .mobile-brand a {
@@ -1332,7 +1310,7 @@
   max-width: 480px
 ) {
   .form-content {
-    padding-top: 38px;
+    padding: 12px 28px 36px;
   }
 
   .form-header h2 {

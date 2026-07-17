@@ -81,6 +81,15 @@ export function LoginFormPanel() {
 
   return (
     <section className="form-panel">
+      <svg
+        className="mobile-wave"
+        viewBox="0 0 1000 150"
+        preserveAspectRatio="none"
+        aria-hidden="true"
+      >
+        <path d="M0 56 C165 -26 342 7 505 66 C690 133 843 36 1000 82 V150 H0 Z" />
+      </svg>
+
       <div className="form-content">
         <div className="form-card">
           <div className="mobile-brand">
