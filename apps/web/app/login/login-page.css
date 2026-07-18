@@ -462,6 +462,24 @@
   line-height: 1.4;
 }
 
+.success-message {
+  margin: -4px 0 18px;
+  padding: 11px 13px;
+
+  border: 1px solid rgba(63, 74, 50, 0.18);
+  border-radius: 11px;
+
+  background: rgba(63, 74, 50, 0.08);
+
+  color: #3f4a32;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.signup-fields-end {
+  margin-bottom: 28px;
+}
+
 .primary-button,
 .google-button {
   width: 100%;
@@ -822,6 +840,10 @@
     line-height: 1.02;
     letter-spacing: -0.035em;
     white-space: nowrap;
+  }
+
+  .signup-form-panel .form-header h2 {
+    white-space: normal;
   }
 
   .form-header p {
