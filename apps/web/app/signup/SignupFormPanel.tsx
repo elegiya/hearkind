@@ -13,6 +13,20 @@ import {
   MailIcon,
 } from "../login/LoginIcons";
 
+const SIGNUP_ERRORS: Record<string, string> = {
+  auth_callback_failed: "Sign-up could not be completed. Please try again",
+  auth_confirmation_failed:
+    "Your confirmation link is invalid or has expired. Please sign up again",
+  missing_auth_code: "Sign-up could not be completed. Please try again",
+};
+
+function getInitialError() {
+  if (typeof window === "undefined") return null;
+
+  const errorCode = new URLSearchParams(window.location.search).get("error");
+  return errorCode ? (SIGNUP_ERRORS[errorCode] ?? null) : null;
+}
+
 export function SignupFormPanel() {
   const router = useRouter();
   const [email, setEmail] = useState("");
@@ -21,7 +35,7 @@ export function SignupFormPanel() {
   const [showPassword, setShowPassword] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isGoogleLoading, setIsGoogleLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(getInitialError);
   const [message, setMessage] = useState<string | null>(null);
 
   async function handleSignup(event: FormEvent<HTMLFormElement>) {
@@ -34,19 +48,34 @@ export function SignupFormPanel() {
       return;
     }
 
+    if (password.length < 8) {
+      setError("Password must be at least 8 characters");
+      return;
+    }
+
     setIsSubmitting(true);
 
     try {
+      const normalizedEmail = email.trim().toLowerCase();
+      const callbackUrl = new URL("/auth/callback", window.location.origin);
+      callbackUrl.searchParams.set("next", "/onboarding");
+      callbackUrl.searchParams.set("error_redirect", "/signup");
+
       const { data, error: signupError } = await createClient().auth.signUp({
-        email: email.trim(),
+        email: normalizedEmail,
         password,
         options: {
-          emailRedirectTo: `${window.location.origin}/auth/callback`,
+          emailRedirectTo: callbackUrl.toString(),
         },
       });
 
       if (signupError) {
         setError(signupError.message);
+        return;
+      }
+
+      if (data.user?.identities?.length === 0) {
+        setError("An account with this email already exists");
         return;
       }
 
@@ -56,7 +85,9 @@ export function SignupFormPanel() {
         return;
       }
 
-      setMessage("Check your email to confirm your account");
+      setPassword("");
+      setConfirmPassword("");
+      setMessage(`Check ${normalizedEmail} to confirm your account`);
     } catch {
       setError("Something went wrong. Please try again");
     } finally {
@@ -70,11 +101,15 @@ export function SignupFormPanel() {
     setIsGoogleLoading(true);
 
     try {
+      const callbackUrl = new URL("/auth/callback", window.location.origin);
+      callbackUrl.searchParams.set("next", "/onboarding");
+      callbackUrl.searchParams.set("error_redirect", "/signup");
+
       const { error: oauthError } =
         await createClient().auth.signInWithOAuth({
           provider: "google",
           options: {
-            redirectTo: `${window.location.origin}/auth/callback`,
+            redirectTo: callbackUrl.toString(),
           },
         });
 
@@ -119,6 +154,7 @@ export function SignupFormPanel() {
                   placeholder="Enter your email"
                   value={email}
                   onChange={(event) => setEmail(event.target.value)}
+                  disabled={Boolean(message)}
                   required
                 />
               </div>
@@ -136,6 +172,7 @@ export function SignupFormPanel() {
                   placeholder="Create a password"
                   value={password}
                   onChange={(event) => setPassword(event.target.value)}
+                  disabled={Boolean(message)}
                   minLength={8}
                   required
                 />
@@ -162,6 +199,7 @@ export function SignupFormPanel() {
                   placeholder="Repeat your password"
                   value={confirmPassword}
                   onChange={(event) => setConfirmPassword(event.target.value)}
+                  disabled={Boolean(message)}
                   minLength={8}
                   required
                 />
@@ -183,7 +221,7 @@ export function SignupFormPanel() {
             <button
               className="primary-button"
               type="submit"
-              disabled={isSubmitting || isGoogleLoading}
+              disabled={isSubmitting || isGoogleLoading || Boolean(message)}
             >
               {isSubmitting ? "Creating account…" : "Create account"}
             </button>
@@ -197,7 +235,7 @@ export function SignupFormPanel() {
             <button
               className="google-button"
               type="button"
-              disabled={isSubmitting || isGoogleLoading}
+              disabled={isSubmitting || isGoogleLoading || Boolean(message)}
               onClick={handleGoogleSignup}
             >
               <GoogleIcon />

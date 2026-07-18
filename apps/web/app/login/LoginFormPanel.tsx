@@ -60,11 +60,15 @@ export function LoginFormPanel() {
     setIsGoogleLoading(true);
 
     try {
+      const callbackUrl = new URL("/auth/callback", window.location.origin);
+      callbackUrl.searchParams.set("next", "/");
+      callbackUrl.searchParams.set("error_redirect", "/login");
+
       const { error: oauthError } =
         await createClient().auth.signInWithOAuth({
           provider: "google",
           options: {
-            redirectTo: `${window.location.origin}/auth/callback`,
+            redirectTo: callbackUrl.toString(),
           },
         });
 

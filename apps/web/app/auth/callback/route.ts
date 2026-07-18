@@ -1,44 +1,53 @@
 import { NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
 
+function getSafePath(value: string | null, fallback: string) {
+  if (!value || !value.startsWith("/") || value.startsWith("//")) {
+    return fallback;
+  }
+
+  return value;
+}
+
+function getErrorRedirect(origin: string, path: string, error: string) {
+  const redirectUrl = new URL(path, origin);
+  redirectUrl.searchParams.set("error", error);
+  return NextResponse.redirect(redirectUrl);
+}
+
 export async function GET(request: Request) {
   const requestUrl = new URL(request.url);
   const code = requestUrl.searchParams.get("code");
-
-  console.log("AUTH CALLBACK URL:", requestUrl.toString());
-  console.log("AUTH CALLBACK HAS CODE:", Boolean(code));
+  const nextPath = getSafePath(
+    requestUrl.searchParams.get("next"),
+    "/onboarding",
+  );
+  const errorPath = getSafePath(
+    requestUrl.searchParams.get("error_redirect"),
+    "/login",
+  );
 
   if (!code) {
-    console.error("AUTH CALLBACK ERROR: missing code");
-
-    return NextResponse.redirect(
-      new URL("/login?error=missing_auth_code", requestUrl.origin),
+    return getErrorRedirect(
+      requestUrl.origin,
+      errorPath,
+      requestUrl.searchParams.has("error")
+        ? "auth_callback_failed"
+        : "missing_auth_code",
     );
   }
 
   const supabase = await createClient();
 
-  const { data, error } =
-    await supabase.auth.exchangeCodeForSession(code);
+  const { error } = await supabase.auth.exchangeCodeForSession(code);
 
   if (error) {
-    console.error("AUTH CALLBACK EXCHANGE ERROR:", {
-      message: error.message,
-      code: error.code,
-      status: error.status,
-    });
-
-    return NextResponse.redirect(
-      new URL("/login?error=auth_callback_failed", requestUrl.origin),
+    return getErrorRedirect(
+      requestUrl.origin,
+      errorPath,
+      "auth_callback_failed",
     );
   }
 
-  console.log("AUTH CALLBACK SUCCESS:", {
-    userId: data.user?.id,
-    hasSession: Boolean(data.session),
-  });
-
-  return NextResponse.redirect(
-    new URL("/onboarding", requestUrl.origin),
-  );
+  return NextResponse.redirect(new URL(nextPath, requestUrl.origin));
 }

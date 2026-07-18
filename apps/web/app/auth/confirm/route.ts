@@ -29,7 +29,7 @@ export async function GET(request: NextRequest) {
     console.error("Email confirmation error:", error);
   }
 
-  redirectTo.pathname = "/login";
+  redirectTo.pathname = "/signup";
   redirectTo.searchParams.set("error", "auth_confirmation_failed");
 
   return NextResponse.redirect(redirectTo);
