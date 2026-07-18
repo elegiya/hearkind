@@ -70,8 +70,8 @@ export default function OnboardingPage() {
         <BrandLogo
           href="/"
           variant="pill"
-          size="medium"
-          className="onboarding-logo onboarding-logo--pill"
+          size="small"
+          className="onboarding-logo"
         />
       </section>
 
@@ -130,7 +130,7 @@ export default function OnboardingPage() {
           </Link>
 
           <div className="onboarding-intro-meta">
-            <span><ClockIcon />About 2 minutes</span>
+            <span><ClockIcon />Takes about 1 minute</span>
             <i aria-hidden="true">•</i>
             <span><LockIcon />Private by default</span>
           </div>

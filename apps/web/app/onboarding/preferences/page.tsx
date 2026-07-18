@@ -77,7 +77,7 @@ export default function OnboardingPreferencesPage() {
           sizes="50vw"
           className="onboarding-illustration onboarding-illustration--preferences"
         />
-        <BrandLogo href="/" variant="pill" size="medium" className="onboarding-logo onboarding-logo--pill" />
+        <BrandLogo href="/" variant="pill" size="small" className="onboarding-logo" />
       </section>
 
       <svg className="onboarding-divider-wave" viewBox="0 0 1000 150" preserveAspectRatio="none" aria-hidden="true">

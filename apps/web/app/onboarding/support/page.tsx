@@ -75,8 +75,8 @@ export default function OnboardingSupportPage() {
         <BrandLogo
           href="/"
           variant="pill"
-          size="medium"
-          className="onboarding-logo onboarding-logo--pill"
+          size="small"
+          className="onboarding-logo"
         />
       </section>
 

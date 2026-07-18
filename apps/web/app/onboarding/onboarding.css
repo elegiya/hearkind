@@ -200,20 +200,6 @@
   z-index: 2;
   top: clamp(32px, 5vh, 56px);
   left: clamp(34px, 3.4vw, 58px);
-  height: auto !important;
-  padding: 0 !important;
-  gap: 12px !important;
-}
-
-.onboarding-logo span:first-child {
-  color: #ca6d43;
-  font-size: 36px !important;
-}
-
-.onboarding-logo span:last-child {
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: 31px !important;
-  font-weight: 600;
 }
 
 .onboarding-content {
@@ -497,22 +483,6 @@
 .onboarding-page--topics .onboarding-illustration--topics {
   object-position: 54% center;
   transform: scale(1.08) translateY(3%);
-}
-
-.onboarding-logo--pill {
-  height: 48px !important;
-  padding: 0 18px !important;
-  gap: 9px !important;
-}
-
-.onboarding-logo--pill span:first-child {
-  font-size: 24px !important;
-}
-
-.onboarding-logo--pill span:last-child {
-  font-family: var(--font-geist-sans), Arial, sans-serif;
-  font-size: 17px !important;
-  font-weight: 650;
 }
 
 .onboarding-sign-out {
@@ -1279,14 +1249,6 @@
   .onboarding-logo {
     top: 20px;
     left: 24px;
-  }
-
-  .onboarding-logo span:first-child {
-    font-size: 28px !important;
-  }
-
-  .onboarding-logo span:last-child {
-    font-size: 23px !important;
   }
 
   .onboarding-content {
