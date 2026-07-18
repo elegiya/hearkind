@@ -36,13 +36,8 @@
 
   overflow: hidden;
 
-  clip-path: url(
-    "#login-visual-clip"
-  );
-
-  -webkit-clip-path: url(
-    "#login-visual-clip"
-  );
+  clip-path: url("#login-visual-clip");
+  -webkit-clip-path: url("#login-visual-clip");
 }
 
 .visual-background {
@@ -78,7 +73,7 @@
 .illustration
   img {
   object-fit: cover;
-  object-position: center 62%;
+  object-position: 64% 62%;
 
   transform: scale(1.015);
 }
@@ -92,59 +87,16 @@
   pointer-events: none;
 
   background:
-    linear-gradient(
-      180deg,
-      rgba(
-          255,
-          249,
-          242,
-          0.96
-        )
-        0%,
-      rgba(
-          255,
-          249,
-          242,
-          0.82
-        )
-        20%,
-      rgba(
-          255,
-          249,
-          242,
-          0.4
-        )
-        38%,
-      rgba(
-          255,
-          249,
-          242,
-          0.04
-        )
-        62%,
+    radial-gradient(
+      ellipse 62% 48% at 25% 25%,
+      rgba(255, 249, 242, 0.84) 0%,
+      rgba(255, 249, 242, 0.58) 42%,
+      rgba(255, 249, 242, 0.18) 72%,
       transparent 100%
-    ),
-    linear-gradient(
-      90deg,
-      rgba(
-          255,
-          249,
-          242,
-          0.65
-        )
-        0%,
-      rgba(
-          255,
-          249,
-          242,
-          0.3
-        )
-        42%,
-      transparent 78%
     );
 }
 
-.brand {
+.brand-shell {
   position: absolute;
   z-index: 6;
 
@@ -154,11 +106,8 @@
     56px
   );
 
-  left: clamp(
-    34px,
-    3.8vw,
-    64px
-  );
+  left: 0;
+  right: 0;
 }
 
 .visual-copy {
@@ -851,7 +800,6 @@
     padding-right: 30px;
   }
 
-  .brand,
   .visual-copy {
     left: 34px;
   }
@@ -929,7 +877,7 @@
   }
 
   .visual-background,
-  .brand,
+  .brand-shell,
   .visual-copy,
   .safety-card {
     display: none;

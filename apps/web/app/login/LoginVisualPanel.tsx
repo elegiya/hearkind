@@ -1,6 +1,7 @@
 import Image from "next/image";
 
 import BrandLogo from "@/components/BrandLogo";
+import PageContainer from "@/components/PageContainer";
 
 export function LoginVisualPanel() {
   return (
@@ -17,9 +18,9 @@ export function LoginVisualPanel() {
       </div>
       <div className="illustration-overlay" />
 
-      <div className="brand">
+      <PageContainer className="brand-shell">
         <BrandLogo href="/" variant="pill" size="small" />
-      </div>
+      </PageContainer>
 
       <div className="visual-copy">
         <p className="visual-eyebrow">Anonymous peer support</p>
