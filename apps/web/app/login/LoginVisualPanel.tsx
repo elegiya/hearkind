@@ -2,6 +2,7 @@ import Image from "next/image";
 
 import BrandLogo from "@/components/BrandLogo";
 import PageContainer from "@/components/PageContainer";
+import TrustBadge from "@/components/TrustBadge";
 
 export function LoginVisualPanel() {
   return (
@@ -29,18 +30,10 @@ export function LoginVisualPanel() {
           <br />
           to come back to
         </h1>
-        <p className="visual-subtitle">Continue where you left off.</p>
+        <p className="visual-subtitle">Continue where you left off</p>
       </div>
 
-      <div className="safety-card">
-        <div className="safety-icon" aria-hidden="true">
-          ♡
-        </div>
-        <div className="safety-copy">
-          <p className="safety-title">Private. Safe. Human.</p>
-          <p className="safety-subtitle">Your story stays yours.</p>
-        </div>
-      </div>
+      <TrustBadge className="login-trust-badge absolute bottom-10 left-12 z-[7] rounded-2xl bg-[#fbf5ed]/75 px-4 py-3 backdrop-blur-md" />
     </section>
   );
 }

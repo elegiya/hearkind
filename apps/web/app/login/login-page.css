@@ -88,10 +88,10 @@
 
   background:
     radial-gradient(
-      ellipse 62% 48% at 25% 25%,
-      rgba(255, 249, 242, 0.84) 0%,
-      rgba(255, 249, 242, 0.58) 42%,
-      rgba(255, 249, 242, 0.18) 72%,
+      ellipse 56% 42% at 28% 21%,
+      rgba(255, 249, 242, 0.82) 0%,
+      rgba(255, 249, 242, 0.52) 40%,
+      rgba(255, 249, 242, 0.14) 70%,
       transparent 100%
     );
 }
@@ -115,9 +115,9 @@
   z-index: 6;
 
   top: clamp(
-    150px,
-    19vh,
-    220px
+    104px,
+    12vh,
+    128px
   );
 
   left: clamp(
@@ -126,7 +126,9 @@
     64px
   );
 
-  right: 17%;
+  right: auto;
+
+  width: min(520px, calc(100% - 80px));
 }
 
 .visual-eyebrow {
@@ -152,9 +154,9 @@
   margin: 0;
 
   font-size: clamp(
-    46px,
+    56px,
     4vw,
-    64px
+    60px
   );
 
   font-weight: 550;
@@ -179,61 +181,6 @@
   letter-spacing: 0;
 
   color: #6f6254;
-}
-
-.safety-card {
-  position: absolute;
-  z-index: 7;
-
-  left: clamp(
-    28px,
-    3.6vw,
-    60px
-  );
-
-  bottom: clamp(
-    54px,
-    6.5vh,
-    92px
-  );
-
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-
-.safety-copy p {
-  margin: 0;
-}
-
-.safety-title {
-  color: #2a241d;
-  font-size: 16px;
-  font-weight: 500;
-  line-height: 1.4;
-}
-
-.safety-subtitle {
-  color: #6f6254;
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 1.4;
-}
-
-.safety-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  width: 48px;
-  height: 48px;
-  flex: 0 0 48px;
-
-  border-radius: 16px;
-
-  background: #f0c2a6;
-  color: #2a241d;
-  font-size: 20px;
 }
 
 .form-panel {
@@ -416,27 +363,15 @@
   display: flex;
   align-items: center;
 
-  height: 62px;
-  min-height: 62px;
-  padding:
-    0
-    clamp(
-      17px,
-      0.9vw,
-      26px
-    );
+  height: 60px;
+  min-height: 60px;
+  padding: 0 20px;
 
-  border: 1px solid
-    #d8d5d0;
+  border: 1px solid #d9d1c7;
 
-  border-radius: 18px;
+  border-radius: 16px;
 
-  background: rgba(
-    255,
-    255,
-    255,
-    0.78
-  );
+  background: rgba(255, 255, 255, 0.8);
 
   backdrop-filter: blur(8px);
 
@@ -447,38 +382,17 @@
 }
 
 .input-shell:focus-within {
-  border-color: #173f35;
-  background: #ffffff;
+  border-color: #3f4a32;
+  background: rgba(255, 255, 255, 0.9);
 
-  box-shadow:
-    0 0 0 3px
-    rgba(
-      23,
-      63,
-      53,
-      0.1
-    );
+  box-shadow: 0 0 0 4px rgba(63, 74, 50, 0.1);
 }
 
 .input-shell
   svg {
-  width: clamp(
-    22px,
-    0.9vw,
-    30px
-  );
-  height: clamp(
-    22px,
-    0.9vw,
-    30px
-  );
-  flex:
-    0 0
-    clamp(
-      22px,
-      0.9vw,
-      30px
-    );
+  width: 20px;
+  height: 20px;
+  flex: 0 0 20px;
 
   color: #6d706c;
 }
@@ -486,7 +400,7 @@
 .input-shell input {
   width: 100%;
   min-width: 0;
-  height: 60px;
+  height: 58px;
 
   padding:
     0
@@ -509,7 +423,7 @@
   );
   font-weight: 400;
 
-  color: #1d2521;
+  color: #29251f;
 }
 
 .input-shell
@@ -775,8 +689,6 @@
 
   .visual-eyebrow {
     margin-bottom: 16px;
-    font-size: 10px;
-    letter-spacing: 0.28em;
   }
 
   .visual-subtitle {
@@ -804,10 +716,6 @@
     left: 34px;
   }
 
-  .visual-copy {
-    right: 16%;
-  }
-
   .visual-eyebrow {
     margin-bottom: 14px;
   }
@@ -817,9 +725,6 @@
     font-size: 13px;
   }
 
-  .safety-card {
-    left: 25px;
-  }
 }
 
 @media (
@@ -838,8 +743,7 @@
   }
 
   .visual-copy {
-    top: 145px;
-    right: 15%;
+    width: calc(100% - 68px);
   }
 
   .visual-subtitle {
@@ -879,7 +783,7 @@
   .visual-background,
   .brand-shell,
   .visual-copy,
-  .safety-card {
+  .login-trust-badge {
     display: none;
   }
 
@@ -1053,17 +957,12 @@
   }
 
   .input-shell {
-    height: 62px;
-    min-height: 62px;
-    padding: 0 28px;
+    height: 60px;
+    min-height: 60px;
+    padding: 0 20px;
 
-    border-color: rgba(
-      63,
-      59,
-      55,
-      0.24
-    );
-    border-radius: 18px;
+    border-color: #d9d1c7;
+    border-radius: 16px;
 
     background: rgba(
       255,
@@ -1075,16 +974,16 @@
 
   .input-shell
     svg {
-    width: 25px;
-    height: 25px;
-    flex: 0 0 25px;
+    width: 20px;
+    height: 20px;
+    flex: 0 0 20px;
 
     color: #303330;
   }
 
   .input-shell input {
-    height: 60px;
-    padding: 0 24px;
+    height: 58px;
+    padding: 0 16px;
 
     color: #2a2d2a;
     font-size: 20px;
@@ -1209,13 +1108,13 @@
   }
 
   .input-shell {
-    height: 62px;
-    min-height: 62px;
-    border-radius: 18px;
+    height: 60px;
+    min-height: 60px;
+    border-radius: 16px;
   }
 
   .input-shell input {
-    height: 60px;
+    height: 58px;
     font-size: 20px;
   }
 

@@ -3,6 +3,7 @@
 import Header from "@/components/landing/Header";
 import Image from "next/image";
 import PageContainer from "@/components/PageContainer";
+import TrustBadge from "@/components/TrustBadge";
 
 type HeroSectionProps = {
   onWaitlistClick: (source: "header" | "hero") => void;
@@ -58,15 +59,7 @@ export default function HeroSection({ onWaitlistClick }: HeroSectionProps) {
             </a>
           </div>
 
-          <div className="mt-16 flex items-center gap-4">
-            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[#f0c2a6] text-xl">
-              ♡
-            </div>
-            <div>
-              <p className="font-medium">Private. Safe. Human.</p>
-              <p className="text-sm text-[#6f6254]">Your story stays yours.</p>
-            </div>
-          </div>
+          <TrustBadge className="mt-16" />
         </div>
 
         <div className="relative mx-auto mt-12 aspect-[16/11] w-full max-w-3xl overflow-hidden rounded-[2rem] shadow-xl lg:hidden">
