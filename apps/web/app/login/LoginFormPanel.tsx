@@ -5,6 +5,7 @@ import { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
 
 import { createClient } from "@/lib/supabase/client";
+import { continueWithGoogle } from "@/lib/supabase/google-oauth";
 
 import { EyeIcon, GoogleIcon, LockIcon, MailIcon } from "./LoginIcons";
 
@@ -72,22 +73,7 @@ export function LoginFormPanel() {
     setIsGoogleLoading(true);
 
     try {
-      const callbackUrl = new URL("/auth/callback", window.location.origin);
-      callbackUrl.searchParams.set("next", "/");
-      callbackUrl.searchParams.set("error_redirect", "/login");
-
-      const { error: oauthError } =
-        await createClient().auth.signInWithOAuth({
-          provider: "google",
-          options: {
-            redirectTo: callbackUrl.toString(),
-          },
-        });
-
-      if (oauthError) {
-        setError(oauthError.message);
-        setIsGoogleLoading(false);
-      }
+      await continueWithGoogle("login");
     } catch {
       setError("Google login could not be started. Please try again.");
       setIsGoogleLoading(false);
