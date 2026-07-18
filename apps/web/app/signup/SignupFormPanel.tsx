@@ -33,6 +33,7 @@ export function SignupFormPanel() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isGoogleLoading, setIsGoogleLoading] = useState(false);
   const [error, setError] = useState<string | null>(getInitialError);
@@ -138,7 +139,7 @@ export function SignupFormPanel() {
         <div className="form-card">
           <header className="form-header">
             <h2>Create your account</h2>
-            <p>Sign up to find support from someone who understands</p>
+            <p>Find support from someone who’s been there.</p>
           </header>
 
           <form onSubmit={handleSignup}>
@@ -194,15 +195,27 @@ export function SignupFormPanel() {
                 <input
                   id="confirm-password"
                   name="confirmPassword"
-                  type={showPassword ? "text" : "password"}
+                  type={showConfirmPassword ? "text" : "password"}
                   autoComplete="new-password"
-                  placeholder="Repeat your password"
+                  placeholder="Confirm your password"
                   value={confirmPassword}
                   onChange={(event) => setConfirmPassword(event.target.value)}
                   disabled={Boolean(message)}
                   minLength={8}
                   required
                 />
+                <button
+                  className="password-toggle"
+                  type="button"
+                  aria-label={
+                    showConfirmPassword ? "Hide password" : "Show password"
+                  }
+                  onClick={() =>
+                    setShowConfirmPassword((value) => !value)
+                  }
+                >
+                  <EyeIcon crossed={showConfirmPassword} />
+                </button>
               </div>
             </div>
 
@@ -225,6 +238,12 @@ export function SignupFormPanel() {
             >
               {isSubmitting ? "Creating account…" : "Create account"}
             </button>
+
+            <p className="signup-legal">
+              By creating an account, you agree to our{" "}
+              <Link href="/legal">Terms of Service</Link> and{" "}
+              <Link href="/privacy">Privacy Policy</Link>.
+            </p>
 
             <div className="separator">
               <span />

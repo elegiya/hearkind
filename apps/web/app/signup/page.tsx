@@ -21,7 +21,7 @@ export default function SignupPage() {
         </defs>
       </svg>
 
-      <LoginVisualPanel />
+      <LoginVisualPanel variant="signup" />
       <SignupFormPanel />
     </main>
   );

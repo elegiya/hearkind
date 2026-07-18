@@ -4,9 +4,17 @@ import BrandLogo from "@/components/BrandLogo";
 import PageContainer from "@/components/PageContainer";
 import TrustBadge from "@/components/TrustBadge";
 
-export function LoginVisualPanel() {
+type LoginVisualPanelProps = {
+  variant?: "login" | "signup";
+};
+
+export function LoginVisualPanel({
+  variant = "login",
+}: LoginVisualPanelProps) {
+  const isSignup = variant === "signup";
+
   return (
-    <section className="visual-panel">
+    <section className={`visual-panel visual-panel--${variant}`}>
       <div className="visual-background" />
       <div className="illustration">
         <Image
@@ -28,7 +36,7 @@ export function LoginVisualPanel() {
         <h1>
           A safe place
           <br />
-          to come back to
+          {isSignup ? "to begin" : "to come back to"}
         </h1>
       </div>
 

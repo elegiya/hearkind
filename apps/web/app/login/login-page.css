@@ -68,9 +68,14 @@
 .illustration
   img {
   object-fit: cover;
-  object-position: 72% 62%;
+  object-position: 42% center;
 
   transform: scale(1.015);
+}
+
+.visual-panel--signup .illustration img {
+  object-position: 58% center;
+  transform: scale(1.08) translateX(-4%);
 }
 
 .illustration-overlay {
@@ -534,6 +539,29 @@
   cursor: not-allowed;
 }
 
+.signup-legal {
+  margin: 10px 8px 0;
+
+  color: #77736d;
+  font-size: 13px;
+  line-height: 18px;
+  text-align: center;
+}
+
+.signup-legal a {
+  color: #c86442;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.signup-legal a:hover {
+  text-decoration: underline;
+}
+
+.signup-form-panel .separator {
+  margin-top: 18px;
+}
+
 .separator {
   display: grid;
 
@@ -743,8 +771,13 @@
 
   .illustration
     img {
-    object-position: center 58%;
+    object-position: 42% center;
     transform: none;
+  }
+
+  .visual-panel--signup .illustration img {
+    object-position: 58% center;
+    transform: scale(1.08) translateX(-4%);
   }
 
   .illustration-overlay {
