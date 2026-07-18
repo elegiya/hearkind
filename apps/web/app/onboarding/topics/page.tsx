@@ -101,11 +101,11 @@ export default function OnboardingTopicsPage() {
 
       <svg
         className="onboarding-divider-wave"
-        viewBox="0 0 120 1000"
+        viewBox="0 0 1000 150"
         preserveAspectRatio="none"
         aria-hidden="true"
       >
-        <path d="M 70 0 C 34 110, 22 244, 55 360 C 91 480, 94 565, 55 680 C 19 788, 20 906, 55 1000 H 120 V 0 Z" />
+        <path d="M0 56 C165 -26 342 7 505 66 C690 133 843 36 1000 82 V150 H0 Z" />
       </svg>
 
       <button
