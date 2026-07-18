@@ -5,7 +5,7 @@
   min-height: 100svh;
   overflow: hidden;
 
-  background: #fffdfb;
+  background: #fbf5ed;
   color: #211d19;
 
   font-family:
@@ -974,7 +974,7 @@
     min-height: 100svh;
     overflow-y: auto;
 
-    background: #fffdfb;
+    background: #fbf5ed;
   }
 
   .clip-definitions {
@@ -1025,16 +1025,16 @@
           )
           56%,
         rgba(
-            255,
-            253,
             251,
+            245,
+            237,
             0.5
           )
           82%,
         rgba(
-            255,
-            253,
             251,
+            245,
+            237,
             0.94
           )
           100%
@@ -1060,7 +1060,7 @@
     height: 104px;
     margin-bottom: -1px;
 
-    color: #fffdfb;
+    color: #fbf5ed;
     fill: currentColor;
   }
 
@@ -1072,7 +1072,7 @@
 
     padding: 18px 34px 40px;
 
-    background: #fffdfb;
+    background: #fbf5ed;
   }
 
   .form-content::before,
