@@ -58,7 +58,7 @@ export function LoginFormPanel() {
         return;
       }
 
-      router.replace("/");
+      router.replace("/onboarding");
       router.refresh();
     } catch {
       setError("Something went wrong. Please try again.");

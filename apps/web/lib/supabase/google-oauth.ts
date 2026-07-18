@@ -7,7 +7,7 @@ const FLOW_ROUTES: Record<
   { next: string; errorRedirect: string }
 > = {
   login: {
-    next: "/",
+    next: "/onboarding",
     errorRedirect: "/login",
   },
   signup: {
