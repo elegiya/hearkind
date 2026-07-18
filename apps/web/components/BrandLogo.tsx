@@ -21,20 +21,22 @@ export default function BrandLogo({
           text: "text-base",
         }
       : {
-          wrapper: "h-10 gap-3 px-4",
+          wrapper: "h-10 gap-2 px-4",
           icon: "text-xl",
-          text: "text-sm",
+          text: "text-base",
         };
 
   const variantClasses =
     variant === "pill"
       ? `
           rounded-full
-          bg-white/80
+          border
+          border-[#e5ded5]
+          bg-[#fbf5ed]/90
           shadow-sm
-          backdrop-blur-md
+          backdrop-blur-sm
           transition
-          hover:bg-white
+          hover:bg-[#fbf5ed]
         `
       : "px-0";
 

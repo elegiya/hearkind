@@ -469,13 +469,13 @@
 .primary-button,
 .google-button {
   width: 100%;
-  height: 52px;
-  min-height: 52px;
+  height: 58px;
+  min-height: 58px;
 
   border-radius: 999px;
 
   font: inherit;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 500;
 
   cursor: pointer;
@@ -490,7 +490,7 @@
 .primary-button {
   border: 0;
 
-  background: #3f4734;
+  background: #3f4a32;
 
   color: #ffffff;
 
@@ -523,28 +523,19 @@
     1fr auto 1fr;
 
   align-items: center;
-  gap: 18px;
+  gap: 16px;
 
-  margin:
-    clamp(
-      16px,
-      0.8vw,
-      22px
-    )
-    0;
+  margin: 24px 0;
 
-  color: #686a67;
-  font-size: clamp(
-    15px,
-    0.62vw,
-    19px
-  );
+  color: #77736d;
+  font-size: 14px;
+  font-weight: 400;
 }
 
 .separator span {
   height: 1px;
 
-  background: #ddd9d4;
+  background: #ddd7cf;
 }
 
 .separator p {
@@ -557,19 +548,13 @@
   justify-content: center;
   gap: 13px;
 
-  border: 1px solid
-    #d7d4cf;
+  border: 1px solid #d7d0c8;
 
-  background: rgba(
-    255,
-    255,
-    255,
-    0.8
-  );
+  background: rgba(255, 255, 255, 0.7);
 
   backdrop-filter: blur(8px);
 
-  color: #171918;
+  color: #29251f;
 }
 
 .google-button:hover:not(
@@ -700,7 +685,7 @@
 
     width: 100%;
     min-height: 0;
-    height: clamp(210px, 28svh, 260px);
+    height: 240px;
 
     clip-path: none;
     -webkit-clip-path: none;
@@ -717,6 +702,9 @@
     top: 20px;
 
     display: block;
+
+    padding-left: 20px;
+    padding-right: 20px;
   }
 
   .illustration {
@@ -762,7 +750,7 @@
 
     min-height: auto;
     margin-left: 0;
-    margin-top: -70px;
+    margin-top: -46px;
     overflow: visible;
   }
 
@@ -773,7 +761,7 @@
     display: block;
 
     width: 100%;
-    height: 80px;
+    height: 52px;
     margin-bottom: -1px;
 
     color: #fbf5ed;
@@ -813,23 +801,25 @@
   }
 
   .form-header {
-    margin-bottom: 24px;
+    margin-bottom: 32px;
   }
 
   .form-header h2 {
-    margin-bottom: 12px;
+    margin-bottom: 0;
 
     color: #26221e;
-    font-size: clamp(38px, 10vw, 44px);
-    font-weight: 650;
-    line-height: 1;
+    font-size: clamp(42px, 10.5vw, 48px);
+    font-weight: 600;
+    line-height: 1.02;
     letter-spacing: -0.035em;
   }
 
   .form-header p {
+    margin-top: 12px;
+
     color: #6c7170;
-    font-size: 16px;
-    line-height: 1.5;
+    font-size: 18px;
+    line-height: 28px;
   }
 
   .field-group {
@@ -837,18 +827,24 @@
   }
 
   .field-group label {
-    display: none;
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: #29251f;
+    font-size: 14px;
+    font-weight: 600;
   }
 
   .input-shell {
-    height: 54px;
-    min-height: 54px;
+    height: 60px;
+    min-height: 60px;
     padding: 0 20px;
 
-    border-color: #e5d6c8;
+    border-color: #ddd2c6;
     border-radius: 16px;
 
-    background: #ffffff;
+    background: rgba(255, 255, 255, 0.8);
   }
 
   .input-shell
@@ -861,11 +857,11 @@
   }
 
   .input-shell input {
-    height: 52px;
+    height: 58px;
     padding: 0 16px;
 
     color: #2a241d;
-    font-size: 14px;
+    font-size: 16px;
   }
 
   .input-shell
@@ -878,34 +874,45 @@
   }
 
   .forgot-password {
-    margin-top: 4px;
-    margin-bottom: 20px;
+    margin-top: 12px;
+    margin-bottom: 28px;
 
-    font-size: 14px;
+    font-size: 15px;
     font-weight: 500;
   }
 
-  .forgot-password a,
-  .signup-copy a {
-    color: #3e4a35;
+  .forgot-password a {
+    color: #c86442;
+    text-decoration: none;
+  }
+
+  .forgot-password a:hover {
     text-decoration: underline;
-    text-decoration-thickness: 1px;
-    text-underline-offset: 4px;
+  }
+
+  .signup-copy a {
+    color: #c86442;
+    font-weight: 500;
+    text-decoration: none;
+  }
+
+  .signup-copy a:hover {
+    text-decoration: underline;
   }
 
   .primary-button,
   .google-button {
-    height: 52px;
-    min-height: 52px;
+    height: 58px;
+    min-height: 58px;
 
     border-radius: 999px;
 
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 500;
   }
 
   .primary-button {
-    background: #3f4734;
+    background: #3f4a32;
 
     box-shadow:
       0 10px 15px -3px rgba(55, 45, 35, 0.1),
@@ -915,30 +922,20 @@
   .separator {
     gap: 16px;
 
-    margin: 20px 0;
+    margin: 24px 0;
 
-    color: #70726f;
+    color: #77736d;
     font-size: 14px;
-    font-weight: 500;
+    font-weight: 400;
   }
 
   .google-button {
     gap: 13px;
 
-    border-color: rgba(
-      63,
-      59,
-      55,
-      0.28
-    );
-    background: rgba(
-      255,
-      255,
-      255,
-      0.58
-    );
+    border-color: #d7d0c8;
+    background: rgba(255, 255, 255, 0.7);
 
-    color: #1f211f;
+    color: #29251f;
   }
 
   .google-button
@@ -949,13 +946,20 @@
   }
 
   .signup-copy {
-    margin-top: 22px;
+    margin-top: 28px;
 
-    color: #777b79;
-    font-size: 14px;
+    color: #71736f;
+    font-size: 16px;
     line-height: 1.35;
+    white-space: nowrap;
   }
 
+}
+
+@media (min-width: 640px) and (max-width: 820px) {
+  .visual-panel {
+    height: 280px;
+  }
 }
 
 @media (
@@ -966,35 +970,35 @@
   }
 
   .form-header h2 {
-    font-size: clamp(38px, 10vw, 44px);
+    font-size: 42px;
   }
 
   .form-header p {
-    font-size: 16px;
+    font-size: 18px;
   }
 
   .input-shell {
-    height: 54px;
-    min-height: 54px;
+    height: 60px;
+    min-height: 60px;
     border-radius: 16px;
   }
 
   .input-shell input {
-    height: 52px;
-    font-size: 14px;
+    height: 58px;
+    font-size: 16px;
   }
 
   .primary-button,
   .google-button {
-    height: 52px;
-    min-height: 52px;
+    height: 58px;
+    min-height: 58px;
     border-radius: 999px;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 500;
   }
 
   .signup-copy {
-    font-size: 14px;
+    font-size: 16px;
   }
 
 }
