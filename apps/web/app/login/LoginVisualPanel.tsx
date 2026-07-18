@@ -30,7 +30,6 @@ export function LoginVisualPanel() {
           <br />
           to come back to
         </h1>
-        <p className="visual-subtitle">Continue where you left off</p>
       </div>
 
       <TrustBadge className="login-trust-badge absolute bottom-10 left-12 z-[7] rounded-2xl bg-[#fbf5ed]/75 px-4 py-3 backdrop-blur-md" />
