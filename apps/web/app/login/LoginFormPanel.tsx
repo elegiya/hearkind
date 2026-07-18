@@ -4,7 +4,6 @@ import Link from "next/link";
 import { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
 
-import BrandLogo from "@/components/BrandLogo";
 import { createClient } from "@/lib/supabase/client";
 
 import { EyeIcon, GoogleIcon, LockIcon, MailIcon } from "./LoginIcons";
@@ -92,11 +91,6 @@ export function LoginFormPanel() {
 
       <div className="form-content">
         <div className="form-card">
-          <div className="mobile-brand">
-            <BrandLogo href="/" variant="plain" size="medium" />
-          </div>
-          <p className="mobile-eyebrow">Anonymous peer support</p>
-
           <header className="form-header">
             <h2>Welcome back</h2>
             <p>
