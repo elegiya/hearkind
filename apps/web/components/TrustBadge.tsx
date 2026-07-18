@@ -13,7 +13,7 @@ export default function TrustBadge({ className = "" }: TrustBadgeProps) {
       </div>
       <div>
         <p className="font-medium text-[#2a241d]">Private. Safe. Human.</p>
-        <p className="text-sm text-[#6f6254]">Your story stays yours.</p>
+        <p className="text-sm text-[#6f6254]">Your story stays yours</p>
       </div>
     </div>
   );

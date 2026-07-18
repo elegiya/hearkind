@@ -32,7 +32,7 @@ export function LoginVisualPanel() {
         </h1>
       </div>
 
-      <TrustBadge className="login-trust-badge absolute bottom-10 left-12 z-[7] rounded-2xl bg-[#fbf5ed]/75 px-4 py-3 backdrop-blur-md" />
+      <TrustBadge className="login-trust-badge absolute bottom-10 left-12 z-[7] rounded-2xl border border-[#e5ded5] bg-[rgba(251,245,237,0.82)] px-3 py-2.5 shadow-[0_8px_24px_rgba(55,45,35,0.05)] backdrop-blur-[10px]" />
     </section>
   );
 }

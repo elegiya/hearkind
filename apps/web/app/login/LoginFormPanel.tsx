@@ -93,12 +93,7 @@ export function LoginFormPanel() {
         <div className="form-card">
           <header className="form-header">
             <h2>Welcome back</h2>
-            <p>
-              <span className="desktop-copy">Log in to your HearKind account</span>
-              <span className="mobile-copy">
-                Good to see you again. You&apos;re not alone.
-              </span>
-            </p>
+            <p>Log in to continue where you left off</p>
           </header>
 
           <form onSubmit={handleLogin}>
@@ -119,7 +114,7 @@ export function LoginFormPanel() {
               </div>
             </div>
 
-            <div className="field-group">
+            <div className="field-group password-field">
               <label htmlFor="password">Password</label>
               <div className="input-shell">
                 <LockIcon />
