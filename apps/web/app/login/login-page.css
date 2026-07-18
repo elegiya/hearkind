@@ -166,9 +166,9 @@
   z-index: 6;
 
   top: clamp(
-    118px,
-    15vh,
-    185px
+    150px,
+    19vh,
+    220px
   );
 
   left: clamp(
@@ -199,16 +199,17 @@
 }
 
 .visual-copy h1 {
+  max-width: 520px;
   margin: 0;
 
   font-size: clamp(
-    48px,
-    4.65vw,
-    72px
+    46px,
+    4vw,
+    64px
   );
 
-  font-weight: 600;
-  line-height: 0.95;
+  font-weight: 550;
+  line-height: 0.98;
   letter-spacing: 0;
 
   color: #2a241d;
@@ -250,71 +251,40 @@
   display: flex;
   align-items: center;
   gap: 16px;
-
-  padding: 17px 22px;
-
-  border: 1px solid
-    rgba(
-      92,
-      65,
-      45,
-      0.08
-    );
-
-  border-radius: 19px;
-
-  background: rgba(
-    255,
-    249,
-    244,
-    0.92
-  );
-
-  box-shadow:
-    0 16px 38px
-    rgba(
-      77,
-      51,
-      34,
-      0.11
-    );
-
-  backdrop-filter: blur(13px);
 }
 
-.safety-card p {
+.safety-copy p {
   margin: 0;
+}
 
-  font-size: clamp(
-    14px,
-    1vw,
-    18px
-  );
+.safety-title {
+  color: #2a241d;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.4;
+}
 
+.safety-subtitle {
+  color: #6f6254;
+  font-size: 14px;
   font-weight: 400;
-  line-height: 1.45;
-
-  color: #282622;
+  line-height: 1.4;
 }
 
 .safety-icon {
-  display: grid;
-  place-items: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-  width: 46px;
-  height: 46px;
-  flex: 0 0 46px;
+  width: 48px;
+  height: 48px;
+  flex: 0 0 48px;
 
-  border-radius: 50%;
+  border-radius: 16px;
 
-  background: #f8ddcb;
-  color: #c86237;
-}
-
-.safety-icon
-  svg {
-  width: 24px;
-  height: 24px;
+  background: #f0c2a6;
+  color: #2a241d;
+  font-size: 20px;
 }
 
 .form-panel {
@@ -421,14 +391,9 @@
 .form-card {
   position: relative;
 
-  width: min(
-    100%,
-    clamp(
-      400px,
-      27vw,
-      440px
-    )
-  );
+  width: min(100%, 450px);
+
+  transform: translateX(-28px);
 }
 
 .form-header {
@@ -458,7 +423,7 @@
   line-height: 1.04;
   letter-spacing: -0.02em;
 
-  color: #173f35;
+  color: #26221e;
 }
 
 .form-header p {
@@ -502,11 +467,8 @@
   display: flex;
   align-items: center;
 
-  min-height: clamp(
-    56px,
-    2.7vw,
-    64px
-  );
+  height: 62px;
+  min-height: 62px;
   padding:
     0
     clamp(
@@ -518,11 +480,7 @@
   border: 1px solid
     #d8d5d0;
 
-  border-radius: clamp(
-    16px,
-    0.75vw,
-    24px
-  );
+  border-radius: 18px;
 
   background: rgba(
     255,
@@ -579,11 +537,7 @@
 .input-shell input {
   width: 100%;
   min-width: 0;
-  height: clamp(
-    54px,
-    2.6vw,
-    62px
-  );
+  height: 60px;
 
   padding:
     0
@@ -686,17 +640,10 @@
 .primary-button,
 .google-button {
   width: 100%;
-  min-height: clamp(
-    52px,
-    2.6vw,
-    60px
-  );
+  height: 58px;
+  min-height: 58px;
 
-  border-radius: clamp(
-    15px,
-    0.75vw,
-    24px
-  );
+  border-radius: 999px;
 
   font: inherit;
   font-size: clamp(
@@ -718,7 +665,7 @@
 .primary-button {
   border: 0;
 
-  background: #3e4a35;
+  background: #3f4734;
 
   color: #ffffff;
 
@@ -877,10 +824,6 @@
     padding-right: 38px;
   }
 
-  .visual-copy h1 {
-    font-size: 37px;
-  }
-
   .visual-eyebrow {
     margin-bottom: 16px;
     font-size: 10px;
@@ -917,10 +860,6 @@
     right: 16%;
   }
 
-  .visual-copy h1 {
-    font-size: 31px;
-  }
-
   .visual-eyebrow {
     margin-bottom: 14px;
   }
@@ -932,9 +871,6 @@
 
   .safety-card {
     left: 25px;
-
-    padding:
-      15px 17px;
   }
 }
 
@@ -954,12 +890,8 @@
   }
 
   .visual-copy {
-    top: 112px;
+    top: 145px;
     right: 15%;
-  }
-
-  .visual-copy h1 {
-    font-size: 28px;
   }
 
   .visual-subtitle {
@@ -1083,10 +1015,7 @@
   .form-card {
     z-index: 1;
 
-    width: min(
-      100%,
-      520px
-    );
+    width: min(100%, 450px);
 
     transform: none;
   }
@@ -1146,7 +1075,7 @@
   .form-header h2 {
     margin-bottom: 22px;
 
-    color: #2a2a26;
+    color: #26221e;
     font-size: clamp(
       48px,
       12vw,
@@ -1176,7 +1105,8 @@
   }
 
   .input-shell {
-    min-height: 66px;
+    height: 62px;
+    min-height: 62px;
     padding: 0 28px;
 
     border-color: rgba(
@@ -1185,7 +1115,7 @@
       55,
       0.24
     );
-    border-radius: 23px;
+    border-radius: 18px;
 
     background: rgba(
       255,
@@ -1205,7 +1135,7 @@
   }
 
   .input-shell input {
-    height: 64px;
+    height: 60px;
     padding: 0 24px;
 
     color: #2a2d2a;
@@ -1239,16 +1169,17 @@
 
   .primary-button,
   .google-button {
-    min-height: 68px;
+    height: 58px;
+    min-height: 58px;
 
-    border-radius: 22px;
+    border-radius: 999px;
 
     font-size: 20px;
     font-weight: 600;
   }
 
   .primary-button {
-    background: #3e4a35;
+    background: #3f4734;
 
     box-shadow:
       0 18px 32px
@@ -1330,19 +1261,21 @@
   }
 
   .input-shell {
-    min-height: 66px;
-    border-radius: 23px;
+    height: 62px;
+    min-height: 62px;
+    border-radius: 18px;
   }
 
   .input-shell input {
-    height: 64px;
+    height: 60px;
     font-size: 20px;
   }
 
   .primary-button,
   .google-button {
-    min-height: 68px;
-    border-radius: 22px;
+    height: 58px;
+    min-height: 58px;
+    border-radius: 999px;
     font-size: 20px;
   }
 

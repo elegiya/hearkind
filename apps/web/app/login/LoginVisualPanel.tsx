@@ -2,8 +2,6 @@ import Image from "next/image";
 
 import BrandLogo from "@/components/BrandLogo";
 
-import { ShieldIcon } from "./LoginIcons";
-
 export function LoginVisualPanel() {
   return (
     <section className="visual-panel">
@@ -24,26 +22,23 @@ export function LoginVisualPanel() {
       </div>
 
       <div className="visual-copy">
-        <p className="visual-eyebrow">Private peer support</p>
+        <p className="visual-eyebrow">Anonymous peer support</p>
         <h1>
-          Understanding
+          A safe place
           <br />
-          starts here
+          to come back to
         </h1>
-        <p className="visual-subtitle">
-          Private support from someone who gets it
-        </p>
+        <p className="visual-subtitle">Continue where you left off.</p>
       </div>
 
       <div className="safety-card">
-        <div className="safety-icon">
-          <ShieldIcon />
+        <div className="safety-icon" aria-hidden="true">
+          ♡
         </div>
-        <p>
-          A safe space to be heard,
-          <br />
-          understood, and supported
-        </p>
+        <div className="safety-copy">
+          <p className="safety-title">Private. Safe. Human.</p>
+          <p className="safety-subtitle">Your story stays yours.</p>
+        </div>
       </div>
     </section>
   );

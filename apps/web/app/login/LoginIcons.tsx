@@ -90,39 +90,6 @@ export function EyeIcon({
   );
 }
 
-export function ShieldIcon() {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.8"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-    >
-      <path
-        d="
-          M 12 3
-          L 19 6
-          V 11
-          C 19 15.8,
-            16.1 19.2,
-            12 21
-          C 7.9 19.2,
-            5 15.8,
-            5 11
-          V 6
-          L 12 3
-          Z
-        "
-      />
-
-      <path d="m9.5 12.2 1.7 1.8 3.6-4" />
-    </svg>
-  );
-}
-
 export function GoogleIcon() {
   return (
     <svg
