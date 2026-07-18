@@ -20,6 +20,15 @@ function getInitialError() {
     : null;
 }
 
+function getInitialMessage() {
+  if (typeof window === "undefined") return null;
+
+  return new URLSearchParams(window.location.search).get("password_reset") ===
+    "success"
+    ? "Your password has been updated. You can log in now"
+    : null;
+}
+
 export function LoginFormPanel() {
   const router = useRouter();
   const [email, setEmail] = useState("");
@@ -28,10 +37,12 @@ export function LoginFormPanel() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isGoogleLoading, setIsGoogleLoading] = useState(false);
   const [error, setError] = useState<string | null>(getInitialError);
+  const [message, setMessage] = useState<string | null>(getInitialMessage);
 
   async function handleLogin(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setError(null);
+    setMessage(null);
     setIsSubmitting(true);
 
     try {
@@ -57,6 +68,7 @@ export function LoginFormPanel() {
 
   async function handleGoogleLogin() {
     setError(null);
+    setMessage(null);
     setIsGoogleLoading(true);
 
     try {
@@ -150,6 +162,12 @@ export function LoginFormPanel() {
             {error && (
               <div className="error-message" role="alert">
                 {error}
+              </div>
+            )}
+
+            {message && (
+              <div className="success-message" role="status">
+                {message}
               </div>
             )}
 

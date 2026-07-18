@@ -480,6 +480,10 @@
   margin-bottom: 28px;
 }
 
+.recovery-fields-end {
+  margin-bottom: 28px;
+}
+
 .primary-button,
 .google-button {
   width: 100%;
@@ -842,7 +846,8 @@
     white-space: nowrap;
   }
 
-  .signup-form-panel .form-header h2 {
+  .signup-form-panel .form-header h2,
+  .recovery-form-panel .form-header h2 {
     white-space: normal;
   }
 
