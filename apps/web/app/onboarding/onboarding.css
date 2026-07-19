@@ -4,6 +4,7 @@
   overflow: hidden;
   background: #fbf7f1;
   color: #26221e;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 .onboarding-page--complete .onboarding-visual::after {
@@ -28,7 +29,7 @@
 }
 
 .onboarding-page--complete .onboarding-complete-header h1 {
-  font-family: var(--font-geist-sans), Arial, sans-serif;
+  font-family: inherit;
   font-size: clamp(46px, 3.35vw, 58px);
   font-weight: 650;
   line-height: 1.04;
@@ -247,7 +248,7 @@
 
 .onboarding-header h1 {
   margin: 0;
-  font-family: Georgia, "Times New Roman", serif;
+  font-family: inherit;
   font-size: clamp(46px, 3.25vw, 57px);
   font-weight: 600;
   line-height: 0.98;
@@ -531,7 +532,7 @@
 }
 
 .onboarding-page--topics .onboarding-topics-header h1 {
-  font-family: var(--font-geist-sans), Arial, sans-serif;
+  font-family: inherit;
   font-size: clamp(42px, 3vw, 52px);
   font-weight: 650;
   line-height: 1.04;
@@ -691,7 +692,7 @@
 }
 
 .onboarding-page--intro .onboarding-intro-header h1 {
-  font-family: var(--font-geist-sans), Arial, sans-serif;
+  font-family: inherit;
   font-size: clamp(45px, 3.2vw, 56px);
   font-weight: 650;
   line-height: 1.05;
@@ -840,7 +841,7 @@
 }
 
 .onboarding-page--support .onboarding-support-header h1 {
-  font-family: var(--font-geist-sans), Arial, sans-serif;
+  font-family: inherit;
   font-size: clamp(39px, 2.9vw, 49px);
   font-weight: 650;
   line-height: 1.05;
@@ -1029,7 +1030,7 @@
 }
 
 .onboarding-page--preferences .onboarding-preferences-header h1 {
-  font-family: var(--font-geist-sans), Arial, sans-serif;
+  font-family: inherit;
   font-size: clamp(39px, 2.9vw, 49px);
   font-weight: 650;
   line-height: 1.05;
