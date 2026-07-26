@@ -27,7 +27,7 @@ export default function MatchingPage() {
 
         <nav aria-label="Main navigation">
           <Link className="is-active" href="/matching" aria-current="page">Home</Link>
-          <Link href="#messages">Messages</Link>
+          <Link href="/messages">Messages</Link>
           <Link href="/onboarding/preferences">Preferences</Link>
         </nav>
 
