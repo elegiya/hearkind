@@ -23,7 +23,7 @@ export default function MatchingPage() {
   return (
     <main className="matching-page">
       <header className="matching-nav">
-        <BrandLogo href="/" variant="plain" size="medium" className="matching-brand" />
+        <BrandLogo href="/" variant="plain" size="small" className="matching-brand" />
 
         <nav aria-label="Main navigation">
           <Link className="is-active" href="/matching" aria-current="page">Home</Link>
@@ -39,23 +39,24 @@ export default function MatchingPage() {
 
       <div className="matching-shell">
         {matchingStatus === "idle" ? (
-          <section className="matching-hero">
+          <section className="matching-hero matching-hero--idle">
             <div className="matching-hero-copy">
               <p className="matching-eyebrow">You’re not alone</p>
-              <h1>Let someone<br />reach out</h1>
+              <h1>Let someone<br />truly understand</h1>
               <p className="matching-intro">
-                Share as much or as little as feels comfortable. Someone who understands
-                may reach out when you’re ready.
+                Share your story with someone who gets it.<br />
+                Connect over similar life challenges,<br />
+                anonymously and without pressure.
               </p>
               <button className="matching-primary" type="button" onClick={() => setMatchingStatus("searching")}>
-                <span>Start matching</span>
+                <span>Find a meaningful match</span>
                 <ArrowIcon />
               </button>
             </div>
 
             <div className="matching-way" aria-hidden="true">
               <Image
-                src="/images/matching_start_way.png"
+                src="/images/matching-hero-lake.png"
                 alt=""
                 fill
                 priority
