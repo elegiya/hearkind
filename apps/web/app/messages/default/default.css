@@ -2,6 +2,8 @@
 .messages-default-layout { display: grid; grid-template-columns: 446px minmax(0,1fr); width: calc(100% - 56px); max-width: 1480px; min-height: calc(100vh - 112px); margin: 0 auto 28px; overflow: hidden; border: 1px solid #e8dfd5; border-radius: 17px; background: rgba(255,255,255,.42); }
 .messages-default-inbox { display: flex; min-width: 0; flex-direction: column; padding: 30px 26px 28px; border-right: 1px solid #e5ddd4; }
 .messages-default-inbox .messages-inbox-heading { padding: 0 2px; }
+.messages-default-inbox .messages-inbox-heading h1 { margin: 0; font-family: inherit; font-size: 30px; font-weight: 700; letter-spacing: -0.025em; }
+.messages-default-inbox .messages-inbox-heading p { margin: 7px 0 0; }
 .messages-default-inbox .messages-tabs { margin-top: 24px; }
 .messages-default-empty-list { display: grid; place-items: center; margin: 145px auto 0; text-align: center; }
 .messages-default-chat-mark { position: relative; display: grid; place-items: center; width: 96px; height: 96px; border-radius: 50%; background: #f2f1e8; color: #2f6642; }

@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { FormEvent, useMemo, useState } from "react";
+import { FormEvent, useEffect, useMemo, useState } from "react";
 
 import BrandLogo from "@/components/BrandLogo";
 
@@ -41,6 +41,20 @@ export default function MessagesPage() {
   const [query, setQuery] = useState("");
   const [draft, setDraft] = useState("");
   const [chatMessages, setChatMessages] = useState(chatSeed);
+  const [detailsOpen, setDetailsOpen] = useState(true);
+
+  useEffect(() => {
+    const saved = window.localStorage.getItem("hearkind:messages-details-open");
+    const frame = window.requestAnimationFrame(() => {
+      setDetailsOpen(saved === null ? !window.matchMedia("(max-width: 1250px)").matches : saved === "true");
+    });
+    return () => window.cancelAnimationFrame(frame);
+  }, []);
+
+  function updateDetails(open: boolean) {
+    setDetailsOpen(open);
+    window.localStorage.setItem("hearkind:messages-details-open", String(open));
+  }
 
   const visibleConversations = useMemo(() => {
     const normalized = query.trim().toLowerCase();
@@ -71,7 +85,7 @@ export default function MessagesPage() {
         <button className="messages-profile" type="button" aria-label="Open profile menu"><span>M</span><ChevronIcon /></button>
       </header>
 
-      <div className="messages-layout">
+      <div className={`messages-layout ${detailsOpen ? "is-details-open" : "is-details-closed"}`}>
         <section className="messages-inbox" aria-label="Conversations">
           <div className="messages-inbox-heading">
             <div><h1>Messages</h1><p>Your conversations</p></div>
@@ -113,6 +127,7 @@ export default function MessagesPage() {
             <Image src="/images/matching_reached_out_lake.png" alt="Quiet Pine" width={58} height={58} className="messages-avatar" />
             <div><div><h2>Quiet Pine</h2><span>Relocation</span></div><p>Real person • Private conversation</p></div>
             <div className="messages-chat-tools">
+              {!detailsOpen && <button type="button" aria-label="Open connection details" aria-expanded="false" aria-controls="messages-connection-details" onClick={() => updateDetails(true)}><InfoIcon /><span>Connection details</span></button>}
               <button type="button"><MoreIcon /><span>More</span></button>
             </div>
           </header>
@@ -142,8 +157,13 @@ export default function MessagesPage() {
           <p className="messages-secure"><LockIcon />Your conversation is private and secure.</p>
         </section>
 
-        <aside className="messages-details" aria-label="Conversation details">
-          <h2>Conversation details</h2>
+        {detailsOpen && <button className="messages-details-backdrop" type="button" aria-label="Close connection details" onClick={() => updateDetails(false)} />}
+
+        <aside id="messages-connection-details" className="messages-details" aria-label="About this connection" aria-hidden={!detailsOpen}>
+          <div className="messages-details-heading">
+            <h2>About this connection</h2>
+            <button type="button" aria-label="Close connection details" onClick={() => updateDetails(false)}><CloseIcon /></button>
+          </div>
 
           <div className="messages-detail-row">
             <span className="messages-detail-icon"><TagIcon /></span>
@@ -177,6 +197,8 @@ export default function MessagesPage() {
         </aside>
       </div>
 
+      {!detailsOpen && <button className="messages-mobile-details-trigger" type="button" aria-label="Open connection details" onClick={() => updateDetails(true)}><InfoIcon /><span>Connection details</span></button>}
+
       <nav className="messages-mobile-nav" aria-label="Mobile navigation">
         <Link href="/matching"><HomeIcon /><span>Home</span></Link>
         <Link className="is-active" href="/messages"><ChatIcon /><span>Messages</span></Link>
@@ -194,6 +216,8 @@ function ShieldIcon() { return <Icon><path d="M12 3 20 6v6c0 5-3 8-8 10-5-2-8-5-
 function HeartIcon() { return <Icon><path d="M20.8 5.8a5.2 5.2 0 0 0-7.4 0L12 7.2l-1.4-1.4a5.2 5.2 0 0 0-7.4 7.4L12 21l8.8-7.8a5.2 5.2 0 0 0 0-7.4Z" /></Icon>; }
 function FlagIcon() { return <Icon><path d="M5 21V4m0 1h11l-2 4 2 4H5" /></Icon>; }
 function MoreIcon() { return <Icon><circle cx="5" cy="12" r="1" fill="currentColor" /><circle cx="12" cy="12" r="1" fill="currentColor" /><circle cx="19" cy="12" r="1" fill="currentColor" /></Icon>; }
+function InfoIcon() { return <Icon><circle cx="12" cy="12" r="9" /><path d="M12 11v6M12 7h.01" /></Icon>; }
+function CloseIcon() { return <Icon><path d="m6 6 12 12M18 6 6 18" /></Icon>; }
 function PaperclipIcon() { return <Icon><path d="m9 12 6-6a3 3 0 0 1 4 4l-8 8a5 5 0 0 1-7-7l8-8" /></Icon>; }
 function SendIcon() { return <Icon><path d="m3 11 18-8-7 18-3-7-8-3Z" /><path d="m11 14 10-11" /></Icon>; }
 function LockIcon() { return <Icon><rect x="5" y="10" width="14" height="11" rx="2" /><path d="M8 10V7a4 4 0 0 1 8 0v3" /></Icon>; }
