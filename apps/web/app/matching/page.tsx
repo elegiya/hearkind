@@ -115,10 +115,10 @@ export default function MatchingPage() {
               </blockquote>
               <p className="matching-reached-note">There’s no pressure to reply right away.</p>
               <div className="matching-reached-actions">
-                <button className="matching-primary" type="button">
+                <Link className="matching-primary" href="/messages/quiet-pine">
                   <span>Read and reply</span>
                   <ArrowIcon />
-                </button>
+                </Link>
                 <button type="button" onClick={() => setMatchingStatus("searching")}>Not right now</button>
               </div>
             </div>
