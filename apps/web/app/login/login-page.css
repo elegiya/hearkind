@@ -10,6 +10,25 @@
 
 }
 
+@media (min-width: 821px) {
+  .auth-legal-footer {
+    position: fixed;
+    z-index: 20;
+    right: 0;
+    bottom: 0;
+    left: 46vw;
+    background: transparent;
+  }
+}
+
+@media (min-width: 821px) and (max-width: 1040px) {
+  .auth-legal-footer { left: 45vw; }
+}
+
+@media (min-width: 821px) and (max-width: 900px) {
+  .auth-legal-footer { left: 44vw; }
+}
+
 .clip-definitions {
   position: absolute;
 

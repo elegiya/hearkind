@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import PostHogProvider from "@/components/analytics/PostHogProvider";
 import CookieConsentBanner from "@/components/consent/CookieConsentBanner";
 import { CookieConsentProvider } from "@/components/consent/CookieConsentProvider";
+import GlobalLegalFooter from "@/components/GlobalLegalFooter";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -48,6 +49,7 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col">
         <CookieConsentProvider>
           <PostHogProvider>{children}</PostHogProvider>
+          <GlobalLegalFooter />
           <CookieConsentBanner />
         </CookieConsentProvider>
       </body>
