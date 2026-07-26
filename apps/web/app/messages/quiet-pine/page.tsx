@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 
 import BrandLogo from "@/components/BrandLogo";
 
@@ -37,6 +37,19 @@ const initialMessages: Message[] = [
 export default function QuietPineConversationPage() {
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState(initialMessages);
+  const [safetyVisible, setSafetyVisible] = useState(true);
+
+  useEffect(() => {
+    const frame = window.requestAnimationFrame(() => {
+      setSafetyVisible(window.localStorage.getItem("hearkind:quiet-pine-safety-dismissed") !== "true");
+    });
+    return () => window.cancelAnimationFrame(frame);
+  }, []);
+
+  function dismissSafety() {
+    setSafetyVisible(false);
+    window.localStorage.setItem("hearkind:quiet-pine-safety-dismissed", "true");
+  }
 
   function sendMessage(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -70,8 +83,8 @@ export default function QuietPineConversationPage() {
             <Image
               src="/images/matching_reached_out_lake.png"
               alt="Quiet Pine"
-              width={118}
-              height={118}
+              width={48}
+              height={48}
               className="conversation-avatar conversation-avatar--large"
             />
             <div>
@@ -79,22 +92,26 @@ export default function QuietPineConversationPage() {
                 <h1>Quiet Pine</h1>
                 <span>Relocation</span>
               </div>
-              <p>Private conversation</p>
+              <p>Connected 3 days ago</p>
             </div>
             <button type="button" aria-label="More conversation options"><MoreIcon /></button>
           </header>
 
-          <div className="conversation-comfort-note">
+          {safetyVisible && <div className="conversation-comfort-note">
             <HeartIcon />
-            <span>Share only what feels comfortable.</span>
-          </div>
+            <span>Share only what feels comfortable. There’s no rush to reply.</span>
+            <button type="button" aria-label="Dismiss safety note" onClick={dismissSafety}><CloseIcon /></button>
+          </div>}
 
           <div className="conversation-day"><span>Today</span></div>
 
           <div className="conversation-messages" aria-live="polite">
-            {messages.map((item) => (
-              <article className={`conversation-message${item.mine ? " is-mine" : ""}`} key={item.id}>
-                {!item.mine && (
+            {messages.map((item, index) => {
+              const startsIncomingGroup = !item.mine && (index === 0 || messages[index - 1].mine);
+              const startsGroup = index === 0 || Boolean(item.mine) !== Boolean(messages[index - 1].mine);
+              return (
+              <article className={`conversation-message${item.mine ? " is-mine" : ""}${startsGroup ? " starts-group" : ""}`} key={item.id}>
+                {!item.mine && (startsIncomingGroup ? (
                   <Image
                     src="/images/matching_reached_out_lake.png"
                     alt=""
@@ -102,13 +119,14 @@ export default function QuietPineConversationPage() {
                     height={62}
                     className="conversation-avatar"
                   />
-                )}
+                ) : <span className="conversation-avatar-spacer" />)}
                 <div>
                   <p>{item.body}</p>
                   <small>{item.time}{item.mine && <CheckIcon />}</small>
                 </div>
               </article>
-            ))}
+              );
+            })}
           </div>
 
           <form className="conversation-composer" onSubmit={sendMessage}>
@@ -142,7 +160,6 @@ export default function QuietPineConversationPage() {
           <section className="conversation-tips">
             <h3><span><HeartFilledIcon /></span>Conversation tips</h3>
             <ul>
-              <li>Share only what feels comfortable.</li>
               <li>It’s okay to reply later.</li>
               <li>You can take breaks.</li>
             </ul>
@@ -164,10 +181,6 @@ export default function QuietPineConversationPage() {
           />
         </aside>
 
-        <footer className="conversation-footer-note">
-          <span aria-hidden="true"><HeartIcon /></span>
-          <p><strong>Private. Safe. Human.</strong><small>Your story stays yours.</small></p>
-        </footer>
       </div>
     </main>
   );
@@ -187,5 +200,6 @@ function BlockIcon() { return <Icon><circle cx="12" cy="12" r="9" /><path d="m6 
 function FlagIcon() { return <Icon><path d="M5 21V4m0 1h11l-2 4 2 4H5" /></Icon>; }
 function CheckIcon() { return <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" aria-hidden="true"><path d="m5 10 3 3 6-7" /></svg>; }
 function MoreIcon() { return <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="5" cy="12" r="1.7" /><circle cx="12" cy="12" r="1.7" /><circle cx="19" cy="12" r="1.7" /></svg>; }
+function CloseIcon() { return <Icon><path d="m6 6 12 12M18 6 6 18" /></Icon>; }
 function SendIcon() { return <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="m3 11 18-8-7 18-3-7-8-3Z" /><path d="m11 14 10-11" /></svg>; }
 function ChevronIcon() { return <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" aria-hidden="true"><path d="m6 8 4 4 4-4" /></svg>; }

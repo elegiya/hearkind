@@ -22,11 +22,11 @@ type Conversation = {
 
 const conversations: Conversation[] = [
   { name: "Quiet Pine", topic: "Relocation", preview: "Thank you. I didn’t expect it to feel this hard some days.", time: "10:35 AM", image: "/images/matching_reached_out_lake.png", status: "active", unread: true },
-  { name: "Soft Willow", topic: "Loneliness", preview: "That makes so much sense. I felt the same way.", time: "Yesterday", image: "/images/branch-left.png", status: "active" },
-  { name: "Golden Leaf", topic: "Relationships", preview: "Thank you for sharing that with me. It helps.", time: "2d ago", image: "/images/branch-right.png", status: "active" },
+  { name: "Soft Willow", topic: "Loneliness", preview: "That makes so much sense. I felt the same way.", time: "Yesterday", image: "/images/matching_start_way.png", status: "active" },
+  { name: "Golden Leaf", topic: "Relationships", preview: "Thank you for sharing that with me. It helps.", time: "2d ago", image: "/images/matching_search_way.png", status: "active" },
   { name: "Warm Cedar", topic: "Relocation", preview: "You: That’s so kind of you.", time: "Jul 18", image: "/images/matching_search_way.png", status: "active" },
   { name: "Calm Water", topic: "Loneliness", preview: "Conversation ended", time: "Jul 10", image: "/images/landscape-login.png", status: "past" },
-  { name: "Kind Spruce", topic: "Anxiety", preview: "Conversation ended", time: "Jun 29", image: "/images/matching_start_way.png", status: "past" },
+  { name: "Kind Spruce", topic: "Anxiety", preview: "Conversation ended", time: "Jun 29", image: "/images/matching_reached_out_lake.png", status: "past" },
 ];
 
 const chatSeed = [
@@ -42,11 +42,19 @@ export default function MessagesPage() {
   const [draft, setDraft] = useState("");
   const [chatMessages, setChatMessages] = useState(chatSeed);
   const [detailsOpen, setDetailsOpen] = useState(true);
+  const [safetyVisible, setSafetyVisible] = useState(true);
 
   useEffect(() => {
     const saved = window.localStorage.getItem("hearkind:messages-details-open");
     const frame = window.requestAnimationFrame(() => {
-      setDetailsOpen(saved === null ? !window.matchMedia("(max-width: 1250px)").matches : saved === "true");
+      setDetailsOpen(saved === null ? !window.matchMedia("(max-width: 1400px)").matches : saved === "true");
+    });
+    return () => window.cancelAnimationFrame(frame);
+  }, []);
+
+  useEffect(() => {
+    const frame = window.requestAnimationFrame(() => {
+      setSafetyVisible(window.localStorage.getItem("hearkind:quiet-pine-safety-dismissed") !== "true");
     });
     return () => window.cancelAnimationFrame(frame);
   }, []);
@@ -54,6 +62,11 @@ export default function MessagesPage() {
   function updateDetails(open: boolean) {
     setDetailsOpen(open);
     window.localStorage.setItem("hearkind:messages-details-open", String(open));
+  }
+
+  function dismissSafety() {
+    setSafetyVisible(false);
+    window.localStorage.setItem("hearkind:quiet-pine-safety-dismissed", "true");
   }
 
   const visibleConversations = useMemo(() => {
@@ -88,14 +101,8 @@ export default function MessagesPage() {
       <div className={`messages-layout ${detailsOpen ? "is-details-open" : "is-details-closed"}`}>
         <section className="messages-inbox" aria-label="Conversations">
           <div className="messages-inbox-heading">
-            <div><h1>Messages</h1><p>Your conversations</p></div>
-            <button type="button"><PersonAddIcon /><span>New introduction</span></button>
-          </div>
-
-          <div className="messages-tabs" role="tablist" aria-label="Conversation filters">
-            <button className={filter === "all" ? "is-active" : ""} type="button" role="tab" aria-selected={filter === "all"} onClick={() => setFilter("all")}>All <span>6</span></button>
-            <button className={filter === "active" ? "is-active" : ""} type="button" role="tab" aria-selected={filter === "active"} onClick={() => setFilter("active")}>Active <span>4</span></button>
-            <button className={filter === "past" ? "is-active" : ""} type="button" role="tab" aria-selected={filter === "past"} onClick={() => setFilter("past")}>Past <span>2</span></button>
+            <div><h1>Messages</h1></div>
+            <button type="button"><PersonAddIcon /><span>New connection</span></button>
           </div>
 
           <label className="messages-search">
@@ -103,12 +110,18 @@ export default function MessagesPage() {
             <input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search conversations" />
           </label>
 
+          <div className="messages-tabs" role="tablist" aria-label="Conversation filters">
+            <button className={filter === "all" ? "is-active" : ""} type="button" role="tab" aria-selected={filter === "all"} onClick={() => setFilter("all")}>All <span>6</span></button>
+            <button className={filter === "active" ? "is-active" : ""} type="button" role="tab" aria-selected={filter === "active"} onClick={() => setFilter("active")}>Active <span>4</span></button>
+            <button className={filter === "past" ? "is-active" : ""} type="button" role="tab" aria-selected={filter === "past"} onClick={() => setFilter("past")}>Past <span>2</span></button>
+          </div>
+
           <div className="messages-list">
             {visibleConversations.map((conversation) => (
               <Link className={`messages-row${conversation.name === "Quiet Pine" ? " is-selected" : ""}`} href={conversation.name === "Quiet Pine" ? "/messages/quiet-pine" : "#"} key={conversation.name}>
-                <Image src={conversation.image} alt="" width={58} height={58} className={`messages-avatar messages-avatar--${conversation.name.toLowerCase().replace(" ", "-")}`} />
+                <Image src={conversation.image} alt="" width={58} height={58} className="messages-avatar" />
                 <div>
-                  <div className="messages-row-title"><strong>{conversation.name}</strong>{conversation.unread && <span>New</span>}</div>
+                  <div className="messages-row-title"><strong>{conversation.name}</strong></div>
                   <small>{conversation.topic}</small>
                   <p>{conversation.preview}</p>
                 </div>
@@ -119,33 +132,32 @@ export default function MessagesPage() {
             {visibleConversations.length === 0 && <p className="messages-empty">No conversations found.</p>}
           </div>
 
-          <div className="messages-privacy-card"><ShieldIcon /><p><strong>Private. Safe. Human.</strong><small>Your conversations are private and secure.</small></p></div>
         </section>
 
         <section className="messages-chat" aria-label="Conversation with Quiet Pine">
           <header className="messages-chat-header">
-            <Image src="/images/matching_reached_out_lake.png" alt="Quiet Pine" width={58} height={58} className="messages-avatar" />
-            <div><div><h2>Quiet Pine</h2><span>Relocation</span></div><p>Real person • Private conversation</p></div>
+            <Image src="/images/matching_reached_out_lake.png" alt="Quiet Pine" width={48} height={48} className="messages-avatar messages-chat-avatar" />
+            <div><div><h2>Quiet Pine</h2><span>Relocation</span></div><p>Connected 3 days ago</p></div>
             <div className="messages-chat-tools">
-              {!detailsOpen && <button type="button" aria-label="Open connection details" aria-expanded="false" aria-controls="messages-connection-details" onClick={() => updateDetails(true)}><InfoIcon /><span>Connection details</span></button>}
+              {!detailsOpen && <button type="button" aria-label="Open connection details" aria-expanded="false" aria-controls="messages-connection-details" onClick={() => updateDetails(true)}><InfoIcon /><span>Details</span></button>}
               <button type="button"><MoreIcon /><span>More</span></button>
             </div>
           </header>
 
-          <div className="messages-comfort"><HeartIcon /><span>Share only what feels comfortable. There’s no rush to reply.</span></div>
+          {safetyVisible && <div className="messages-comfort"><HeartIcon /><span>Share only what feels comfortable. There’s no rush to reply.</span><button type="button" aria-label="Dismiss safety note" onClick={dismissSafety}><CloseIcon /></button></div>}
           <div className="messages-day"><span>Today</span></div>
 
           <div className="messages-thread" aria-live="polite">
-            {chatMessages.map((message) => (
-              <article className={`messages-bubble-row${message.mine ? " is-mine" : ""}`} key={message.id}>
-                {!message.mine && <Image src="/images/matching_reached_out_lake.png" alt="" width={42} height={42} className="messages-avatar" />}
+            {chatMessages.map((message, index) => {
+              const startsIncomingGroup = !message.mine && (index === 0 || chatMessages[index - 1].mine);
+              const startsGroup = index === 0 || Boolean(message.mine) !== Boolean(chatMessages[index - 1].mine);
+              return (
+              <article className={`messages-bubble-row${message.mine ? " is-mine" : ""}${startsGroup ? " starts-group" : ""}`} key={message.id}>
+                {!message.mine && (startsIncomingGroup ? <Image src="/images/matching_reached_out_lake.png" alt="" width={42} height={42} className="messages-avatar" /> : <span className="messages-avatar-spacer" />)}
                 <div><p>{message.body}</p><small>{message.time}{message.mine && <CheckIcon />}</small></div>
               </article>
-            ))}
-            <div className="messages-private-note">
-              <LockIcon />
-              <p><span>This is a private conversation.</span><small>Your messages are end-to-end encrypted.</small></p>
-            </div>
+              );
+            })}
           </div>
 
           <form className="messages-composer" onSubmit={sendMessage}>
@@ -154,7 +166,6 @@ export default function MessagesPage() {
             <input id="messages-draft" value={draft} onChange={(event) => setDraft(event.target.value)} placeholder="Write a message..." autoComplete="off" />
             <button type="submit" aria-label="Send message" disabled={!draft.trim()}><SendIcon /></button>
           </form>
-          <p className="messages-secure"><LockIcon />Your conversation is private and secure.</p>
         </section>
 
         {detailsOpen && <button className="messages-details-backdrop" type="button" aria-label="Close connection details" onClick={() => updateDetails(false)} />}
@@ -180,7 +191,6 @@ export default function MessagesPage() {
           <section className="messages-detail-tips">
             <h3><span><HeartFilledIcon /></span>Conversation tips</h3>
             <ul>
-              <li>Share only what feels comfortable.</li>
               <li>It’s okay to reply later.</li>
               <li>You can take breaks.</li>
             </ul>
@@ -220,7 +230,6 @@ function InfoIcon() { return <Icon><circle cx="12" cy="12" r="9" /><path d="M12 
 function CloseIcon() { return <Icon><path d="m6 6 12 12M18 6 6 18" /></Icon>; }
 function PaperclipIcon() { return <Icon><path d="m9 12 6-6a3 3 0 0 1 4 4l-8 8a5 5 0 0 1-7-7l8-8" /></Icon>; }
 function SendIcon() { return <Icon><path d="m3 11 18-8-7 18-3-7-8-3Z" /><path d="m11 14 10-11" /></Icon>; }
-function LockIcon() { return <Icon><rect x="5" y="10" width="14" height="11" rx="2" /><path d="M8 10V7a4 4 0 0 1 8 0v3" /></Icon>; }
 function CheckIcon() { return <svg viewBox="0 0 20 20" fill="none" stroke="currentColor"><path d="m5 10 3 3 6-7" /></svg>; }
 function HomeIcon() { return <Icon><path d="m3 11 9-8 9 8v10h-6v-6H9v6H3Z" /></Icon>; }
 function ChatIcon() { return <Icon><path d="M4 5h16v12H9l-5 4V5Z" /></Icon>; }

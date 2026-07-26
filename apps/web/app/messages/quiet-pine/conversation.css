@@ -93,10 +93,11 @@
 
 .conversation-chat-header {
   display: grid;
-  grid-template-columns: 118px minmax(0, 1fr) 40px;
+  grid-template-columns: 48px minmax(0, 1fr) 40px;
   align-items: center;
-  gap: 22px;
-  padding-bottom: 24px;
+  gap: 14px;
+  min-height: 72px;
+  padding-bottom: 14px;
   border-bottom: 1px solid #e8e0d7;
 }
 
@@ -105,17 +106,17 @@
   object-fit: cover;
 }
 
-.conversation-avatar--large { width: 118px; height: 118px; }
-.conversation-name-line { display: flex; align-items: center; gap: 20px; }
+.conversation-avatar--large { width: 48px; height: 48px; }
+.conversation-name-line { display: flex; align-items: center; gap: 12px; }
 .conversation-name-line h1,
 .conversation-details h2,
 .conversation-details h3 {
   font-family: inherit;
 }
 
-.conversation-name-line h1 { margin: 0; font-size: 36px; font-weight: 700; letter-spacing: -0.035em; }
-.conversation-name-line > span { padding: 9px 18px; border-radius: 999px; background: #f8e7d7; font-size: 14px; }
-.conversation-chat-header > div > p { margin: 9px 0 0; color: #60635f; font-size: 17px; }
+.conversation-name-line h1 { margin: 0; font-size: 24px; font-weight: 650; letter-spacing: -0.025em; }
+.conversation-name-line > span { padding: 5px 10px; border-radius: 999px; background: #f8e7d7; font-size: 10px; }
+.conversation-chat-header > div > p { margin: 4px 0 0; color: #6a6f6b; font-size: 11px; }
 .conversation-chat-header > button { border: 0; background: transparent; color: #343a36; cursor: pointer; }
 .conversation-chat-header > button svg { width: 28px; height: 28px; }
 
@@ -132,6 +133,9 @@
   color: #484c48;
   font-size: 16px;
 }
+.conversation-comfort-note > button { display: grid; place-items: center; width: 34px; height: 34px; margin-left: auto; border: 0; border-radius: 50%; background: transparent; color: #74726d; cursor: pointer; }
+.conversation-comfort-note > button:hover { background: #f7eadc; }
+.conversation-comfort-note > button svg { width: 18px; height: 18px; stroke-width: 1.7; }
 
 .conversation-comfort-note svg { width: 30px; height: 30px; color: #e3834e; stroke-width: 1.7; }
 
@@ -147,15 +151,17 @@
 .conversation-day::before,
 .conversation-day::after { height: 1px; flex: 1; background: #e5ddd4; content: ""; }
 
-.conversation-messages { display: flex; flex: 1; flex-direction: column; gap: 14px; }
+.conversation-messages { display: flex; flex: 1; flex-direction: column; gap: 10px; padding-bottom: 34px; }
 
 .conversation-message {
   display: grid;
   grid-template-columns: 62px minmax(0, 1fr);
   align-items: start;
   gap: 16px;
-  max-width: 64%;
+  max-width: 54%;
 }
+.conversation-message.starts-group:not(:first-child) { margin-top: 16px; }
+.conversation-avatar-spacer { width: 62px; }
 
 .conversation-message > div > p {
   margin: 0;
@@ -172,8 +178,8 @@
   align-items: center;
   gap: 6px;
   margin: 8px 6px 0;
-  color: #666b67;
-  font-size: 12px;
+  color: #8a8e89;
+  font-size: 10px;
 }
 
 .conversation-message small svg { width: 17px; height: 17px; color: #496e50; stroke-width: 1.8; }
@@ -182,7 +188,7 @@
   display: flex;
   align-self: flex-end;
   justify-content: flex-end;
-  max-width: 62%;
+  max-width: 50%;
 }
 
 .conversation-message.is-mine > div > p { border-color: #dedfd1; background: #eff0e5; }
@@ -192,31 +198,31 @@
   position: relative;
   display: flex;
   align-items: center;
-  min-height: 76px;
-  margin-top: 12px;
+  min-height: 60px;
+  margin-top: 10px;
   border: 1px solid #e2d4c5;
   border-radius: 24px;
   background: rgba(255, 255, 255, 0.42);
 }
 
 .conversation-composer label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
-.conversation-composer input { width: 100%; height: 72px; padding: 0 82px 0 25px; border: 0; background: transparent; color: #292824; font: inherit; font-size: 16px; outline: none; }
+.conversation-composer input { width: 100%; height: 58px; padding: 0 64px 0 22px; border: 0; background: transparent; color: #292824; font: inherit; font-size: 15px; outline: none; }
 .conversation-composer input::placeholder { color: #92938f; }
 .conversation-composer button {
   position: absolute;
-  right: 9px;
+  right: 7px;
   display: grid;
   place-items: center;
-  width: 58px;
-  height: 58px;
+  width: 44px;
+  height: 44px;
   border: 0;
   border-radius: 50%;
   background: #315c3a;
   color: white;
   cursor: pointer;
 }
-.conversation-composer button:disabled { opacity: 0.45; cursor: default; }
-.conversation-composer button svg { width: 28px; height: 28px; stroke-width: 1.55; }
+.conversation-composer button:disabled { background: #eceae4; color: #aaa9a4; cursor: default; }
+.conversation-composer button svg { width: 21px; height: 21px; stroke-width: 1.55; }
 
 .conversation-details { position: relative; min-height: 830px; overflow: hidden; padding: 38px 34px 300px; }
 .conversation-details h2 { margin: 0 0 24px; font-size: 23px; font-weight: 700; letter-spacing: -0.02em; }
@@ -280,12 +286,12 @@
   .conversation-profile > span { width: 42px; height: 42px; }
   .conversation-shell { padding: 18px 16px 88px; }
   .conversation-chat { min-height: 780px; padding: 22px 16px; }
-  .conversation-chat-header { grid-template-columns: 72px minmax(0, 1fr) 28px; gap: 13px; }
-  .conversation-avatar--large { width: 72px; height: 72px; }
-  .conversation-name-line { align-items: flex-start; flex-direction: column; gap: 7px; }
-  .conversation-name-line h1 { font-size: 31px; }
-  .conversation-name-line > span { padding: 6px 11px; font-size: 11px; }
-  .conversation-chat-header > div > p { font-size: 14px; }
+  .conversation-chat-header { grid-template-columns: 44px minmax(0, 1fr) 28px; gap: 11px; }
+  .conversation-avatar--large { width: 44px; height: 44px; }
+  .conversation-name-line { align-items: center; flex-direction: row; gap: 8px; }
+  .conversation-name-line h1 { font-size: 22px; }
+  .conversation-name-line > span { padding: 5px 9px; font-size: 9px; }
+  .conversation-chat-header > div > p { font-size: 11px; }
   .conversation-comfort-note { padding: 0 16px; font-size: 14px; }
   .conversation-message { grid-template-columns: 42px minmax(0, 1fr); max-width: 90%; gap: 10px; }
   .conversation-message .conversation-avatar { width: 42px; height: 42px; }
