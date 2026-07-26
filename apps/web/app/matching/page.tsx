@@ -150,7 +150,7 @@ export default function MatchingPage() {
             <h2>Your connection journey</h2>
             <ol>
               {journey.map((step, index) => (
-                <li className={index === 0 ? "is-complete" : ""} key={step}>
+                <li className={index === 0 ? "is-complete" : matchingStatus === "searching" && index === 1 ? "is-current" : ""} key={step}>
                   <span>{index === 0 ? <CheckIcon /> : index + 1}</span>
                   <small>{step}</small>
                 </li>
