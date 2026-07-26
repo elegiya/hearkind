@@ -89,7 +89,7 @@ export default function MessagesPage() {
   return (
     <main className="messages-page">
       <header className="messages-nav">
-        <BrandLogo href="/" variant="plain" size="medium" className="messages-brand" />
+        <BrandLogo href="/" variant="plain" size="small" className="messages-brand" />
         <nav aria-label="Main navigation">
           <Link href="/matching">Home</Link>
           <Link className="is-active" href="/messages" aria-current="page">Messages</Link>

@@ -66,7 +66,7 @@ export default function QuietPineConversationPage() {
   return (
     <main className="conversation-page">
       <header className="conversation-nav">
-        <BrandLogo href="/" variant="plain" size="medium" className="conversation-brand" />
+        <BrandLogo href="/" variant="plain" size="small" className="conversation-brand" />
         <nav aria-label="Main navigation">
           <Link href="/matching">Home</Link>
           <Link className="is-active" href="/messages" aria-current="page">Messages</Link>
