@@ -129,7 +129,6 @@
 .matching-hero--idle .matching-way { position: absolute; z-index: 1; inset: 0; min-height: 0; }
 .matching-hero--idle .matching-way::after { background: linear-gradient(0deg, #fbf7f1 0%, rgba(251,247,241,.82) 5%, transparent 17%), linear-gradient(90deg, #fbf7f1 0%, rgba(251,247,241,.97) 18%, rgba(251,247,241,.72) 38%, rgba(251,247,241,.08) 58%, transparent 72%); }
 .matching-hero--idle .matching-way img { object-position: center 35%; }
-.matching-hero--reached { margin: 130px clamp(26px, 3.4vw, 52px) 0; }
 
 .matching-hero-copy {
   position: relative;
@@ -269,15 +268,20 @@
 
 .matching-hero--reached {
   grid-template-columns: 42% 58%;
-  min-height: 440px;
+  min-height: 450px;
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
 }
 
 .matching-reached-visual {
   position: relative;
   align-self: center;
   justify-self: center;
-  width: min(78%, 390px);
+  width: min(68%, 340px);
   aspect-ratio: 1;
+  transform: translateY(24px);
 }
 
 .matching-reached-visual img {
@@ -288,11 +292,15 @@
   padding: 38px 64px 36px 20px;
 }
 
-.matching-reached-copy .matching-eyebrow { margin-bottom: 14px; }
+@media (min-width: 761px) {
+  .matching-reached-copy { transform: translateY(32px); }
+}
+
+.matching-reached-copy .matching-eyebrow { margin-bottom: 18px; }
 
 .matching-reached-copy h1 {
-  font-size: clamp(42px, 4vw, 60px);
-  line-height: 1.02;
+  font-size: clamp(40px, 3.6vw, 54px);
+  line-height: 1.04;
 }
 
 .matching-reached-copy blockquote {
