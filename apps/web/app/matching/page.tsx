@@ -174,13 +174,10 @@ export default function MatchingPage() {
               <li>Be kind to yourself and set your own pace.</li>
               <li>You can block or report at any time.</li>
             </ul>
-            <Image
-              src="/images/hero-chair.png"
-              alt="A comfortable chair beside a warm drink"
-              width={360}
-              height={310}
-              className="matching-chair"
-            />
+            <span className="matching-safety-circles" aria-hidden="true">
+              <span />
+              <span />
+            </span>
           </article>
           </section>
         ) : (
@@ -215,13 +212,6 @@ export default function MatchingPage() {
                 <li>You do not need to respond immediately.</li>
                 <li>You can choose not to continue.</li>
               </ul>
-              <Image
-                src="/images/hero-chair.png"
-                alt="A comfortable chair beside a warm drink"
-                width={360}
-                height={310}
-                className="matching-chair"
-              />
             </article>
           </section>
         )}
