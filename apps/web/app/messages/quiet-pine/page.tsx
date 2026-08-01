@@ -70,7 +70,7 @@ export default function QuietPineConversationPage() {
         <nav aria-label="Main navigation">
           <Link href="/matching">Home</Link>
           <Link className="is-active" href="/messages" aria-current="page">Messages</Link>
-          <Link href="/onboarding/preferences">Preferences</Link>
+          <Link href="/preferences">Preferences</Link>
         </nav>
         <button className="conversation-profile" type="button" aria-label="Open profile menu">
           <span>M</span><ChevronIcon />

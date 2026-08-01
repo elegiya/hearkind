@@ -28,7 +28,7 @@ export default function MatchingPage() {
         <nav aria-label="Main navigation">
           <Link className="is-active" href="/matching" aria-current="page">Home</Link>
           <Link href="/messages">Messages</Link>
-          <Link href="/onboarding/preferences">Preferences</Link>
+          <Link href="/preferences">Preferences</Link>
         </nav>
 
         <button className="matching-profile" type="button" aria-label="Open profile menu">
@@ -48,10 +48,16 @@ export default function MatchingPage() {
                 Connect over similar life challenges,<br />
                 anonymously and without pressure.
               </p>
-              <button className="matching-primary" type="button" onClick={() => setMatchingStatus("searching")}>
-                <span>Find a meaningful match</span>
-                <ArrowIcon />
-              </button>
+              <div className="matching-home-actions">
+                <button className="matching-primary" type="button" onClick={() => setMatchingStatus("searching")}>
+                  <span>Share what’s going on</span>
+                  <ArrowIcon />
+                </button>
+                <Link className="matching-support-action" href="/messages">
+                  <HeartIcon />
+                  <span>Support someone</span>
+                </Link>
+              </div>
             </div>
 
             <div className="matching-way" aria-hidden="true">
@@ -68,17 +74,17 @@ export default function MatchingPage() {
           <section className="matching-hero matching-hero--active" aria-live="polite">
             <div className="matching-hero-copy matching-active-copy">
               <p className="matching-eyebrow">Taking the next step</p>
-              <h1>We’re looking for<br />someone who gets it</h1>
+              <h1>Your support request<br />is open</h1>
               <p className="matching-intro">
-                A thoughtful match can take a little time.<br />
-                We’ll let you know when someone feels right.
+                People who relate can reach out in their own time.<br />
+                You decide who you’d like to talk with.
               </p>
               <div className="matching-active-actions">
                 <button className="matching-primary matching-pause" type="button" onClick={() => setMatchingStatus("idle")}>
                   <span>Pause matching</span>
                   <PauseIcon />
                 </button>
-                <Link href="/onboarding/preferences">Edit preferences</Link>
+                <Link href="/preferences">Edit preferences</Link>
                 <button className="matching-preview-next" type="button" onClick={() => setMatchingStatus("reachedOut")}>
                   Someone reached out
                 </button>
@@ -131,7 +137,7 @@ export default function MatchingPage() {
           <article className="matching-card matching-preferences">
             <div className="matching-card-heading">
               <h2>Your preferences</h2>
-              <Link href="/onboarding/preferences">Edit</Link>
+              <Link href="/preferences">Edit</Link>
             </div>
             <div className="matching-preference-list">
               {preferences.map((preference) => (

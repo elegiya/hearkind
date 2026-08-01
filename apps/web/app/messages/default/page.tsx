@@ -14,7 +14,7 @@ export default function MessagesDefaultPage() {
         <nav aria-label="Main navigation">
           <Link href="/matching">Home</Link>
           <Link className="is-active" href="/messages/default" aria-current="page">Messages</Link>
-          <Link href="/onboarding/preferences">Preferences</Link>
+          <Link href="/preferences">Preferences</Link>
         </nav>
         <button className="messages-profile" type="button" aria-label="Open profile menu"><span>M</span><ChevronIcon /></button>
       </header>
