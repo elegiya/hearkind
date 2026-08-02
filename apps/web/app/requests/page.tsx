@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { FormEvent, useMemo, useState } from "react";
+import { FormEvent, useState } from "react";
 
 import AppNavigation from "@/components/AppNavigation";
 import { requestConfig } from "@/lib/requests/config";
@@ -23,20 +23,13 @@ const supportRequests: SupportRequest[] = [
 export default function RequestsPage() {
   const [tab, setTab] = useState<Tab>("others");
   const [selectedId, setSelectedId] = useState(1);
-  const [filter, setFilter] = useState<"open" | "new" | "all">("open");
   const [browseFilter, setBrowseFilter] = useState<"recommended" | "newest" | "saved">("recommended");
   const [savedIds, setSavedIds] = useState<number[]>([]);
-  const [detailOpen, setDetailOpen] = useState(false);
   const [requestPaused, setRequestPaused] = useState(false);
   const [composerOpen, setComposerOpen] = useState(false);
   const [firstMessage, setFirstMessage] = useState("");
   const [offerSent, setOfferSent] = useState(false);
 
-  const visibleRequests = useMemo(() => supportRequests.filter((item) => {
-    if (filter === "all") return true;
-    if (filter === "new") return item.fresh;
-    return item.state === "open";
-  }), [filter]);
   const selected = supportRequests.find((item) => item.id === selectedId) ?? supportRequests[0];
   const browseRequests = browseFilter === "saved" ? supportRequests.filter((item) => savedIds.includes(item.id)) : browseFilter === "newest" ? [...supportRequests].reverse().filter((item) => item.state === "open") : supportRequests.filter((item) => item.state === "open");
 
@@ -52,7 +45,7 @@ export default function RequestsPage() {
     <div className="requests-landscape" aria-hidden="true"><Image src="/images/matching-hero-lake.png" alt="" fill priority sizes="75vw" /></div>
     <div className="requests-content">
       <header className="requests-heading"><div><p className="requests-eyebrow">You’re not alone</p><h1>{tab === "others" ? "Support requests" : "My requests"}</h1><p>{tab === "others" ? "People are looking for someone who understands." : "Manage your requests and the conversations they create."}</p></div>{tab === "mine" && <Link href="/onboarding/topics">+ New request</Link>}</header>
-      <div className="requests-tabs" role="tablist"><button className={tab === "mine" ? "is-active" : ""} type="button" onClick={() => { setTab("mine"); setOfferSent(false); }}>My requests <span>1</span></button><button className={tab === "others" ? "is-active" : ""} type="button" onClick={() => setTab("others")}>Support others <span>4</span></button></div>
+      <div className="requests-tabs" role="tablist"><button className={tab === "mine" ? "is-active" : ""} type="button" onClick={() => { setTab("mine"); setOfferSent(false); setComposerOpen(false); }}>My requests <span>1</span></button><button className={tab === "others" ? "is-active" : ""} type="button" onClick={() => setTab("others")}>Support others <span>4</span></button></div>
 
       {tab === "mine" ? <section className="requests-mine" aria-label="My requests">
         <article className="request-card request-card--mine">
@@ -63,29 +56,20 @@ export default function RequestsPage() {
           <footer><Link href="/messages">View conversations</Link><button type="button" onClick={() => setRequestPaused((value) => !value)}>{requestPaused ? "Reopen" : "Pause"}</button><Link href="/onboarding/preferences">Edit</Link><button type="button" aria-label="More request options">•••</button></footer>
         </article>
         <aside className="requests-next"><h2>Matching happens automatically</h2><ol><li><span>1</span><p><strong>Shared in small batches</strong><small>5 people at a time, up to 25.</small></p></li><li><span>2</span><p><strong>Supporters write first</strong><small>A chat appears only after a kind first message.</small></p></li><li><span>3</span><p><strong>You stay in control</strong><small>Reply, pause, end, block or report anytime.</small></p></li></ol><p>Requests expire after {requestConfig.requestExpirationHours} hours. Existing conversations stay active.</p></aside>
-      </section> : offerSent ? <OfferSent request={selected} /> : !detailOpen ? <section className="support-browse" aria-label="Available support requests">
+      </section> : offerSent ? <OfferSent request={selected} /> : <section className="support-browse" aria-label="Available support requests">
         <div className="support-browse-filters">{(["recommended","newest","saved"] as const).map((value) => <button className={browseFilter === value ? "is-active" : ""} type="button" onClick={() => setBrowseFilter(value)} key={value}>{value === "recommended" ? "Recommended" : value === "newest" ? "Newest" : "Saved"}</button>)}</div>
         <div className="support-browse-layout">
           <div className="support-browse-grid">{browseRequests.slice(0,3).map((request) => <article className="support-browse-card" key={request.id}>
             <header><div className="request-tags">{request.topics.map((topic) => <span key={topic}>{topic}</span>)}</div>{request.fresh ? <b>New</b> : <button className={savedIds.includes(request.id) ? "is-saved" : ""} type="button" aria-label={savedIds.includes(request.id) ? "Remove from saved" : "Save request"} onClick={() => setSavedIds((current) => current.includes(request.id) ? current.filter((id) => id !== request.id) : [...current, request.id])}><HeartIcon /></button>}</header>
             <h2>{request.title === "Relocation & loneliness" ? "Feeling isolated in a new place" : request.title}</h2><p>{request.excerpt}<br />Looking for someone who gets it.</p>
             <dl><div><dt><GlobeIcon />Language</dt><dd>{request.language}</dd></div><div><dt><ClockIcon />Availability</dt><dd>{request.availability.split(" or ")[0]}</dd></div><div><dt><PeopleIcon />Support type</dt><dd>{request.support}</dd></div><div><dt><LocationIcon />Timezone</dt><dd>{request.timezone.split(" · ")[0]}</dd></div></dl>
-            <footer><button type="button" onClick={() => { setSelectedId(request.id); setDetailOpen(true); }}>Offer support <span>→</span></button><button type="button">Not for me</button></footer>
+            <footer><button type="button" onClick={() => { setSelectedId(request.id); setFirstMessage(""); setComposerOpen(true); }}>Offer support <span>→</span></button><button type="button">Not for me</button></footer>
           </article>)}</div>
           {browseRequests.length === 0 && <div className="support-saved-empty"><HeartIcon /><h2>No saved requests yet</h2><p>Tap the heart on a request to keep it here for later.</p></div>}
           <aside className="support-browse-safety"><header><h2>What you’ll see<br />before chatting</h2><span><ShieldIcon /></span></header><p>To help keep every conversation safe and comfortable, you’ll see:</p><ul><li>The topic they’re reaching out about</li><li>A short description of what they need</li><li>Their preferred language</li><li>When they’re usually available</li><li>The kind of support they’re looking for</li><li>Their broad timezone</li></ul><footer><span>🔒</span><p>You’ll decide if it feels right.<br />There’s no pressure to respond.</p></footer></aside>
         </div>
         <footer className="support-browse-note"><span>❧</span>Every request is anonymous. Share only what feels comfortable, and take breaks anytime.<i>•</i>Your wellbeing comes first.<Link href="/legal">See safety tips →</Link></footer>
-      </section> : <section className="support-workspace" aria-label="Support request details">
-        <aside className="support-request-list"><div className="support-filters">{(["open","new","all"] as const).map((value) => <button className={filter === value ? "is-active" : ""} type="button" onClick={() => setFilter(value)} key={value}>{value === "open" ? "Open now" : value === "new" ? "New" : "All"}</button>)}</div><div>{visibleRequests.map((request) => <button className={`support-list-row${selected.id === request.id ? " is-selected" : ""}`} type="button" onClick={() => { setSelectedId(request.id); setComposerOpen(false); setFirstMessage(""); }} key={request.id}><Image src={request.image} alt="" width={62} height={62} /><span><strong>{request.title}</strong><i>{request.topics.map((topic) => <small key={topic}>{topic}</small>)}</i><p>{request.excerpt}</p><em>{request.language}</em></span><b className={request.state === "closed" ? "is-closed" : ""}>{request.state === "closed" ? "Closed" : request.fresh ? "New" : "Open now"}</b></button>)}</div></aside>
-
-        <article className="support-request-detail">
-          <header><button className="support-back" type="button" onClick={() => setDetailOpen(false)}>← All requests</button><span className={`request-status${selected.state === "closed" ? " is-paused" : ""}`}>{selected.state === "closed" ? "No longer accepting replies" : "Open now"}</span><small>Anonymous · Verified request</small></header><h2>A request about<br />{selected.title.toLowerCase()}</h2><div className="request-tags">{selected.topics.map((topic) => <span key={topic}>{topic}</span>)}</div><blockquote>{selected.full}</blockquote>
-          <dl><div><dt><PeopleIcon />What they’re looking for</dt><dd>{selected.support}</dd></div><div><dt><ClockIcon />Timezone</dt><dd>{selected.timezone}</dd></div><div><dt><GlobeIcon />Language</dt><dd>{selected.language}</dd></div><div><dt><ChatIcon />Response preference</dt><dd>No rush</dd></div><div><dt><ClockIcon />Approx. availability</dt><dd>{selected.availability}</dd></div><div><dt><HeartIcon />Best fit</dt><dd>People with shared experience</dd></div></dl>
-          <div className="support-safety"><ShieldIcon /><span><strong>Safety first:</strong> Personal details stay hidden until a conversation begins.<br />You can pause, end, block or report at any time.</span></div>
-          {composerOpen ? <form className="offer-composer" onSubmit={sendOffer}><label htmlFor="first-support-message">Write your first message</label><p>A conversation is created only when you send this message.</p><textarea id="first-support-message" value={firstMessage} onChange={(event) => setFirstMessage(event.target.value)} placeholder="Hi. I’ve been through something similar and would be glad to listen..." autoFocus /><div><button type="button" onClick={() => setComposerOpen(false)}>Cancel</button><button type="submit" disabled={!firstMessage.trim()}>Send offer</button></div></form> : <footer><button className="request-offer" type="button" disabled={selected.state === "closed"} onClick={() => setComposerOpen(true)}>{selected.state === "closed" ? "Request closed" : "Offer support"}</button><button type="button" onClick={() => setSelectedId(supportRequests.find((item) => item.id !== selected.id && item.state === "open")?.id ?? 1)}>Not for me</button></footer>}
-        </article>
-        <aside className="support-reminders"><h2>Before you respond</h2><p>A few gentle reminders to help you connect with care.</p><ul><li>Read the request fully and see if you feel able to show up.</li><li>You don’t need to have all the answers. Listening helps most.</li><li>Take breaks and set boundaries that feel right for you.</li><li>It’s okay to say no. There will always be another request.</li></ul></aside>
+        {composerOpen && <div className="direct-message-backdrop" role="presentation" onMouseDown={() => setComposerOpen(false)}><form className="direct-message-composer" role="dialog" aria-modal="true" aria-labelledby="direct-message-title" onSubmit={sendOffer} onMouseDown={(event) => event.stopPropagation()}><header><div><p>Replying anonymously</p><h2 id="direct-message-title">Write a gentle first message</h2></div><button type="button" aria-label="Close message composer" onClick={() => setComposerOpen(false)}>×</button></header><div className="direct-message-context"><div className="request-tags">{selected.topics.map((topic) => <span key={topic}>{topic}</span>)}</div><p>“{selected.excerpt}”</p></div><label htmlFor="first-support-message">Your message</label><textarea id="first-support-message" value={firstMessage} onChange={(event) => setFirstMessage(event.target.value)} placeholder="Hi. I’ve been through something similar and would be glad to listen..." autoFocus /><div className="direct-message-note"><ShieldIcon /><span>Your identity stays private. A conversation is created only after this message is sent.</span></div><footer><button type="button" onClick={() => setComposerOpen(false)}>Cancel</button><button type="submit" disabled={!firstMessage.trim()}>Send offer →</button></footer></form></div>}
       </section>}
     </div>
   </main>;
