@@ -1,32 +1,84 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { FormEvent, useMemo, useState } from "react";
 
 import AppNavigation from "@/components/AppNavigation";
+import { requestConfig } from "@/lib/requests/config";
 
 import "./requests.css";
 
 type Tab = "mine" | "others";
+type RequestState = "open" | "closed";
+type SupportRequest = { id: number; title: string; topics: string[]; excerpt: string; full: string; language: string; availability: string; support: string; timezone: string; image: string; state: RequestState; fresh?: boolean };
 
-const supportRequests = [
-  { title: "Starting over after relocation", topics: ["Relocation", "Loneliness"], excerpt: "I moved recently and everything still feels unfamiliar. I’d appreciate hearing from someone who has rebuilt their sense of home.", language: "English", time: "2h ago" },
-  { title: "Feeling exhausted at work", topics: ["Burnout", "Work life"], excerpt: "I’ve been carrying too much for a while and I’m not sure how to slow down without letting everyone down.", language: "English", time: "Today" },
-  { title: "Learning to trust again", topics: ["Relationships", "Starting over"], excerpt: "A long relationship ended recently. I’m looking for a gentle conversation with someone who understands the uncertainty.", language: "Ukrainian", time: "Today" },
+const supportRequests: SupportRequest[] = [
+  { id: 1, title: "Relocation & loneliness", topics: ["Relocation", "Loneliness"], excerpt: "Moved to a new country two years ago and still feel very alone.", full: "I moved to a new country two years ago for work. People are kind, but I still feel very alone most days. I miss having someone who truly understands what it’s like to start over. I’d love to talk to someone who’s been through this too.", language: "English", availability: "Evenings or weekends", support: "Someone to listen", timezone: "GMT+1 · Central Europe", image: "/images/matching_reached_out_lake.png", state: "open" },
+  { id: 2, title: "Starting over at 40", topics: ["Starting over", "Burnout"], excerpt: "Left my career behind and don’t know how to begin again.", full: "After years in one career, I’ve stepped away and feel unsure about what comes next. I’m hoping to hear from someone who has started again without having all the answers.", language: "English", availability: "Afternoons", support: "Shared experience", timezone: "Europe", image: "/images/matching_start_way.png", state: "open" },
+  { id: 3, title: "Anxiety before a big move", topics: ["Relocation", "Anxiety"], excerpt: "Excited and scared at the same time. Looking for some reassurance.", full: "A big move is coming up and my thoughts keep racing. I’d appreciate a calm conversation with someone who understands this mix of hope and fear.", language: "English", availability: "Mornings", support: "Gentle advice", timezone: "North America", image: "/images/matching_search_way.png", state: "open", fresh: true },
+  { id: 4, title: "Missing home", topics: ["Loneliness", "Homesickness"], excerpt: "It’s hard to feel at home anywhere lately.", full: "I’ve been away from home longer than expected and the loneliness is catching up with me. I mostly need someone to listen.", language: "Ukrainian", availability: "Evenings", support: "Someone to listen", timezone: "Europe", image: "/images/landscape-login.png", state: "closed" },
 ];
 
 export default function RequestsPage() {
   const [tab, setTab] = useState<Tab>("mine");
+  const [selectedId, setSelectedId] = useState(1);
+  const [filter, setFilter] = useState<"open" | "new" | "all">("open");
+  const [requestPaused, setRequestPaused] = useState(false);
+  const [composerOpen, setComposerOpen] = useState(false);
+  const [firstMessage, setFirstMessage] = useState("");
+  const [offerSent, setOfferSent] = useState(false);
+
+  const visibleRequests = useMemo(() => supportRequests.filter((item) => {
+    if (filter === "all") return true;
+    if (filter === "new") return item.fresh;
+    return item.state === "open";
+  }), [filter]);
+  const selected = supportRequests.find((item) => item.id === selectedId) ?? supportRequests[0];
+
+  function sendOffer(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    if (!firstMessage.trim() || selected.state === "closed") return;
+    setOfferSent(true);
+    setComposerOpen(false);
+  }
 
   return <main className="requests-page">
     <AppNavigation active="requests" />
+    <div className="requests-landscape" aria-hidden="true"><Image src="/images/matching-hero-lake.png" alt="" fill priority sizes="75vw" /></div>
     <div className="requests-content">
-      <header className="requests-heading"><div><p className="requests-eyebrow">Support, at your pace</p><h1>Requests</h1><p>Manage your own requests or find someone you may understand.</p></div><Link href="/onboarding/topics">+ New request</Link></header>
-      <div className="requests-tabs" role="tablist"><button className={tab === "mine" ? "is-active" : ""} type="button" onClick={() => setTab("mine")}>My requests <span>1</span></button><button className={tab === "others" ? "is-active" : ""} type="button" onClick={() => setTab("others")}>Support others <span>3</span></button></div>
+      <header className="requests-heading"><div><p className="requests-eyebrow">You’re not alone</p><h1>Requests</h1><p>Manage your requests or support someone who may need to be heard.</p></div>{tab === "mine" && <Link href="/onboarding/topics">+ New request</Link>}</header>
+      <div className="requests-tabs" role="tablist"><button className={tab === "mine" ? "is-active" : ""} type="button" onClick={() => { setTab("mine"); setOfferSent(false); }}>My requests <span>1</span></button><button className={tab === "others" ? "is-active" : ""} type="button" onClick={() => setTab("others")}>Support others <span>4</span></button></div>
+
       {tab === "mine" ? <section className="requests-mine" aria-label="My requests">
-        <article className="request-card request-card--mine"><div className="request-card-top"><span className="request-status">Open</span><time>Expires in 2 days</time></div><h2>Relocation &amp; loneliness</h2><p>I moved to a new country and have been feeling isolated. I’d like to talk with someone who has been through a similar transition.</p><div className="request-tags"><span>Relocation</span><span>Loneliness</span><span>Someone to listen</span></div><div className="request-stats"><span><strong>2</strong> people reached out</span><span><strong>15</strong> people saw this</span><span><strong>2</strong> conversations</span></div><footer><Link href="/messages">View conversations</Link><button type="button">Pause</button><button type="button" aria-label="More request options">•••</button></footer></article>
-        <aside className="requests-next"><h2>What happens next?</h2><ol><li><span>1</span>Your request is shared privately</li><li><span>2</span>People who relate may reach out</li><li><span>3</span>You choose who to talk with</li></ol><p>You can pause or close your request at any time.</p></aside>
-      </section> : <section className="requests-others" aria-label="Requests from others"><header><div><h2>People looking for support</h2><p>Requests that may match your experiences and preferences.</p></div><div><button className="is-active" type="button">Recommended</button><button type="button">Newest</button></div></header><div className="requests-grid">{supportRequests.map((request) => <article className="request-card" key={request.title}><div className="request-card-top"><div className="request-tags">{request.topics.map((topic) => <span key={topic}>{topic}</span>)}</div><time>{request.time}</time></div><h2>{request.title}</h2><p>{request.excerpt}</p><small>{request.language} · Text conversation</small><footer><button className="request-offer" type="button">Offer support</button><button type="button">Not for me</button></footer></article>)}</div></section>}
+        <article className="request-card request-card--mine">
+          <div className="request-card-top"><span className={`request-status${requestPaused ? " is-paused" : ""}`}>{requestPaused ? "Paused" : "Open · matching"}</span><time>Expires in 2 days</time></div>
+          <h2>Relocation &amp; loneliness</h2><p>I moved to a new country and have been feeling isolated. I’d like to talk with someone who has been through a similar transition.</p><div className="request-tags"><span>Relocation</span><span>Loneliness</span><span>Someone to listen</span></div>
+          <div className="request-progress"><div><p><strong>Invitations sent</strong><span>10 of {requestConfig.maxInvitationsPerRequest}</span></p><i><b style={{ width: `${10 / requestConfig.maxInvitationsPerRequest * 100}%` }} /></i><small>Shared automatically in batches of {requestConfig.nextInvitationBatchSize}.</small></div><div><p><strong>Conversations</strong><span>2 of {requestConfig.maxConversationsPerRequest}</span></p><i><b style={{ width: `${2 / requestConfig.maxConversationsPerRequest * 100}%` }} /></i><small>Matching stops at {requestConfig.maxConversationsPerRequest}; conversations continue after expiry.</small></div></div>
+          <div className="request-stats"><span><strong>2</strong> people reached out</span><span><strong>10</strong> invitations sent</span><span><strong>48h</strong> matching left</span></div>
+          <footer><Link href="/messages">View conversations</Link><button type="button" onClick={() => setRequestPaused((value) => !value)}>{requestPaused ? "Reopen" : "Pause"}</button><Link href="/onboarding/preferences">Edit</Link><button type="button" aria-label="More request options">•••</button></footer>
+        </article>
+        <aside className="requests-next"><h2>Matching happens automatically</h2><ol><li><span>1</span><p><strong>Shared in small batches</strong><small>5 people at a time, up to 25.</small></p></li><li><span>2</span><p><strong>Supporters write first</strong><small>A chat appears only after a kind first message.</small></p></li><li><span>3</span><p><strong>You stay in control</strong><small>Reply, pause, end, block or report anytime.</small></p></li></ol><p>Requests expire after {requestConfig.requestExpirationHours} hours. Existing conversations stay active.</p></aside>
+      </section> : offerSent ? <OfferSent request={selected} /> : <section className="support-workspace" aria-label="Support requests">
+        <aside className="support-request-list"><div className="support-filters">{(["open","new","all"] as const).map((value) => <button className={filter === value ? "is-active" : ""} type="button" onClick={() => setFilter(value)} key={value}>{value === "open" ? "Open now" : value === "new" ? "New" : "All"}</button>)}</div><div>{visibleRequests.map((request) => <button className={`support-list-row${selected.id === request.id ? " is-selected" : ""}`} type="button" onClick={() => { setSelectedId(request.id); setComposerOpen(false); setFirstMessage(""); }} key={request.id}><Image src={request.image} alt="" width={62} height={62} /><span><strong>{request.title}</strong><i>{request.topics.map((topic) => <small key={topic}>{topic}</small>)}</i><p>{request.excerpt}</p><em>{request.language}</em></span><b className={request.state === "closed" ? "is-closed" : ""}>{request.state === "closed" ? "Closed" : request.fresh ? "New" : "Open now"}</b></button>)}</div></aside>
+
+        <article className="support-request-detail">
+          <header><span className={`request-status${selected.state === "closed" ? " is-paused" : ""}`}>{selected.state === "closed" ? "No longer accepting replies" : "Open now"}</span><small>Anonymous · Verified request</small></header><h2>A request about<br />{selected.title.toLowerCase()}</h2><div className="request-tags">{selected.topics.map((topic) => <span key={topic}>{topic}</span>)}</div><blockquote>{selected.full}</blockquote>
+          <dl><div><dt><PeopleIcon />What they’re looking for</dt><dd>{selected.support}</dd></div><div><dt><ClockIcon />Timezone</dt><dd>{selected.timezone}</dd></div><div><dt><GlobeIcon />Language</dt><dd>{selected.language}</dd></div><div><dt><ChatIcon />Response preference</dt><dd>No rush</dd></div><div><dt><ClockIcon />Approx. availability</dt><dd>{selected.availability}</dd></div><div><dt><HeartIcon />Best fit</dt><dd>People with shared experience</dd></div></dl>
+          <div className="support-safety"><ShieldIcon /><span><strong>Safety first:</strong> Personal details stay hidden until a conversation begins.<br />You can pause, end, block or report at any time.</span></div>
+          {composerOpen ? <form className="offer-composer" onSubmit={sendOffer}><label htmlFor="first-support-message">Write your first message</label><p>A conversation is created only when you send this message.</p><textarea id="first-support-message" value={firstMessage} onChange={(event) => setFirstMessage(event.target.value)} placeholder="Hi. I’ve been through something similar and would be glad to listen..." autoFocus /><div><button type="button" onClick={() => setComposerOpen(false)}>Cancel</button><button type="submit" disabled={!firstMessage.trim()}>Send offer</button></div></form> : <footer><button className="request-offer" type="button" disabled={selected.state === "closed"} onClick={() => setComposerOpen(true)}>{selected.state === "closed" ? "Request closed" : "Offer support"}</button><button type="button" onClick={() => setSelectedId(supportRequests.find((item) => item.id !== selected.id && item.state === "open")?.id ?? 1)}>Not for me</button></footer>}
+        </article>
+        <aside className="support-reminders"><h2>Before you respond</h2><p>A few gentle reminders to help you connect with care.</p><ul><li>Read the request fully and see if you feel able to show up.</li><li>You don’t need to have all the answers. Listening helps most.</li><li>Take breaks and set boundaries that feel right for you.</li><li>It’s okay to say no. There will always be another request.</li></ul></aside>
+      </section>}
     </div>
   </main>;
 }
+
+function OfferSent({ request }: { request: SupportRequest }) { return <section className="offer-sent"><article><div className="offer-success"><span>✓</span><p><strong>Your offer was sent</strong><small>Your first message now appears in their Messages. They can reply whenever they’re ready.</small></p><Link href="/messages">Go to messages →</Link></div><div className="offer-request"><Image src={request.image} alt="" width={78} height={78} /><div><h2>{request.title}</h2><p>“{request.excerpt}”</p><div className="request-tags">{request.topics.map((topic) => <span key={topic}>{topic}</span>)}</div></div></div><footer><span>🔒 Your offer has already been sent to this request.</span><Link href="/requests">See more requests →</Link></footer></article><aside className="offer-next"><h2>What happens next</h2><ol><li><span><ChatIcon /></span><p><strong>You’ll appear in Messages</strong><small>They’ll see your first message when they’re ready.</small></p></li><li><span><ClockIcon /></span><p><strong>They can reply in their own time</strong><small>There’s no rush or approval step.</small></p></li><li><span><HeartIcon /></span><p><strong>You can leave anytime</strong><small>You can end the conversation or step away.</small></p></li></ol></aside></section>; }
+function Icon({ children }: { children: React.ReactNode }) { return <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">{children}</svg>; }
+function PeopleIcon() { return <Icon><circle cx="9" cy="8" r="3" /><circle cx="17" cy="9" r="2.5" /><path d="M3 20v-2a6 6 0 0 1 12 0v2M15 15a5 5 0 0 1 6 5" /></Icon>; }
+function ClockIcon() { return <Icon><circle cx="12" cy="12" r="9" /><path d="M12 7v6l4 2" /></Icon>; }
+function GlobeIcon() { return <Icon><circle cx="12" cy="12" r="9" /><path d="M3 12h18M12 3c3 3.3 3 14.7 0 18M12 3c-3 3.3-3 14.7 0 18" /></Icon>; }
+function ChatIcon() { return <Icon><path d="M4 5h16v12H9l-5 4V5Z" /></Icon>; }
+function HeartIcon() { return <Icon><path d="M20.8 5.8a5.2 5.2 0 0 0-7.4 0L12 7.2l-1.4-1.4a5.2 5.2 0 0 0-7.4 7.4L12 21l8.8-7.8a5.2 5.2 0 0 0 0-7.4Z" /></Icon>; }
+function ShieldIcon() { return <Icon><path d="M12 3 20 6v6c0 5-3 8-8 10-5-2-8-5-8-10V6Z" /><path d="m9 12 2 2 4-4" /></Icon>; }
