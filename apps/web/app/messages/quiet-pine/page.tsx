@@ -1,10 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { FormEvent, useEffect, useState } from "react";
 
-import BrandLogo from "@/components/BrandLogo";
+import AppNavigation from "@/components/AppNavigation";
 
 import "./conversation.css";
 
@@ -65,17 +64,7 @@ export default function QuietPineConversationPage() {
 
   return (
     <main className="conversation-page">
-      <header className="conversation-nav">
-        <BrandLogo href="/" variant="plain" size="small" className="conversation-brand" />
-        <nav aria-label="Main navigation">
-          <Link href="/matching">Home</Link>
-          <Link className="is-active" href="/messages" aria-current="page">Messages</Link>
-          <Link href="/preferences">Preferences</Link>
-        </nav>
-        <button className="conversation-profile" type="button" aria-label="Open profile menu">
-          <span>M</span><ChevronIcon />
-        </button>
-      </header>
+      <AppNavigation active="messages" />
 
       <div className="conversation-shell">
         <section className="conversation-chat" aria-label="Conversation with Quiet Pine">
@@ -202,4 +191,3 @@ function CheckIcon() { return <svg viewBox="0 0 20 20" fill="none" stroke="curre
 function MoreIcon() { return <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="5" cy="12" r="1.7" /><circle cx="12" cy="12" r="1.7" /><circle cx="19" cy="12" r="1.7" /></svg>; }
 function CloseIcon() { return <Icon><path d="m6 6 12 12M18 6 6 18" /></Icon>; }
 function SendIcon() { return <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="m3 11 18-8-7 18-3-7-8-3Z" /><path d="m11 14 10-11" /></svg>; }
-function ChevronIcon() { return <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" aria-hidden="true"><path d="m6 8 4 4 4-4" /></svg>; }

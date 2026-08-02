@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 
-import BrandLogo from "@/components/BrandLogo";
+import AppNavigation from "@/components/AppNavigation";
 
 import "./matching.css";
 
@@ -22,20 +22,7 @@ export default function MatchingPage() {
 
   return (
     <main className="matching-page">
-      <header className="matching-nav">
-        <BrandLogo href="/" variant="plain" size="small" className="matching-brand" />
-
-        <nav aria-label="Main navigation">
-          <Link className="is-active" href="/matching" aria-current="page">Home</Link>
-          <Link href="/messages">Messages</Link>
-          <Link href="/preferences">Preferences</Link>
-        </nav>
-
-        <button className="matching-profile" type="button" aria-label="Open profile menu">
-          <span>M</span>
-          <ChevronIcon />
-        </button>
-      </header>
+      <AppNavigation active="home" overlay />
 
       <div className="matching-shell">
         {matchingStatus === "idle" ? (
@@ -53,7 +40,7 @@ export default function MatchingPage() {
                   <span>Share what’s going on</span>
                   <ArrowIcon />
                 </button>
-                <Link className="matching-support-action" href="/messages">
+                <Link className="matching-support-action" href="/requests">
                   <HeartIcon />
                   <span>Support someone</span>
                 </Link>
@@ -242,7 +229,6 @@ function HeartIcon() { return <Icon><path d="M20.8 5.8a5.2 5.2 0 0 0-7.4 0L12 7.
 function CheckIcon() { return <svg viewBox="0 0 20 20" fill="none" stroke="currentColor"><path d="m5 10 3.2 3.2L15 6.5" /></svg>; }
 function ArrowIcon() { return <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="M5 12h14M14 7l5 5-5 5" /></svg>; }
 function PauseIcon() { return <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 6h4v12H7zM14 6h4v12h-4z" /></svg>; }
-function ChevronIcon() { return <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" aria-hidden="true"><path d="m6 8 4 4 4-4" /></svg>; }
 function TagIcon() { return <Icon><path d="m4 13 9-9h6v6l-9 9-6-6Z" /><circle cx="16" cy="7" r="1" /></Icon>; }
 function PersonIcon() { return <Icon><circle cx="12" cy="8" r="4" /><path d="M5 21v-2a7 7 0 0 1 14 0v2" /></Icon>; }
 function HandsIcon() { return <Icon><path d="M12 21V11M12 16 7 11a2 2 0 0 0-3 3l5 5M12 16l5-5a2 2 0 0 1 3 3l-5 5M8 9 6 7a2 2 0 0 1 3-3l3 3 3-3a2 2 0 0 1 3 3l-2 2" /></Icon>; }

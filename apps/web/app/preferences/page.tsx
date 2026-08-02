@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 
-import BrandLogo from "@/components/BrandLogo";
+import AppNavigation from "@/components/AppNavigation";
 
 import "./preferences.css";
 
@@ -34,15 +34,7 @@ export default function PreferencesPage() {
 
   return (
     <main className="preferences-page">
-      <header className="preferences-nav">
-        <BrandLogo href="/" variant="plain" size="small" className="preferences-brand" />
-        <nav aria-label="Main navigation">
-          <Link href="/matching">Home</Link>
-          <Link href="/messages">Messages</Link>
-          <Link className="is-active" href="/preferences" aria-current="page">Preferences</Link>
-        </nav>
-        <button className="preferences-profile" type="button" aria-label="Open profile menu"><span>M</span><ChevronIcon /></button>
-      </header>
+      <AppNavigation />
 
       <div className="preferences-landscape" aria-hidden="true">
         <Image src="/images/matching-hero-lake.png" alt="" fill priority sizes="100vw" />
@@ -131,4 +123,3 @@ function BellIcon() { return <Icon><path d="M6 17h12l-1.5-2V10a4.5 4.5 0 0 0-9 0
 function ShieldIcon() { return <Icon><path d="M12 3 20 6v6c0 5-3 8-8 10-5-2-8-5-8-10V6Z" /><path d="m9 12 2 2 4-4" /></Icon>; }
 function HeartIcon() { return <Icon><path d="M20.8 5.8a5.2 5.2 0 0 0-7.4 0L12 7.2l-1.4-1.4a5.2 5.2 0 0 0-7.4 7.4L12 21l8.8-7.8a5.2 5.2 0 0 0 0-7.4Z" /></Icon>; }
 function ArrowIcon() { return <Icon><path d="M5 12h14m-5-5 5 5-5 5" /></Icon>; }
-function ChevronIcon() { return <Icon><path d="m6 9 6 6 6-6" /></Icon>; }

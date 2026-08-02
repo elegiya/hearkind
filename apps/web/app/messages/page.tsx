@@ -1,10 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { FormEvent, useMemo, useState } from "react";
 
-import BrandLogo from "@/components/BrandLogo";
+import AppNavigation from "@/components/AppNavigation";
 
 import "./messages.css";
 
@@ -48,15 +47,7 @@ export default function MessagesPage() {
 
   return (
     <main className="messages-page">
-      <header className="messages-nav">
-        <BrandLogo href="/" variant="plain" size="small" className="messages-brand" />
-        <nav aria-label="Main navigation">
-          <Link href="/matching">Home</Link>
-          <Link className="is-active" href="/messages" aria-current="page">Messages</Link>
-          <Link href="/preferences">Preferences</Link>
-        </nav>
-        <button className="messages-profile" type="button" aria-label="Open profile menu"><span>M</span><ChevronIcon /></button>
-      </header>
+      <AppNavigation active="messages" />
 
       <div className="messages-landscape" aria-hidden="true"><Image src="/images/matching-hero-lake.png" alt="" fill priority sizes="75vw" /></div>
 
@@ -94,7 +85,7 @@ export default function MessagesPage() {
           <section className={`messages-connection${connectionOpen ? " is-open" : ""}`}>
             <button type="button" aria-expanded={connectionOpen} onClick={() => setConnectionOpen((value) => !value)}><HandsIcon /><span><strong>How you connected</strong>{connectionOpen && <small>This started with a request for support about relocation and loneliness.<br />This is now a two-way conversation. Share only what feels right.</small>}</span><ChevronUpIcon /></button>
           </section>
-          <button className="messages-introduction" type="button"><ChatIcon /><strong>Original introduction</strong><span>Started Jul 18, 2025</span><ChevronIcon /></button>
+          <button className="messages-introduction" type="button"><ChatIcon /><strong>Original introduction</strong><span>Started Jul 18, 2025</span><ChevronDownIcon /></button>
           <div className="messages-day"><span>Today</span></div>
 
           <div className="messages-thread" aria-live="polite">
@@ -123,5 +114,5 @@ function PaperclipIcon() { return <Icon><path d="m20 11-8.5 8.5a5 5 0 0 1-7-7L14
 function SendIcon() { return <Icon><path d="m3 11 18-8-7 18-3-7-8-3Z" /><path d="m11 14 10-11" /></Icon>; }
 function MoreIcon() { return <svg viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="1.7" /><circle cx="12" cy="12" r="1.7" /><circle cx="19" cy="12" r="1.7" /></svg>; }
 function CheckIcon() { return <Icon><path d="m5 12 4 4 10-11" /></Icon>; }
-function ChevronIcon() { return <Icon><path d="m6 9 6 6 6-6" /></Icon>; }
+function ChevronDownIcon() { return <Icon><path d="m6 9 6 6 6-6" /></Icon>; }
 function ChevronUpIcon() { return <Icon><path d="m6 15 6-6 6 6" /></Icon>; }

@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import BrandLogo from "@/components/BrandLogo";
+import AppNavigation from "@/components/AppNavigation";
 
 import "../messages.css";
 import "./default.css";
@@ -9,15 +9,7 @@ import "./default.css";
 export default function MessagesDefaultPage() {
   return (
     <main className="messages-page messages-default-page">
-      <header className="messages-nav">
-        <BrandLogo href="/" variant="plain" size="medium" className="messages-brand" />
-        <nav aria-label="Main navigation">
-          <Link href="/matching">Home</Link>
-          <Link className="is-active" href="/messages/default" aria-current="page">Messages</Link>
-          <Link href="/preferences">Preferences</Link>
-        </nav>
-        <button className="messages-profile" type="button" aria-label="Open profile menu"><span>M</span><ChevronIcon /></button>
-      </header>
+      <AppNavigation active="messages" />
 
       <div className="messages-default-layout">
         <aside className="messages-default-inbox" aria-label="Conversations">
@@ -75,4 +67,3 @@ function LeafIcon() { return <Icon><path d="M19 4C11 4 6 8 6 15c7 0 11-4 13-11Z"
 function HeartIcon() { return <Icon><path d="M20.8 5.8a5.2 5.2 0 0 0-7.4 0L12 7.2l-1.4-1.4a5.2 5.2 0 0 0-7.4 7.4L12 21l8.8-7.8a5.2 5.2 0 0 0 0-7.4Z" /></Icon>; }
 function LockIcon() { return <Icon><rect x="5" y="10" width="14" height="11" rx="2" /><path d="M8 10V7a4 4 0 0 1 8 0v3" /></Icon>; }
 function ArrowIcon() { return <Icon><path d="M5 12h14m-5-5 5 5-5 5" /></Icon>; }
-function ChevronIcon() { return <svg viewBox="0 0 20 20" fill="none" stroke="currentColor"><path d="m6 8 4 4 4-4" /></svg>; }
