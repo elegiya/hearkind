@@ -87,7 +87,7 @@ export default function PreferencesPage() {
             <article className="preferences-side-card preferences-side-card--safety">
               <h2><span><ShieldIcon /></span>Safety comes first</h2>
               <p>You’re always in control.<br />You can pause new introductions,<br />block or report anyone,<br />and end conversations at any time.</p>
-              <Link href="/legal">See safety tips <ArrowIcon /></Link>
+              <Link href="/safety">See safety tips <ArrowIcon /></Link>
             </article>
             <article className="preferences-side-card">
               <h2><span className="is-heart"><HeartIcon /></span>Take a break anytime</h2>

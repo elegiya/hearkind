@@ -24,10 +24,10 @@ export default function AppNavigation({ active, overlay = false }: { active?: Ac
         <button type="button" aria-label="Open profile menu" aria-expanded={profileOpen} onClick={() => setProfileOpen((value) => !value)}><span>M</span><ChevronIcon /></button>
         {profileOpen && <div className="app-profile-menu">
           <header><span>M</span><p><strong>Marina</strong><small>Your private profile</small></p></header>
+          <Link href="/account"><PersonIcon />Account</Link>
           <Link href="/preferences"><SettingsIcon />Preferences</Link>
-          <Link href="/preferences#notifications"><BellIcon />Notifications</Link>
-          <Link href="/preferences#safety"><ShieldIcon />Safety &amp; privacy</Link>
-          <Link href="/preferences#account"><PersonIcon />Account</Link>
+          <Link href="/notifications"><BellIcon />Notifications</Link>
+          <Link href="/safety"><ShieldIcon />Safety &amp; privacy</Link>
           <button type="button"><SignOutIcon />Sign out</button>
         </div>}
       </div>
