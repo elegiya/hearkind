@@ -2,7 +2,7 @@
 .account-landscape { position: absolute; z-index: 0; top: 0; right: 0; width: 68%; height: 245px; opacity: .69; mask-image: linear-gradient(90deg,transparent 0,#000 30%),linear-gradient(180deg,#000 48%,transparent 100%); mask-composite: intersect; }
 .account-landscape img { object-fit: cover; object-position: center 39%; }
 .account-content { position: relative; z-index: 2; padding: 8px clamp(30px,4vw,60px) 36px; }
-.account-heading h1 { margin: 0; font: 500 clamp(39px,3.5vw,53px) Georgia,"Times New Roman",serif; letter-spacing: -.045em; }
+.account-heading h1 { margin: 0; font-family: inherit; font-size: clamp(39px,3.5vw,53px); font-weight: 600; line-height: 1; letter-spacing: -.045em; }
 .account-heading p { margin: 10px 0 14px; color: #555b58; font-size: 14px; }
 .account-layout { display: grid; grid-template-columns: minmax(0,2.08fr) minmax(320px,1fr); gap: 24px; align-items: start; }
 .account-settings,.account-aside { display: grid; gap: 8px; }
@@ -47,7 +47,7 @@
 .account-data-row span { color: #727572; font-size: 10px; }
 .account-data-row svg { justify-self: end; width: 15px; height: 15px; color: #315c41; }
 .account-info-card { overflow: hidden; min-height: 190px; padding: 20px 22px; }
-.account-info-card h2 { display: flex; align-items: center; gap: 12px; margin: 0; font: 600 19px Georgia,"Times New Roman",serif; }
+.account-info-card h2 { display: flex; align-items: center; gap: 12px; margin: 0; font-family: inherit; font-size: 19px; font-weight: 600; line-height: 1.2; }
 .account-info-card h2 > span { width: 42px; height: 42px; }
 .account-info-card h2 svg { width: 24px; height: 24px; stroke-width: 1.55; }
 .account-info-card > p { margin: 14px 0; color: #555b57; font-size: 12px; line-height: 1.55; }
