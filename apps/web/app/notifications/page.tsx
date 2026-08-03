@@ -82,9 +82,9 @@ export default function NotificationsPage() {
             <SettingsSectionCard
               className="notifications-pause-section"
               icon={<MailIcon />}
-              title="Pause non-essential emails"
-              description="Turn off all non-essential emails. You’ll still receive important safety messages."
-              action={<Switch checked={pauseEmails} label="Pause non-essential emails" onChange={() => setPauseEmails((value) => !value)} />}
+              title="Pause email notifications"
+              description="Important account and safety emails will still be sent."
+              action={<Switch checked={pauseEmails} label="Pause email notifications" onChange={() => setPauseEmails((value) => !value)} />}
             />
 
             {groups.map((group) => (
@@ -135,9 +135,8 @@ export default function NotificationsPage() {
               <small className="notifications-local-time">Your local time</small>
             </AsideCard>
 
-            <AsideCard icon={<HeartIcon />} tone="warning" title="Safety note">
-              <p>Your privacy and well-being are our priority.</p>
-              <ul className="notifications-list"><li>We never share your contact information.</li><li>You can pause emails or adjust quiet hours<br />whenever you need.</li></ul>
+            <AsideCard icon={<HeartIcon />} tone="warning" title="Important notifications">
+              <p>Account, security, and safety messages cannot be disabled.</p>
             </AsideCard>
           </aside>
         </SettingsLayout>

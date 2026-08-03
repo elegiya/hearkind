@@ -14,8 +14,8 @@ const primarySections = [
   },
   {
     icon: <ShieldIcon />,
-    title: "How block & report work",
-    description: <>You’re in control. Block or report anyone who makes you uncomfortable.<br />We review reports carefully and take action when our guidelines are violated.</>,
+    title: "How block and report work",
+    description: <>You’re in control. Block or report anyone who makes you uncomfortable.<br />Reports help us investigate possible guideline violations.</>,
     action: "Learn how it works",
     href: "#reporting",
   },
@@ -33,7 +33,7 @@ const privacySections = [
   {
     icon: <LockIcon />,
     title: "Protecting your anonymity",
-    description: <>Your identity stays yours. We never share your name or personal details<br />without your permission.</>,
+    description: <>Your identity is hidden from other members.</>,
     action: "How we protect you",
     href: "/privacy",
   },
@@ -75,19 +75,19 @@ export default function SafetyPage() {
 
           <aside className="safety-aside" aria-label="Safety principles and reporting">
             <InfoCard icon={<HeartIcon />} title="Safety principles">
-              <ul><li>Respect and kindness come first</li><li>Your boundaries matter</li><li>Privacy is always protected</li><li>We’re here to support you</li></ul>
+              <ul><li>Respect and kindness come first</li><li>Your boundaries matter</li><li>Your identity is hidden from other members.</li><li>We’re here to support you</li></ul>
               <Link href="/legal">Learn more about our principles <ArrowIcon /></Link>
             </InfoCard>
 
             <InfoCard id="reporting" icon={<ShieldIcon />} title="What happens when you report">
-              <p>We review every report with care. If we find a violation<br />of our guidelines, we may:</p>
+              <p>Reported messages may be reviewed to investigate safety concerns.<br />If we find a guideline violation, we may:</p>
               <ul><li>Send a reminder or warning</li><li>Limit the ability to interact</li><li>Suspend or remove accounts</li></ul>
               <Link href="mailto:safety@hearkind.app">Report a concern <ArrowIcon /></Link>
             </InfoCard>
 
-            <InfoCard id="emergency" className="safety-info-card--emergency" icon={<PhoneIcon />} title="If someone may be in immediate danger">
-              <p>Your safety or theirs comes first. Don’t wait—seek help.<br />Contact your local emergency services or a crisis helpline.</p>
-              <a className="safety-emergency-button" href="tel:112">Get emergency help <ArrowIcon /></a>
+            <InfoCard id="emergency" className="safety-info-card--emergency" icon={<PhoneIcon />} title="Need urgent help?">
+              <p>HearKind is not an emergency or crisis service. If you or someone else may be in immediate danger, contact local emergency services or a crisis line.</p>
+              <a href="https://findahelpline.com/" target="_blank" rel="noreferrer">Find urgent help <ArrowIcon /></a>
             </InfoCard>
           </aside>
         </div>

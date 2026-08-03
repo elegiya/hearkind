@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 
-import { InnerPageHeader, InnerPageShell, SettingsLayout, Switch } from "@/components/inner-pages/InnerPage";
+import { ConfirmDialog, InnerPageHeader, InnerPageShell, SettingsLayout, Switch } from "@/components/inner-pages/InnerPage";
 
 import "./account.css";
 
@@ -18,8 +18,14 @@ const avatars = [
 export default function AccountPage() {
   const [aliasIndex, setAliasIndex] = useState(0);
   const [avatarIndex, setAvatarIndex] = useState(0);
+  const [regenerateIdentityOpen, setRegenerateIdentityOpen] = useState(false);
   const [matchingPaused, setMatchingPaused] = useState(false);
-  const [contactPermission, setContactPermission] = useState("Anyone");
+
+  const regenerateIdentity = () => {
+    setAliasIndex((value) => (value + 1) % aliases.length);
+    setAvatarIndex((value) => (value + 1) % avatars.length);
+    setRegenerateIdentityOpen(false);
+  };
 
   return (
     <InnerPageShell className="account-page" contentClassName="account-content">
@@ -31,17 +37,11 @@ export default function AccountPage() {
         <SettingsLayout className="account-layout">
           <section className="account-settings" aria-label="Account and privacy settings">
             <SettingsCard icon={<MaskIcon />} title="Anonymous identity" description="This is how others see you.">
-              <Link className="account-learn-link" href="/privacy">Learn more <ExternalIcon /></Link>
               <div className="account-inner-list">
                 <div className="account-setting-row">
-                  <div><strong>Your alias</strong><small>This name is randomly generated and keeps you anonymous.</small></div>
-                  <b>{aliases[aliasIndex]}</b>
-                  <button type="button" onClick={() => setAliasIndex((value) => (value + 1) % aliases.length)}><RefreshIcon />Regenerate</button>
-                </div>
-                <div className="account-setting-row">
-                  <div><strong>Your avatar</strong><small>This avatar is generated to represent you.</small></div>
+                  <div><strong>{aliases[aliasIndex]}</strong><small>Your generated alias and avatar keep your identity private while you connect.</small></div>
                   <Image className="account-avatar" src={avatars[avatarIndex]} alt="Your anonymous avatar" width={48} height={48} />
-                  <button type="button" onClick={() => setAvatarIndex((value) => (value + 1) % avatars.length)}><EditIcon />Change avatar</button>
+                  <button type="button" onClick={() => setRegenerateIdentityOpen(true)}><RefreshIcon />Regenerate identity</button>
                 </div>
               </div>
             </SettingsCard>
@@ -57,18 +57,26 @@ export default function AccountPage() {
             <SettingsCard id="privacy" icon={<ShieldIcon />} title="Privacy and control">
               <div className="account-inner-list">
                 <Link className="account-setting-row account-setting-row--control" href="/account#blocked-users"><div><strong>Blocked users</strong><small>Manage people you’ve blocked.</small></div><b>3 blocked</b><ChevronIcon /></Link>
-                <div className="account-setting-row account-setting-row--control"><div><strong>Pause all matching</strong><small>Temporarily stop matching with others.</small></div><Switch className="account-toggle" checked={matchingPaused} label="Pause all matching" onChange={() => setMatchingPaused((value) => !value)} /></div>
-                <div className="account-setting-row account-setting-row--control"><div><strong>Who may contact me</strong><small>Choose who can send you requests or messages.</small></div><label className="account-select"><span className="sr-only">Who may contact me</span><select value={contactPermission} onChange={(event) => setContactPermission(event.target.value)}><option>Anyone</option><option>People with shared topics</option><option>No one</option></select><ChevronIcon /></label></div>
+                <div className="account-setting-row account-setting-row--control"><div><strong>Pause new matching</strong><small>Your open requests and new recommendations will be paused. Existing conversations stay available.</small></div><Switch className="account-toggle" checked={matchingPaused} label="Pause new matching" onChange={() => setMatchingPaused((value) => !value)} /></div>
               </div>
             </SettingsCard>
 
-            <SettingsCard icon={<DatabaseIcon />} title="Data">
+            <SettingsCard icon={<DatabaseIcon />} title="Data and legal">
               <div className="account-inner-list account-data-list">
-                <button className="account-data-row" type="button"><strong>Delete account</strong><span>Permanently delete your account and data.</span><ChevronIcon /></button>
-                <button className="account-data-row" type="button"><strong>Export your data</strong><span>Download a copy of your data.</span><ChevronIcon /></button>
-                <Link className="account-data-row" href="/privacy"><strong>Privacy policy</strong><span>Read how we protect your information.</span><ChevronIcon /></Link>
-                <Link className="account-data-row" href="/legal"><strong>Terms of service</strong><span>Review our terms and conditions.</span><ChevronIcon /></Link>
-                <Link className="account-data-row" href="/legal"><strong>Community guidelines</strong><span>Our shared standards for a kind, safe space.</span><ChevronIcon /></Link>
+                <div className="account-data-row"><strong>Export data</strong><span>Coming later</span><span /></div>
+                <Link className="account-data-row" href="/privacy"><strong>Privacy Policy</strong><span>Read how we protect your information.</span><ChevronIcon /></Link>
+                <Link className="account-data-row" href="/legal"><strong>Terms of Service</strong><span>Review our terms and conditions.</span><ChevronIcon /></Link>
+                <Link className="account-data-row" href="/legal"><strong>Community Guidelines</strong><span>Our shared standards for a kind, safe space.</span><ChevronIcon /></Link>
+              </div>
+            </SettingsCard>
+
+            <SettingsCard icon={<WarningIcon />} title="Danger zone">
+              <div className="account-inner-list">
+                <div className="account-setting-row account-setting-row--compact">
+                  <div><strong>Delete account</strong><small>Permanently delete your account and all associated data.</small></div>
+                  <span />
+                  <button className="account-danger-action" type="button">Delete account</button>
+                </div>
               </div>
             </SettingsCard>
           </section>
@@ -91,6 +99,15 @@ export default function AccountPage() {
             </InfoCard>
           </aside>
         </SettingsLayout>
+
+        <ConfirmDialog
+          open={regenerateIdentityOpen}
+          title="Regenerate anonymous identity?"
+          description="This will replace your current alias and avatar with a newly generated identity."
+          confirmLabel="Regenerate identity"
+          onCancel={() => setRegenerateIdentityOpen(false)}
+          onConfirm={regenerateIdentity}
+        />
     </InnerPageShell>
   );
 }
@@ -108,9 +125,9 @@ function MaskIcon() { return <Icon><path d="M3 8c2-1.5 5-2 9-2s7 .5 9 2l-1 7c-.4
 function PersonIcon() { return <Icon><circle cx="12" cy="7" r="4" /><path d="M4 21v-2a8 8 0 0 1 16 0v2" /></Icon>; }
 function ShieldIcon() { return <Icon><path d="M12 3 20 6v6c0 5-3 8-8 10-5-2-8-5-8-10V6Z" /></Icon>; }
 function DatabaseIcon() { return <Icon><ellipse cx="12" cy="5" rx="7" ry="3" /><path d="M5 5v6c0 1.7 3.1 3 7 3s7-1.3 7-3V5M5 11v6c0 1.7 3.1 3 7 3s7-1.3 7-3v-6" /></Icon>; }
+function WarningIcon() { return <Icon><path d="M12 3 2 21h20Z" /><path d="M12 9v5M12 18h.01" /></Icon>; }
 function MoonIcon() { return <Icon><path d="M20 15.5A8.5 8.5 0 0 1 8.5 4 8.5 8.5 0 1 0 20 15.5Z" /></Icon>; }
 function RefreshIcon() { return <Icon><path d="M20 7v5h-5M4 17v-5h5" /><path d="M18 10a7 7 0 0 0-12-3l-2 2M6 14a7 7 0 0 0 12 3l2-2" /></Icon>; }
-function EditIcon() { return <Icon><path d="m4 20 4-1 11-11-3-3L5 16Z" /><path d="m14 7 3 3" /></Icon>; }
 function SignOutIcon() { return <Icon><path d="M10 5H5v14h5M14 8l4 4-4 4m4-4H9" /></Icon>; }
 function ExternalIcon() { return <Icon><path d="M14 4h6v6M20 4l-9 9" /><path d="M18 13v6H5V6h6" /></Icon>; }
 function ChevronIcon() { return <Icon><path d="m9 5 7 7-7 7" /></Icon>; }
