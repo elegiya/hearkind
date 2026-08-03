@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 
-import AppNavigation from "@/components/AppNavigation";
+import { InnerPageHeader, InnerPageShell, SettingsLayout, Switch } from "@/components/inner-pages/InnerPage";
 
 import "./account.css";
 
@@ -22,20 +22,13 @@ export default function AccountPage() {
   const [contactPermission, setContactPermission] = useState("Anyone");
 
   return (
-    <main className="account-page">
-      <AppNavigation />
+    <InnerPageShell className="account-page" contentClassName="account-content">
+        <InnerPageHeader
+          title="Account & privacy"
+          subtitle="Manage your identity, privacy settings, and data."
+        />
 
-      <div className="account-landscape" aria-hidden="true">
-        <Image src="/images/matching-hero-lake.png" alt="" fill priority sizes="100vw" />
-      </div>
-
-      <div className="account-content">
-        <header className="account-heading">
-          <h1>Account &amp; privacy</h1>
-          <p>Manage your identity, privacy settings, and data.</p>
-        </header>
-
-        <div className="account-layout">
+        <SettingsLayout className="account-layout">
           <section className="account-settings" aria-label="Account and privacy settings">
             <SettingsCard icon={<MaskIcon />} title="Anonymous identity" description="This is how others see you.">
               <Link className="account-learn-link" href="/privacy">Learn more <ExternalIcon /></Link>
@@ -64,7 +57,7 @@ export default function AccountPage() {
             <SettingsCard id="privacy" icon={<ShieldIcon />} title="Privacy and control">
               <div className="account-inner-list">
                 <Link className="account-setting-row account-setting-row--control" href="/account#blocked-users"><div><strong>Blocked users</strong><small>Manage people you’ve blocked.</small></div><b>3 blocked</b><ChevronIcon /></Link>
-                <div className="account-setting-row account-setting-row--control"><div><strong>Pause all matching</strong><small>Temporarily stop matching with others.</small></div><button className={`account-toggle${matchingPaused ? " is-active" : ""}`} type="button" role="switch" aria-checked={matchingPaused} aria-label="Pause all matching" onClick={() => setMatchingPaused((value) => !value)}><span /></button></div>
+                <div className="account-setting-row account-setting-row--control"><div><strong>Pause all matching</strong><small>Temporarily stop matching with others.</small></div><Switch className="account-toggle" checked={matchingPaused} label="Pause all matching" onChange={() => setMatchingPaused((value) => !value)} /></div>
                 <div className="account-setting-row account-setting-row--control"><div><strong>Who may contact me</strong><small>Choose who can send you requests or messages.</small></div><label className="account-select"><span className="sr-only">Who may contact me</span><select value={contactPermission} onChange={(event) => setContactPermission(event.target.value)}><option>Anyone</option><option>People with shared topics</option><option>No one</option></select><ChevronIcon /></label></div>
               </div>
             </SettingsCard>
@@ -97,9 +90,8 @@ export default function AccountPage() {
               <small>You can always return when you’re ready.</small>
             </InfoCard>
           </aside>
-        </div>
-      </div>
-    </main>
+        </SettingsLayout>
+    </InnerPageShell>
   );
 }
 

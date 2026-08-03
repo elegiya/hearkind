@@ -1,9 +1,8 @@
 "use client";
 
-import Image from "next/image";
 import { useState } from "react";
 
-import AppNavigation from "@/components/AppNavigation";
+import { AsideCard, InnerPageHeader, InnerPageShell, SettingsLayout, SettingsRow, SettingsRowGroup, SettingsSectionCard, Switch } from "@/components/inner-pages/InnerPage";
 
 import "./notifications.css";
 
@@ -72,79 +71,78 @@ export default function NotificationsPage() {
   };
 
   return (
-    <main className="notifications-page">
-      <AppNavigation />
+    <InnerPageShell className="notifications-page" contentClassName="notifications-content">
+        <InnerPageHeader
+          title="Notifications"
+          subtitle="Choose how HearKind keeps you informed."
+        />
 
-      <div className="notifications-landscape" aria-hidden="true">
-        <Image src="/images/matching-hero-lake.png" alt="" fill priority sizes="100vw" />
-      </div>
-
-      <div className="notifications-content">
-        <header className="notifications-heading">
-          <p>You’re not alone</p>
-          <h1>Notifications</h1>
-          <span>Choose how HearKind keeps you informed.</span>
-        </header>
-
-        <div className="notifications-layout">
+        <SettingsLayout className="notifications-layout">
           <section className="notifications-main" aria-label="Notification preferences">
-            <article className="notifications-pause-card">
-              <span><MailIcon /></span>
-              <div><h2>Pause non-essential emails</h2><p>Turn off all non-essential emails. You’ll still receive important safety messages.</p></div>
-              <Toggle checked={pauseEmails} label="Pause non-essential emails" onChange={() => setPauseEmails((value) => !value)} />
-            </article>
+            <SettingsSectionCard
+              className="notifications-pause-section"
+              icon={<MailIcon />}
+              title="Pause non-essential emails"
+              description="Turn off all non-essential emails. You’ll still receive important safety messages."
+              action={<Switch checked={pauseEmails} label="Pause non-essential emails" onChange={() => setPauseEmails((value) => !value)} />}
+            />
 
             {groups.map((group) => (
-              <article className="notifications-group" key={group.title}>
-                <header>
-                  <span className={`is-${group.tone}`}>{group.icon}</span>
-                  <div><h2>{group.title}</h2><p>{group.description}</p></div>
-                  <b>In-app</b><b>Email</b>
-                </header>
-                {group.rows.map((row) => (
-                  <div className="notifications-row" key={row.key}>
-                    <strong>{row.title}</strong>
-                    <small>{row.description}</small>
-                    <Toggle checked={settings[row.key].inApp} label={`${row.title} in-app notifications`} onChange={() => toggleSetting(row.key, "inApp")} />
-                    <Toggle checked={!pauseEmails && settings[row.key].email} disabled={pauseEmails} label={`${row.title} email notifications`} onChange={() => toggleSetting(row.key, "email")} />
-                  </div>
-                ))}
-              </article>
+              <SettingsSectionCard
+                key={group.title}
+                icon={group.icon}
+                tone={group.tone}
+                title={group.title}
+                description={group.description}
+              >
+                <SettingsRowGroup>
+                  {group.rows.map((row) => (
+                    <SettingsRow
+                      key={row.key}
+                      label={row.title}
+                      helper={row.description}
+                      control={
+                        <div className="notifications-row-controls">
+                          <span className="notifications-channel-control">
+                            <b>In-app</b>
+                            <Switch checked={settings[row.key].inApp} label={`${row.title} in-app notifications`} onChange={() => toggleSetting(row.key, "inApp")} />
+                          </span>
+                          <span className="notifications-channel-control">
+                            <b>Email</b>
+                            <Switch checked={!pauseEmails && settings[row.key].email} disabled={pauseEmails} label={`${row.title} email notifications`} onChange={() => toggleSetting(row.key, "email")} />
+                          </span>
+                        </div>
+                      }
+                    />
+                  ))}
+                </SettingsRowGroup>
+              </SettingsSectionCard>
             ))}
           </section>
 
           <aside className="notifications-aside" aria-label="How notifications work">
-            <InfoCard icon={<BellIcon />} title="How notifications work">
-              <ul><li>In-app notifications appear in your dashboard<br />and browser.</li><li>Email notifications are sent to your registered<br />email address.</li><li>You can change these settings anytime.</li><li>Safety and security messages are always on.</li></ul>
-            </InfoCard>
+            <AsideCard icon={<BellIcon />} title="How notifications work">
+              <ul className="notifications-list"><li>In-app notifications appear in your dashboard<br />and browser.</li><li>Email notifications are sent to your registered<br />email address.</li><li>You can change these settings anytime.</li><li>Safety and security messages are always on.</li></ul>
+            </AsideCard>
 
-            <InfoCard className="notifications-info-card--quiet" icon={<MoonIcon />} title="Quiet hours">
+            <AsideCard icon={<MoonIcon />} tone="green" title="Quiet hours">
               <p>We won’t send non-essential emails during<br />these hours.</p>
               <div className="notifications-time-range">
                 <label><ClockIcon /><span className="sr-only">Quiet hours start</span><input type="time" value={quietStart} onChange={(event) => setQuietStart(event.target.value)} /></label>
                 <i>–</i>
                 <label><ClockIcon /><span className="sr-only">Quiet hours end</span><input type="time" value={quietEnd} onChange={(event) => setQuietEnd(event.target.value)} /></label>
               </div>
-              <small>Your local time</small>
-            </InfoCard>
+              <small className="notifications-local-time">Your local time</small>
+            </AsideCard>
 
-            <InfoCard icon={<HeartIcon />} title="Safety note">
+            <AsideCard icon={<HeartIcon />} tone="warning" title="Safety note">
               <p>Your privacy and well-being are our priority.</p>
-              <ul><li>We never share your contact information.</li><li>You can pause emails or adjust quiet hours<br />whenever you need.</li></ul>
-            </InfoCard>
+              <ul className="notifications-list"><li>We never share your contact information.</li><li>You can pause emails or adjust quiet hours<br />whenever you need.</li></ul>
+            </AsideCard>
           </aside>
-        </div>
-      </div>
-    </main>
+        </SettingsLayout>
+    </InnerPageShell>
   );
-}
-
-function Toggle({ checked, disabled = false, label, onChange }: { checked: boolean; disabled?: boolean; label: string; onChange: () => void }) {
-  return <button className={`notifications-toggle${checked ? " is-active" : ""}`} type="button" role="switch" aria-checked={checked} aria-label={label} disabled={disabled} onClick={onChange}><span /></button>;
-}
-
-function InfoCard({ className = "", icon, title, children }: { className?: string; icon: React.ReactNode; title: string; children: React.ReactNode }) {
-  return <article className={`notifications-info-card ${className}`}><h2><span>{icon}</span>{title}</h2>{children}</article>;
 }
 
 function Icon({ children }: { children: React.ReactNode }) { return <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">{children}</svg>; }

@@ -1,7 +1,6 @@
-import Image from "next/image";
 import Link from "next/link";
 
-import AppNavigation from "@/components/AppNavigation";
+import { InnerPageHeader, InnerPageShell } from "@/components/inner-pages/InnerPage";
 
 import "./safety.css";
 
@@ -57,18 +56,12 @@ const privacySections = [
 
 export default function SafetyPage() {
   return (
-    <main className="safety-page">
-      <AppNavigation />
-
-      <div className="safety-landscape" aria-hidden="true">
-        <Image src="/images/matching-hero-lake.png" alt="" fill priority sizes="100vw" />
-      </div>
-
-      <div className="safety-content">
-        <header className="safety-heading">
-          <h1>Safety</h1>
-          <p>Your well-being is our priority. HearKind is built on respect,<br />kindness, and privacy—so you can connect with confidence.</p>
-        </header>
+    <InnerPageShell className="safety-page" contentClassName="safety-content">
+        <InnerPageHeader
+          eyebrow="YOUR WELL-BEING MATTERS"
+          title="Safety"
+          subtitle="Your well-being is our priority. HearKind is built on respect, kindness, and privacy—so you can connect with confidence."
+        />
 
         <div className="safety-layout">
           <section className="safety-main" aria-label="Safety guidance and resources">
@@ -98,8 +91,7 @@ export default function SafetyPage() {
             </InfoCard>
           </aside>
         </div>
-      </div>
-    </main>
+    </InnerPageShell>
   );
 }
 

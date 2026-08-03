@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import BrandLogo from "@/components/BrandLogo";
 
@@ -11,25 +11,46 @@ type ActivePage = "home" | "requests" | "messages";
 
 export default function AppNavigation({ active, overlay = false }: { active?: ActivePage; overlay?: boolean }) {
   const [profileOpen, setProfileOpen] = useState(false);
+  const profileRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!profileOpen) return;
+
+    const closeOnOutsideClick = (event: MouseEvent) => {
+      if (!profileRef.current?.contains(event.target as Node)) setProfileOpen(false);
+    };
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setProfileOpen(false);
+    };
+
+    document.addEventListener("mousedown", closeOnOutsideClick);
+    document.addEventListener("keydown", closeOnEscape);
+    return () => {
+      document.removeEventListener("mousedown", closeOnOutsideClick);
+      document.removeEventListener("keydown", closeOnEscape);
+    };
+  }, [profileOpen]);
 
   return (
     <header className={`app-navigation${overlay ? " app-navigation--overlay" : ""}`}>
-      <BrandLogo href="/" variant="plain" size="small" className="app-navigation-brand" />
-      <nav className="app-navigation-links" aria-label="Main navigation">
-        <NavLink href="/matching" active={active === "home"}>Home</NavLink>
-        <NavLink href="/requests" active={active === "requests"}>Requests</NavLink>
-        <NavLink href="/messages" active={active === "messages"}>Messages</NavLink>
-      </nav>
-      <div className="app-navigation-profile">
-        <button type="button" aria-label="Open profile menu" aria-expanded={profileOpen} onClick={() => setProfileOpen((value) => !value)}><span>M</span><ChevronIcon /></button>
-        {profileOpen && <div className="app-profile-menu">
-          <header><span>M</span><p><strong>Marina</strong><small>Your private profile</small></p></header>
-          <Link href="/account"><PersonIcon />Account</Link>
-          <Link href="/preferences"><SettingsIcon />Preferences</Link>
-          <Link href="/notifications"><BellIcon />Notifications</Link>
-          <Link href="/safety"><ShieldIcon />Safety &amp; privacy</Link>
-          <button type="button"><SignOutIcon />Sign out</button>
-        </div>}
+      <div className="app-navigation-inner">
+        <BrandLogo href="/" variant="plain" size="small" className="app-navigation-brand" />
+        <nav className="app-navigation-links" aria-label="Main navigation">
+          <NavLink href="/matching" active={active === "home"}>Home</NavLink>
+          <NavLink href="/requests" active={active === "requests"}>Requests</NavLink>
+          <NavLink href="/messages" active={active === "messages"}>Messages</NavLink>
+        </nav>
+        <div className="app-navigation-profile" ref={profileRef}>
+          <button type="button" aria-label="Open profile menu" aria-controls="app-profile-menu" aria-expanded={profileOpen} onClick={() => setProfileOpen((value) => !value)}><span>M</span><ChevronIcon /></button>
+          {profileOpen && <div className="app-profile-menu" id="app-profile-menu">
+            <header><span>M</span><p><strong>Marina</strong><small>Your private profile</small></p></header>
+            <Link href="/account" onClick={() => setProfileOpen(false)}><PersonIcon />Account</Link>
+            <Link href="/preferences" onClick={() => setProfileOpen(false)}><SettingsIcon />Preferences</Link>
+            <Link href="/notifications" onClick={() => setProfileOpen(false)}><BellIcon />Notifications</Link>
+            <Link href="/safety" onClick={() => setProfileOpen(false)}><ShieldIcon />Safety &amp; privacy</Link>
+            <button type="button"><SignOutIcon />Sign out</button>
+          </div>}
+        </div>
       </div>
       <nav className="app-mobile-navigation" aria-label="Mobile navigation">
         <NavLink href="/matching" active={active === "home"}><HomeIcon />Home</NavLink>

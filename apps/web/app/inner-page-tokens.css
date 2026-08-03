@@ -1,0 +1,178 @@
+:root {
+  /* Inner-page structure */
+  --hk-inner-page-max-width: 1480px;
+  --hk-inner-page-padding-inline: clamp(24px, 4vw, 64px);
+  --hk-inner-page-header-height: 82px;
+  --hk-inner-page-main-column: minmax(0, 2.1fr);
+  --hk-inner-page-aside-column: minmax(320px, 1fr);
+  --hk-inner-page-column-gap: 24px;
+  --hk-inner-page-section-gap: 12px;
+
+  /* Inner-page typography */
+  --hk-inner-page-title-font-family: Georgia, "Times New Roman", serif;
+  --hk-inner-page-title-font-size: clamp(44px, 4vw, 64px);
+  --hk-inner-page-title-font-weight: 600;
+  --hk-inner-page-title-line-height: 1;
+  --hk-inner-page-title-letter-spacing: -0.05em;
+  --hk-inner-page-subtitle-font-family: Arial, Helvetica, sans-serif;
+  --hk-inner-page-subtitle-font-size: 15px;
+  --hk-inner-page-subtitle-font-weight: 400;
+  --hk-inner-page-subtitle-line-height: 1.55;
+  --hk-inner-page-subtitle-color: #555b58;
+  --hk-inner-page-subtitle-max-width: 520px;
+  --hk-inner-page-header-content-height: 148px;
+  --hk-inner-page-header-padding-top: 18px;
+  --hk-inner-page-header-padding-bottom: 24px;
+  --hk-inner-page-illustration-height: 280px;
+  --hk-inner-page-illustration-opacity: 0.7;
+  --hk-inner-page-illustration-position: center 40%;
+
+  /* Surfaces and icon circles */
+  --hk-inner-page-background: #fbf7f1;
+  --hk-inner-page-foreground: #292824;
+  --hk-card-background: rgba(255, 253, 249, 0.89);
+  --hk-card-border: 1px solid #e4d8cb;
+  --hk-card-radius: 18px;
+  --hk-card-shadow: 0 5px 15px rgba(70, 53, 37, 0.055);
+  --hk-icon-circle-size: 46px;
+  --hk-icon-circle-size-small: 36px;
+  --hk-icon-circle-size-large: 54px;
+  --hk-icon-circle-peach-background: #f9dfcb;
+  --hk-icon-circle-green-background: #e5ece2;
+  --hk-icon-circle-warm-background: #f9e5d5;
+  --hk-icon-circle-foreground: #385e49;
+  --hk-icon-circle-warm-foreground: #cb633d;
+
+  /* Action foundations */
+  --hk-action-height: 38px;
+  --hk-action-padding-inline: 18px;
+  --hk-action-gap: 8px;
+  --hk-action-radius: 999px;
+  --hk-action-font-family: Arial, Helvetica, sans-serif;
+  --hk-action-font-size: 12px;
+  --hk-action-font-weight: 650;
+  --hk-action-transition: 180ms ease;
+  --hk-action-focus-ring: #315f3f;
+
+  /* Primary action */
+  --hk-action-primary-background: #2f633d;
+  --hk-action-primary-background-hover: #285535;
+  --hk-action-primary-border: transparent;
+  --hk-action-primary-color: #ffffff;
+  --hk-action-primary-shadow: 0 4px 7px rgba(36, 73, 43, 0.22);
+
+  /* Secondary action */
+  --hk-action-secondary-background: rgba(255, 253, 249, 0.72);
+  --hk-action-secondary-background-hover: #fffaf4;
+  --hk-action-secondary-border: #e4cbb7;
+  --hk-action-secondary-color: #59605b;
+  --hk-action-secondary-shadow: none;
+
+  /* Tertiary action */
+  --hk-action-tertiary-background: transparent;
+  --hk-action-tertiary-background-hover: rgba(229, 236, 226, 0.72);
+  --hk-action-tertiary-border: transparent;
+  --hk-action-tertiary-color: #315f3f;
+  --hk-action-tertiary-shadow: none;
+
+  /* Destructive action */
+  --hk-action-destructive-background: rgba(249, 229, 213, 0.58);
+  --hk-action-destructive-background-hover: #f9e5d5;
+  --hk-action-destructive-border: #e4cbb7;
+  --hk-action-destructive-color: #b45436;
+  --hk-action-destructive-shadow: none;
+}
+
+/* Shared action primitive for future inner-page migrations. */
+.hk-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--hk-action-gap);
+  min-height: var(--hk-action-height);
+  padding: 0 var(--hk-action-padding-inline);
+  border: 1px solid transparent;
+  border-radius: var(--hk-action-radius);
+  font-family: var(--hk-action-font-family);
+  font-size: var(--hk-action-font-size);
+  font-weight: var(--hk-action-font-weight);
+  line-height: 1;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    background-color var(--hk-action-transition),
+    border-color var(--hk-action-transition),
+    color var(--hk-action-transition),
+    box-shadow var(--hk-action-transition);
+}
+
+.hk-action:focus-visible {
+  outline: 2px solid var(--hk-action-focus-ring);
+  outline-offset: 2px;
+}
+
+.hk-action:disabled,
+.hk-action[aria-disabled="true"] {
+  cursor: not-allowed;
+  opacity: 0.58;
+}
+
+.hk-action--primary {
+  border-color: var(--hk-action-primary-border);
+  background: var(--hk-action-primary-background);
+  color: var(--hk-action-primary-color);
+  box-shadow: var(--hk-action-primary-shadow);
+}
+
+.hk-action--primary:hover:not(:disabled) {
+  background: var(--hk-action-primary-background-hover);
+}
+
+.hk-action--secondary {
+  border-color: var(--hk-action-secondary-border);
+  background: var(--hk-action-secondary-background);
+  color: var(--hk-action-secondary-color);
+  box-shadow: var(--hk-action-secondary-shadow);
+}
+
+.hk-action--secondary:hover:not(:disabled) {
+  background: var(--hk-action-secondary-background-hover);
+}
+
+.hk-action--tertiary {
+  border-color: var(--hk-action-tertiary-border);
+  background: var(--hk-action-tertiary-background);
+  color: var(--hk-action-tertiary-color);
+  box-shadow: var(--hk-action-tertiary-shadow);
+}
+
+.hk-action--tertiary:hover:not(:disabled) {
+  background: var(--hk-action-tertiary-background-hover);
+}
+
+.hk-action--destructive {
+  border-color: var(--hk-action-destructive-border);
+  background: var(--hk-action-destructive-background);
+  color: var(--hk-action-destructive-color);
+  box-shadow: var(--hk-action-destructive-shadow);
+}
+
+.hk-action--destructive:hover:not(:disabled) {
+  background: var(--hk-action-destructive-background-hover);
+}
+
+@media (max-width: 760px) {
+  :root {
+    --hk-inner-page-padding-inline: 14px;
+    --hk-inner-page-header-height: 72px;
+    --hk-inner-page-title-font-size: 44px;
+    --hk-inner-page-aside-column: minmax(0, 1fr);
+    --hk-inner-page-column-gap: 12px;
+    --hk-inner-page-subtitle-max-width: 360px;
+    --hk-inner-page-header-content-height: 148px;
+    --hk-inner-page-header-padding-top: 48px;
+    --hk-inner-page-header-padding-bottom: 22px;
+    --hk-inner-page-illustration-height: 230px;
+    --hk-inner-page-illustration-opacity: 0.46;
+  }
+}

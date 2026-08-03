@@ -1,4 +1,6 @@
 @import "tailwindcss";
+@import "./inner-page-tokens.css";
+@import "../components/inner-pages/inner-page.css";
 
 :root {
   --background: #ffffff;
