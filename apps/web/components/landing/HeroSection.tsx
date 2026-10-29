@@ -2,6 +2,8 @@
 
 import Header from "@/components/landing/Header";
 import Image from "next/image";
+import PageContainer from "@/components/PageContainer";
+import TrustBadge from "@/components/TrustBadge";
 
 type HeroSectionProps = {
   onWaitlistClick: (source: "header" | "hero") => void;
@@ -24,7 +26,7 @@ export default function HeroSection({ onWaitlistClick }: HeroSectionProps) {
         <Header onWaitlistClick={() => onWaitlistClick("header")} />
       </div>
 
-      <div className="relative z-10 mx-auto max-w-7xl px-6 pb-36 pt-16 sm:pb-40 lg:grid lg:grid-cols-[48%_52%] lg:pb-44">
+      <PageContainer className="relative z-10 pb-36 pt-16 sm:pb-40 lg:grid lg:grid-cols-[48%_52%] lg:pb-44">
         <div className="relative z-10 mx-auto max-w-2xl lg:mx-0 lg:max-w-xl">
           <p className="mb-8 text-xs font-semibold uppercase tracking-[0.24em] text-[#c66f4b] sm:tracking-[0.35em]">
             Anonymous peer support
@@ -57,15 +59,7 @@ export default function HeroSection({ onWaitlistClick }: HeroSectionProps) {
             </a>
           </div>
 
-          <div className="mt-16 flex items-center gap-4">
-            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[#f0c2a6] text-xl">
-              ♡
-            </div>
-            <div>
-              <p className="font-medium">Private. Safe. Human.</p>
-              <p className="text-sm text-[#6f6254]">Your story stays yours.</p>
-            </div>
-          </div>
+          <TrustBadge className="mt-16" />
         </div>
 
         <div className="relative mx-auto mt-12 aspect-[16/11] w-full max-w-3xl overflow-hidden rounded-[2rem] shadow-xl lg:hidden">
@@ -79,7 +73,7 @@ export default function HeroSection({ onWaitlistClick }: HeroSectionProps) {
         </div>
 
         <div className="hidden lg:block" />
-      </div>
+      </PageContainer>
 
       <div className="absolute bottom-[-1px] left-0 right-0 z-20">
         <svg

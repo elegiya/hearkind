@@ -1,0 +1,56 @@
+.preferences-content {
+  padding-block: 0 34px;
+}
+
+.preferences-main,
+.preferences-aside {
+  display: grid;
+  gap: var(--hk-inner-page-section-gap);
+}
+
+.preferences-edit-action {
+  width: 70px;
+  min-width: 70px;
+  padding-inline: 0;
+}
+
+.preferences-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 14px 0 0 60px;
+}
+
+.preferences-tags span {
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: #f8eee4;
+  font-size: 11px;
+}
+
+.preferences-main .settings-row-group {
+  margin-left: 60px;
+}
+
+.preferences-placeholder-summary {
+  margin: 14px 0 0 60px;
+  color: #747774;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+@media (max-width: 760px) {
+  .preferences-content {
+    padding-block: 0 24px;
+  }
+
+  .preferences-tags,
+  .preferences-main .settings-row-group,
+  .preferences-placeholder-summary {
+    margin-left: 0;
+  }
+
+  .preferences-edit-action {
+    width: 100%;
+  }
+}

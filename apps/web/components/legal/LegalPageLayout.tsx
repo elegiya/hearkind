@@ -1,12 +1,5 @@
 import Link from "next/link";
 import { ReactNode } from "react";
-import CookieSettingsButton from "@/components/consent/CookieSettingsButton";
-
-const legalLinks = [
-  { href: "/privacy", label: "Privacy" },
-  { href: "/cookies", label: "Cookies" },
-  { href: "/legal", label: "Legal notice" },
-];
 
 type LegalPageLayoutProps = {
   eyebrow: string;
@@ -55,16 +48,8 @@ export default function LegalPageLayout({
       </main>
 
       <footer className="border-t border-[#e5d6c8] bg-[#fffaf4]">
-        <div className="mx-auto flex max-w-5xl flex-col gap-4 px-6 py-8 text-sm text-[#6f6254] sm:flex-row sm:items-center sm:justify-between">
+        <div className="mx-auto max-w-5xl px-6 py-8 text-sm text-[#6f6254]">
           <p>© 2026 HearKind. All rights reserved.</p>
-          <nav className="flex flex-wrap gap-x-4 gap-y-2" aria-label="Legal">
-            {legalLinks.map((link) => (
-              <Link key={link.href} href={link.href} className="hover:underline">
-                {link.label}
-              </Link>
-            ))}
-            <CookieSettingsButton className="hover:underline" />
-          </nav>
         </div>
       </footer>
     </div>
